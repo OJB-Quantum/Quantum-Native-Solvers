@@ -1,7 +1,9 @@
 # Quantum-Native-Algos
 A compilation of quantum-native solver techniques that can be used to map and run on a quantum computer. Compiled by Onri Jay Benally. 
 
-The purpose of this repository is to monitor computational techniques, over time, that can be used to translate a working mathematical or computational framework of interest that may be eligible for quantum simulation. 
+The purpose of this repository is to monitor computational techniques (over time) that can be used to determine whether a working mathematical or computational framework of interest may be eligible for quantum simulation. 
+
+Interestingly, some models such as the Landau-Lifshitz-Gilbert (LLG) equation (used in micromagnetism studies) can be systematically derived from Lindbladian dynamics, which are based on the general form of Markovian master equations used to describe open quantum systems. In this example alone, LLG solvers are typically implemented on classical computing resources, especially that of general-purpose graphics processing units (GPUs). However, through careful derivation, such a method can transcend the classical description. Although this is not always the case for other classical or semi-classical frameworks and models, examples like these that are physics-informed or physics-supported should encourage one to explore the limits. 
 
 ---
 
@@ -212,9 +214,8 @@ Quantum‑Native Simulation Techniques
 
 ---
 
-**Quantum‑Native Simulation Techniques - Ordered by Hardware‑Readiness**  
+## **Quantum‑Native Simulation Techniques - Ordered by Hardware‑Readiness**  
 
----  
 
 ## I. NISQ‑ready (shallow‑depth, few‑qubit) techniques  
 These algorithms can be executed today on IBM Q, Rigetti, IonQ, or any other gate‑model device with error‑mitigation.  All required primitives are already available in Qiskit ≥ 2.2 (e.g. `QuantumWalkCircuit`, `VQSDynamics`, `QITE`, `AmplitudeEstimation`, `LindbladEvolution`).  
@@ -313,7 +314,7 @@ Heterogeneous Quantum Computer (Architected for Fault-Tolerant Compatibility)
 
 ---
 
-## Decision Tree to Determine Which Quantum-native Simulation Techniques Could Run on an Example Fault-Tolerant Heterogenous Quantum Computer 
+## Decision Tree to Determine Which Quantum-Native Simulation Techniques Could Run on an Proposed Fault-Tolerant Heterogenous Quantum Computer 
 
 ```
 Fault‑tolerant heterogeneous/hybrid quantum system
