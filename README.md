@@ -22,7 +22,7 @@ Interestingly, some models such as the Landau-Lifshitz-Gilbert (LLG) equation (u
 Quantum‑Native Simulation Techniques 
 ├─ I. Lattice‑kinetic/ Automata family
 │   ├─ A. Quantum Lattice Boltzmann (QLBM)
-│   │   ├─ A1. “Quantum-Walk‑equivalent” formulations (QLBM ≈ quantum walk)
+│   │   ├─ A1. “Quantum-walk‑equivalent” formulations (QLBM ≈ quantum walk)
 │   │   ├─ A2. Carleman‑linearized LB (LB–Carleman, fault‑tolerant oriented)
 │   │   ├─ A3. Multi‑circuit QLBM for noisy devices
 │   │   └─ A4. Early hardware demos (advection–diffusion on QPU)
@@ -225,13 +225,13 @@ These algorithms can be executed today on IBM Q, Rigetti, IonQ, or any other g
 | Category | Techniques  |
 |----------|-----------------------|
 | **A. Quantum walks & quantum cellular automata** | 1. Dirac‑type dynamics (split‑step quantum walk) <br> 2. Schrödinger‑type dynamics (continuous‑time QW + discrete‑time Laplacian QW) <br> 3. Simple U(1) gauge‑field coupling (single‑link) |
-| **B. Quantum lattice‑Boltzmann/ lattice‑gas (toy lattices)** | 1. “QW‑equivalent’’ QLBM <br> 2. Early hardware demos (advection–diffusion on a few‑site lattice) <br> 3. Efficient single‑step QLGA for 1‑D/2‑D Navier–Stokes (few sites) |
+| **B. Quantum lattice‑Boltzmann/ lattice‑gas (toy lattices)** | 1. “Quantum-walk‑equivalent’’ QLBM <br> 2. Early hardware demos (advection–diffusion on a few‑site lattice) <br> 3. Efficient single‑step QLGA for 1‑D/2‑D Navier–Stokes (few sites) |
 | **C. Variational & hybrid dynamics** | 1. Real‑time Variational Quantum Simulation (VQS) <br> 2. Quantum Imaginary‑Time Evolution (QITE) <br> 3. Variational Quantum Linear Solver (VQLS) for small linear systems <br> 4. Real‑time VQS for Dirac or Schrödinger spinors with hardware‑efficient ansätze <br> 5. Imaginary‑time VQS/ QITE for Dirac or Schrödinger ground‑state preparation |
-| **D. Direct Hamiltonian‑simulation (small grids)** | 1. Spectral (Fourier) discretisation + Trotter for 1‑D Schrödinger <br> 2. QW‑based Dirac first‑order hyperbolic solver (few lattice sites) <br> 3. Quantum‑walk tunnelling/ barrier transport (single‑step QW) |
+| **D. Direct Hamiltonian‑simulation (small grids)** | 1. Spectral (Fourier) discretization + Trotter for 1‑D Schrödinger <br> 2. QW‑based Dirac first‑order hyperbolic solver (few lattice sites) <br> 3. Quantum‑walk tunnelling/ barrier transport (single‑step QW) |
 | **E. Simple linear‑system/ HHL demos** | 1. HHL for a 2 × 2 or 4 × 4 Poisson‑type matrix (demonstration only) |
 | **F. Quantum‑accelerated Monte Carlo (basic)** | 1. Iterative Amplitude Estimation (IAE) for expectation‑value speed‑up <br> 2. Quantum jump/ Monte‑Carlo wave‑function (MCWF) for a single Lindblad trajectory (few qubits) |
 | **G. Minimal Lindblad simulators** | 1. Randomised product‑formula simulation of short‑time GKSL dynamics (≤ 5 qubits) |
-| **H. Missing NISQ‑ready families** | 1. Quantum tensor‑network simulators (MPS/PEPS with shallow circuits) <br> 2. QSP/QSVT for low‑degree polynomial approximations (e.g. low‑order Chebyshev filters) <br> 3. Quantum algorithms for fractional Laplacian on very small lattices (Fourier‑space LCU) <br> 4. Stochastic Schrödinger‑equation discretisations for a few modes (QSDE prototype) |
+| **H. Missing NISQ‑ready families** | 1. Quantum tensor‑network simulators (MPS/PEPS with shallow circuits) <br> 2. QSP/QSVT for low‑degree polynomial approximations (e.g. low‑order Chebyshev filters) <br> 3. Quantum algorithms for fractional Laplacian on very small lattices (Fourier‑space LCU) <br> 4. Stochastic Schrödinger‑equation discretizations for a few modes (QSDE prototype) |
 
 ---  
 
@@ -241,9 +241,9 @@ These approaches are still limited on today’s noisy devices but become practic
 | Category | Techniques  |
 |----------|-----------------------|
 | **A. Multi‑circuit lattice‑kinetic methods** | 1. Multi‑circuit QLBM for noisy devices (parallel streams) <br> 2. Measurement‑based QLGA for Navier–Stokes (classical feedback after each step) |
-| **B. Linear‑differential‑equation & Carleman‑linearization prototypes** | 1. LDE oracles (Berry–Childs–Kothari) as proof‑of‑concept <br> 2. Carleman linearisation for low‑order Navier–Stokes regimes (small lifted dimension) |
+| **B. Linear‑differential‑equation & Carleman‑linearization prototypes** | 1. LDE oracles (Berry–Childs–Kothari) as proof‑of‑concept <br> 2. Carleman linearization for low‑order Navier–Stokes regimes (small lifted dimension) |
 | **C. Quantum finite‑element/ multigrid (tiny meshes)** | 1. Qu‑FEM/ Q‑FEM for 2‑D Poisson on ≤ 4 × 4 meshes <br> 2. QFEM‑Dirac for a 2‑D spinor mesh (≤ 8 qubits) |
-| **D. LCU/ qubitisation for modest problem sizes** | 1. LCU/ qubitisation of the Dirac operator on a 2 × 2 lattice <br> 2. VQLS for stationary Schrödinger on ≤ 8‑dimensional basis |
+| **D. LCU/ qubitization for modest problem sizes** | 1. LCU/ qubitization of the Dirac operator on a 2 × 2 lattice <br> 2. VQLS for stationary Schrödinger on ≤ 8‑dimensional basis |
 | **E. Hamiltonian simulation (intermediate depth)** | 1. Trotter‑Suzuki product formula for Dirac kinetic + mass on a 3‑site lattice <br> 2. Finite‑difference Schrödinger Trotter on a 4‑site grid |
 | **F. Hybrid quantum‑accelerated Monte Carlo** | 1. Prototype Quantum Metropolis (single‑spin Ising) <br> 2. Hybrid QMC where the quantum computer supplies trial wavefunctions for AFQMC <br> 3. QAE‑based variance reduction inside Diffusion Monte Carlo <br> 4. Stochastic Dirac‑equation sampling on a few momentum modes |
 | **G. Quantum trajectories with modest scaling** | 1. Additive O(T + log 1/ε) trajectory algorithm for a 2‑qubit Lindbladian (research prototype) |
@@ -258,7 +258,7 @@ These algorithms deliver asymptotic speed‑ups or polynomial‑time reductions 
 | Category | Techniques  |
 |----------|-----------------------|
 | **A. Large‑scale linear‑system solvers** | 1. Full‑scale HHL/ block‑encoding for Poisson matrices of size 2ⁿ × 2ⁿ <br> 2. Fault‑tolerant VQLS for high‑dimensional Schrödinger eigenproblems |
-| **B. Dirac & Schrödinger Hamiltonian simulation (qubitisation)** | 1. Qubitisation of the relativistic kinetic operator for 3‑D lattices <br> 2. Qubitisation of kinetic + potential for high‑resolution Schrödinger grids <br> 3. Full LCU implementation of the Dirac Hamiltonian (mass + gauge coupling) <br> 4. LCU/ qubitisation of Schrödinger kinetic + potential |
+| **B. Dirac & Schrödinger Hamiltonian simulation (qubitization)** | 1. Qubitization of the relativistic kinetic operator for 3‑D lattices <br> 2. Qubitization of kinetic + potential for high‑resolution Schrödinger grids <br> 3. Full LCU implementation of the Dirac Hamiltonian (mass + gauge coupling) <br> 4. LCU/ qubitization of Schrödinger kinetic + potential |
 | **C. Scattering & S‑matrix algorithms** | 1. Green’s‑function based cross‑section computation using a quantum resolvent (QPE or QSVT) <br> 2. Dirac scattering (Klein‑paradox) with QSVT‑based resolvent <br> 3. Non‑relativistic Lippmann‑Schwinger solver via QSVT |
 | **D. Quantum signal‑processing/ QSVT frameworks** | 1. High‑degree Chebyshev and polynomial approximations for time‑evolution and matrix inversion (generic PDEs) <br> 2. QSP‑based fractional‑operator solvers for non‑local dynamics |
 | **E. Quantum lattice‑gauge‑theory (full models)** | 1. Digital simulation of 2‑D/3‑D U(1) and SU(2) gauge fields with plaquette operators (requires many qubits and T‑gate depth) |
@@ -269,7 +269,7 @@ These algorithms deliver asymptotic speed‑ups or polynomial‑time reductions 
 | **J. Quantum tensor‑network simulation at scale** | 1. Large‑scale MPS/PEPS evolution using quantum circuits (requires fault‑tolerant resources for bond‑dimension growth) |
 | **K. Quantum Metropolis‑Hastings for generic distributions** | 1. Full‑scale Quantum Metropolis algorithm (detailed‑balance via phase estimation) |
 | **L. Hybrid quantum‑classical domain decomposition** | 1. Schwarz‑type decomposition where each subdomain is solved with a fault‑tolerant quantum linear‑solver and the interface is handled classically |
-| **M. Quantum‑enhanced real‑time TDDFT & many‑body dynamics** | 1. Fully fault‑tolerant RT‑TDDFT where the Kohn‑Sham potential and the electron density are updated via quantum sub‑routines (qubitisation of the KS Hamiltonian) |
+| **M. Quantum‑enhanced real‑time TDDFT & many‑body dynamics** | 1. Fully fault‑tolerant RT‑TDDFT where the Kohn‑Sham potential and the electron density are updated via quantum sub‑routines (qubitization of the KS Hamiltonian) |
 | **N. Wigner‑function/ phase‑space quantum dynamics** | 1. Exact quantum‑Fourier‑transform‑based evolution of high‑dimensional Wigner functions (large QFT registers required) |
 | **O. Quantum uncertainty quantification for large‑scale PDEs** | 1. Propagation of input‑parameter distributions through quantum‑accelerated forward models (QAE + QSVT) |
 | **P. Quantum‑accelerated scattering with many‑body final states** | 1. Dirac time‑dependent scattering with multi‑particle production (requires fault‑tolerant many‑body state preparation) |
@@ -357,8 +357,8 @@ Fault‑tolerant heterogeneous/hybrid quantum system
 │       ├─ II.E    Large‑scale LDE oracle (high‑precision phase estimation)
 │       ├─ II.F    Complete Carleman‑linearization for nonlinear PDEs
 │       ├─ II.G    Full Qu‑FEM + quantum multigrid preconditioner
-│       ├─ IV.S.2  Qubitisation of Dirac kinetic operator (3‑D lattice)
-│       ├─ IV.T.2  Qubitisation of Schrödinger kinetic + potential
+│       ├─ IV.S.2  Qubitization of Dirac kinetic operator (3‑D lattice)
+│       ├─ IV.T.2  Qubitization of Schrödinger kinetic + potential
 │       ├─ IV.Q    Scattering & S‑matrix via Green’s‑function resolvent (QSVT/QSP)
 │       ├─ IV.S.3  High‑order Dirac product‑formula (Forest‑Ruth, Suzuki‑23)
 │       ├─ IV.T.3  Interaction‑picture Schrödinger simulation (time‑dependent V)
@@ -412,16 +412,16 @@ Fault‑tolerant heterogeneous/hybrid quantum system
 │   │   └─ Store intermediate probability distributions for multi‑circuit QLBM (I.A.3) between Trotter steps
 │   └─ Fault‑tolerant‑eligible use
 │       ├─ Logical storage for large‑scale HHL/VQLS registers (II.D, III.L)
-│       ├─ Buffer for Dirac/ Schrödinger qubitisation registers (IV.S.2, IV.T.2)
+│       ├─ Buffer for Dirac/ Schrödinger qubitization registers (IV.S.2, IV.T.2)
 │       ├─ Hold error‑estimate registers for quantum‑driven AMR (VII.F.2, VIII.J.3)
 │       └─ Preserve many‑body wavefunctions for quantum‑dynamical mean‑field theory (VIII.G.2)
 │
 ├─ Ancilla Layer: Transmons (bias‑preserving, syndrome extraction)
-│   └─ Provide fault‑tolerant CZ/ZZ and SNAP‑enabled gates used by all LCU/ qubitisation kernels in the FT‑eligible branch
+│   └─ Provide fault‑tolerant CZ/ZZ and SNAP‑enabled gates used by all LCU/ qubitization kernels in the FT‑eligible branch
 │
 └─ Classical Control & RAM
     ├─ Cryogenic‑CMOS/ SFQ waveform engines compile bias‑aware, erasure‑aware circuits for every technique
-    ├─ Run the outer optimisation loops for VQS/ QITE/ VQLS (III.J–III.O)
+    ├─ Run the outer optimization loops for VQS/ QITE/ VQLS (III.J–III.O)
     ├─ Dispatch hybrid QMC/ Metropolis proposals to the photonic co‑processor
     └─ Coordinate domain‑decomposition (VIII.H, VII.H) and adaptive‑mesh‑refinement decisions (VII.F.2, VIII.J.3)
 ```
