@@ -480,4 +480,12 @@ Fault‑tolerant heterogeneous/hybrid quantum system
 48. Gottesman, D., 1998, ‘The Heisenberg representation of quantum computers’, arXiv quant‑ph/9807006, <https://arxiv.org/abs/quant-ph/9807006>.  
 49. Babbush, R., et al., 2018, ‘Low‑depth quantum simulation of materials’, *Phys. Rev. X* 8, 011044, <https://doi.org/10.1103/PhysRevX.8.011044>.  
 50. Nguyen, N. H., et al., 2020, ‘Quantum simulation of Dirac equation with trapped ions’, *Nat. Commun.* 11, 3720, <https://doi.org/10.1038/s41467-020-17519-4>.  
-51. Montanaro, A., 2021, ‘Quantum algorithms: an overview’, *npj Quantum Inf.* 7, 55, <https://doi.org/10.1038/s41534-021-00379-1>.  
+51. Montanaro, A., 2021, ‘Quantum algorithms: an overview’, *npj Quantum Inf.* 7, 55, <https://doi.org/10.1038/s41534-021-00379-1>. 
+52. Syamlal, M., Copen, C., Takahashi, M. & Hall, B. (2024) ‘Computational Fluid Dynamics on Quantum Computers’, *arXiv*:2406.18749, <https://arxiv.org/abs/2406.18749>. 
+53. Penuel, J., Katabarwa, A., Johnson, P. D., Farquhar, C., Cao, Y. & Garrett, M. C. (2024) ‘Feasibility of accelerating incompressible computational fluid dynamics simulations with fault‑tolerant quantum computers’, *arXiv*:2406.06323, <https://arxiv.org/abs/2406.06323>. 
+54. Li, J., Li, W., Xiao, X., Liu, L., Li, Z., Ren, J. & Fang, W. (2025) ‘Multi‑set variational quantum dynamics algorithm for simulating nonadiabatic dynamics on quantum computers’, *arXiv*:2503.07388, <https://arxiv.org/abs/2503.07388>. 
+55. Duriez, A., Carvalho, P. C., Barroca, M. A., Zipoli, F., Jaderberg, B., Ferreira, R. N. B., Sharma, K., Mezzacapo, A., Wunsch, B. & Steiner, M. (2025) ‘Computing band gaps of periodic materials via sample‑based quantum diagonalization’, *arXiv*:2503.10901, <https://arxiv.org/abs/2503.10901>. 
+56. Arora, A., Ward, B. M. & Oskay, C. (2024) ‘An implementation of the finite element method in hybrid classical/quantum computers’, *arXiv*:2411.09038, <https://arxiv.org/abs/2411.09038>. 
+57. Haghshenas, R., Chertkov, E., Mills, M., Kadow, W., Lin, S.-H., et al. (2025) ‘Digital quantum magnetism at the frontier of classical simulations’, *arXiv*:2503.20870, <https://arxiv.org/abs/2503.20870>.  
+58. Ghisoni, F., Scala, F., Bajoni, D. & Gerace, D. (2024) ‘Shadow quantum linear solver: A resource‑efficient quantum algorithm for linear systems of equations’, *arXiv*:2409.08929, <https://arxiv.org/abs/2409.08929>.  
+59. Kahanamoku‑Meyer, G. D. (2023) *Exploring the Limits of Classical Simulation: From Computational Many‑Body Dynamics to Quantum Advantage*. PhD dissertation, University of California, Berkeley, <https://gregkm.me/files/Kahanamoku-Meyer_dissertation.pdf>. 
