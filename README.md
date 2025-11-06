@@ -428,12 +428,6 @@ Fault‑tolerant heterogeneous/hybrid quantum system
 
 ---
 
-I've verified all the articles, removed several fakes and duplicates, and reformatted the entire list into a consistent Harvard referencing style compatible with GitHub Markdown.
-
-Here is the corrected and formatted list:
-
------
-
 ## References
 
 1.  Wang, B., Meng, Z., Zhao, Y. and Yang, Y. (2025) *Quantum lattice Boltzmann method for simulating nonlinear fluid dynamics*. \[Preprint]. arXiv:2502.16568. Available at: [https://arxiv.org/abs/2502.16568](https://arxiv.org/abs/2502.16568).
