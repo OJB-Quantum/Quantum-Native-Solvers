@@ -277,7 +277,7 @@ These algorithms deliver asymptotic speed‑ups or polynomial‑time reductions 
 
 ---  
 
-## An Example Architecture of How a Fault-Tolerant Heterogenous/ Hybrid Quantum System Could Look Like - by Onri 
+## An Example Architecture of What a Fault-Tolerant Heterogenous/ Hybrid Quantum System Could Look Like - by Onri 
 
 ```
 Heterogeneous Quantum Computer (Architected for Fault-Tolerant Compatibility)
