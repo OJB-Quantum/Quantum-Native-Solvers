@@ -231,7 +231,7 @@ These algorithms can be executed today on IBM Q, Rigetti, IonQ, or any other g
 | **E. Simple linear‑system/ HHL demos** | 1. HHL for a 2 × 2 or 4 × 4 Poisson‑type matrix (demonstration only) |
 | **F. Quantum‑accelerated Monte Carlo (basic)** | 1. Iterative Amplitude Estimation (IAE) for expectation‑value speed‑up <br> 2. Quantum jump/ Monte‑Carlo wave‑function (MCWF) for a single Lindblad trajectory (few qubits) |
 | **G. Minimal Lindblad simulators** | 1. Randomised product‑formula simulation of short‑time GKSL dynamics (≤ 5 qubits) |
-| **H. Missing NISQ‑ready families** | 1. Quantum tensor‑network simulators (MPS/PEPS with shallow circuits) <br> 2. QSP/QSVT for low‑degree polynomial approximations (e.g. low‑order Chebyshev filters) <br> 3. Quantum algorithms for fractional Laplacian on very small lattices (Fourier‑space LCU) <br> 4. Stochastic Schrödinger‑equation discretizations for a few modes (QSDE prototype) |
+| **H. Other NISQ‑ready families** | 1. Quantum tensor‑network simulators (MPS/PEPS with shallow circuits) <br> 2. QSP/QSVT for low‑degree polynomial approximations (e.g. low‑order Chebyshev filters) <br> 3. Quantum algorithms for fractional Laplacian on very small lattices (Fourier‑space LCU) <br> 4. Stochastic Schrödinger‑equation discretizations for a few modes (QSDE prototype) |
 
 ---  
 
@@ -248,7 +248,7 @@ These approaches are still limited on today’s noisy devices but become practic
 | **F. Hybrid quantum‑accelerated Monte Carlo** | 1. Prototype Quantum Metropolis (single‑spin Ising) <br> 2. Hybrid QMC where the quantum computer supplies trial wavefunctions for AFQMC <br> 3. QAE‑based variance reduction inside Diffusion Monte Carlo <br> 4. Stochastic Dirac‑equation sampling on a few momentum modes |
 | **G. Quantum trajectories with modest scaling** | 1. Additive O(T + log 1/ε) trajectory algorithm for a 2‑qubit Lindbladian (research prototype) |
 | **H. Quantum Car‑Parrinello Molecular Dynamics (NISQ prototype)** | 1. QCPMD for a single‑atom, few‑electron system (small basis) |
-| **I. Missing near‑term families** | 1. Quantum lattice‑gauge‑theory engines for 1‑D U(1) link models (few links) <br> 2. Quantum‑accelerated adaptive‑mesh‑refinement on a 2‑D grid (error estimate via IAE) <br> 3. Quantum‑enhanced real‑time TDDFT for a 2‑electron molecule (VQE‑derived Kohn‑Sham potential) <br> 4. Wigner‑function evolution on a 2‑point phase‑space (QFT‑based) <br> 5. Quantum‑accelerated uncertainty quantification for a 1‑D diffusion PDE (QAE sampling of input parameters) |
+| **I. Other near‑term families** | 1. Quantum lattice‑gauge‑theory engines for 1‑D U(1) link models (few links) <br> 2. Quantum‑accelerated adaptive‑mesh‑refinement on a 2‑D grid (error estimate via IAE) <br> 3. Quantum‑enhanced real‑time TDDFT for a 2‑electron molecule (VQE‑derived Kohn‑Sham potential) <br> 4. Wigner‑function evolution on a 2‑point phase‑space (QFT‑based) <br> 5. Quantum‑accelerated uncertainty quantification for a 1‑D diffusion PDE (QAE sampling of input parameters) |
 
 ---  
 
