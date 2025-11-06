@@ -1,7 +1,7 @@
 # Quantum-Native-Solvers
 A compilation of quantum-native solver techniques that can be used to map and run on a quantum computer. Compiled by Onri Jay Benally. 
 
-[![License](https://img.shields.io/badge/Creative_Commons-License-green)](https://choosealicense.com/licenses/cc-by-4.0)
+[![License](https://img.shields.io/badge/Creative_Commons-License-green)](https://choosealicense.com/licenses/cc-by-4.0) 
 
 ---
 
@@ -18,7 +18,7 @@ Interestingly, some models such as the [Landau-Lifshitz-Gilbert (LLG) equation](
 
 ---
 
-## Classification Tree for Quantum-Native Simulation 
+## Classification Tree for Quantum-Native Simulation/ Solvers 
 
 ```
 Quantum‑Native Simulation Techniques 
@@ -34,9 +34,9 @@ Quantum‑Native Simulation Techniques
 │   │   └─ B3. Fully‑quantum LGA building blocks (MHD/NS‑ready)
 │   └─ C. Quantum Walks/ Quantum Cellular Automata (QCA)
 │       ├─ C1. Dirac‑type dynamics (transport, diffusion, barriers & tunneling)
-│       ├─ C2. Schrödinger‑type dynamics (continuous‑time QW ↔ free‑particle propagation,
-│       │      discrete‑time QW approximating Laplacian)
-│       └─ C3. Gauge‑field‑coupled QW/QCA (U(1), SU(2) links for both Dirac & Schrödinger)
+│       ├─ C2. Schrödinger‑type dynamics (continuous‑time quantum walk ↔ free‑particle propagation,
+│       │      discrete‑time quantum walk approximating Laplacian)
+│       └─ C3. Gauge‑field‑coupled quantum walk/QCA (U(1), SU(2) links for both Dirac & Schrödinger)
 │
 ├─ II. Quantum PDE & Linear‑Differential Equation solvers
 │   ├─ D. Quantum Linear‑System Algorithms (HHL & block‑encoding, Poisson)
@@ -44,7 +44,7 @@ Quantum‑Native Simulation Techniques
 │   ├─ F. Carleman linearization for nonlinear ODE/PDE (Navier-Stokes regimes)
 │   ├─ G. Quantum Finite Elements (Qu‑FEM/ Q‑FEM) + q‑Multigrid
 │   ├─ H. Dirac‑PDE solvers
-│   │   ├─ H1. QW‑based Dirac first‑order hyperbolic solvers
+│   │   ├─ H1. Quantum-walk‑based Dirac first‑order hyperbolic solvers
 │   │   ├─ H2. QLGA spinor kernels for relativistic fluids
 │   │   └─ H3. LCU/ qubitization of the Dirac operator (mass + kinetic terms)
 │   └─ I. Schrödinger‑PDE solvers
@@ -137,10 +137,10 @@ Quantum‑Native Simulation Techniques
 │
 ├─ VIII. Dirac Equation Solvers (relativistic quantum dynamics)
 │   ├─ A. Quantum‑Walk‑based Dirac solvers
-│   │   ├─ A1. 1‑D split‑step Dirac QW (continuous limit → Dirac equation)
-│   │   ├─ A2. 2‑D/ 3‑D multi‑step Dirac QWs (including spin‑orbit coupling)
-│   │   ├─ A3. Gauge‑field‑coupled Dirac QWs (U(1) electromagnetic, SU(2) weak)
-│   │   └─ A4. Multi‑circuit Dirac QWs for NISQ devices (error‑mitigated implementations)
+│   │   ├─ A1. 1‑D split‑step Dirac quantum walk (continuous limit → Dirac equation)
+│   │   ├─ A2. 2‑D/ 3‑D multi‑step Dirac quantum walks (including spin‑orbit coupling)
+│   │   ├─ A3. Gauge‑field‑coupled Dirac quantum walks (U(1) electromagnetic, SU(2) weak)
+│   │   └─ A4. Multi‑circuit Dirac quantum walks for NISQ devices (error‑mitigated implementations)
 │   ├─ B. Quantum Lattice‑Gas Automata for Dirac dynamics
 │   │   ├─ B1. Spinor QLGA kernels (γ‑matrix encoding on qubits)
 │   │   ├─ B2. Dirac-Maxwell QLGA (self‑consistent coupling of spinor and EM fields)
@@ -218,7 +218,7 @@ Quantum‑Native Simulation Techniques
 
 ---
 
-## **Quantum‑Native Simulation Techniques - Ordered by Hardware‑Readiness**  
+## **Quantum‑Native Solver Techniques - Ordered by Hardware‑Readiness**  
 
 
 ## I. NISQ‑ready (shallow‑depth, few‑qubit) techniques  
@@ -226,10 +226,10 @@ These algorithms can be executed today on IBM Q, Rigetti, IonQ, or any other g
 
 | Category | Techniques  |
 |----------|-----------------------|
-| **A. Quantum walks & quantum cellular automata** | 1. Dirac‑type dynamics (split‑step quantum walk) <br> 2. Schrödinger‑type dynamics (continuous‑time QW + discrete‑time Laplacian QW) <br> 3. Simple U(1) gauge‑field coupling (single‑link) |
+| **A. Quantum walks & quantum cellular automata** | 1. Dirac‑type dynamics (split‑step quantum walk) <br> 2. Schrödinger‑type dynamics (continuous‑time quantum walk + discrete‑time Laplacian quantum walk) <br> 3. Simple U(1) gauge‑field coupling (single‑link) |
 | **B. Quantum lattice‑Boltzmann/ lattice‑gas (toy lattices)** | 1. “Quantum-walk‑equivalent’’ QLBM <br> 2. Early hardware demos (advection-diffusion on a few‑site lattice) <br> 3. Efficient single‑step QLGA for 1‑D/2‑D Navier-Stokes (few sites) |
 | **C. Variational & hybrid dynamics** | 1. Real‑time Variational Quantum Simulation (VQS) <br> 2. Quantum Imaginary‑Time Evolution (QITE) <br> 3. Variational Quantum Linear Solver (VQLS) for small linear systems <br> 4. Real‑time VQS for Dirac or Schrödinger spinors with hardware‑efficient ansätze <br> 5. Imaginary‑time VQS/ QITE for Dirac or Schrödinger ground‑state preparation |
-| **D. Direct Hamiltonian‑simulation (small grids)** | 1. Spectral (Fourier) discretization + Trotter for 1‑D Schrödinger <br> 2. QW‑based Dirac first‑order hyperbolic solver (few lattice sites) <br> 3. Quantum‑walk tunnelling/ barrier transport (single‑step QW) |
+| **D. Direct Hamiltonian‑simulation (small grids)** | 1. Spectral (Fourier) discretization + Trotter for 1‑D Schrödinger <br> 2. quantum-walk‑based Dirac first‑order hyperbolic solver (few lattice sites) <br> 3. Quantum‑walk tunnelling/ barrier transport (single‑step quantum walk) |
 | **E. Simple linear‑system/ HHL demos** | 1. HHL for a 2 × 2 or 4 × 4 Poisson‑type matrix (demonstration only) |
 | **F. Quantum‑accelerated Monte Carlo (basic)** | 1. Iterative Amplitude Estimation (IAE) for expectation‑value speed‑up <br> 2. Quantum jump/ Monte‑Carlo wave‑function (MCWF) for a single Lindblad trajectory (few qubits) |
 | **G. Minimal Lindblad simulators** | 1. Randomised product‑formula simulation of short‑time GKSL dynamics (≤ 5 qubits) |
@@ -318,7 +318,7 @@ Heterogeneous Quantum Computer (Architected for Fault-Tolerant Compatibility)
 
 ---
 
-## Decision Tree to Determine Which Quantum-Native Simulation Techniques Could Run on an Proposed Fault-Tolerant Heterogenous Quantum Computer 
+## Decision Tree to Determine Which Quantum-Native Solver Techniques Could Run on an Proposed Fault-Tolerant Heterogenous Quantum Computer 
 
 ```
 Fault‑tolerant heterogeneous/hybrid quantum system
@@ -326,8 +326,8 @@ Fault‑tolerant heterogeneous/hybrid quantum system
 │   ├─ NISQ‑ready techniques (shallow circuits, few qubits)
 │   │   ├─ I.C.1  Dirac‑type quantum‑walk/ QCA
 │   │   ├─ I.C.2  Schrödinger‑type quantum‑walk/ QCA
-│   │   ├─ I.C.3  Simple gauge‑field‑coupled QW/QCA (U(1) link)
-│   │   ├─ I.A.1  “QW‑equivalent’’ Quantum Lattice‑Boltzmann (QLBM)
+│   │   ├─ I.C.3  Simple gauge‑field‑coupled quantum walk/QCA (U(1) link)
+│   │   ├─ I.A.1  “Quantum-walk‑equivalent’’ Quantum Lattice‑Boltzmann (QLBM)
 │   │   ├─ I.B.3  Fully‑quantum Lattice‑Gas Automata (MHD/NS‑ready)
 │   │   ├─ III.J  Variational Quantum Simulation (VQS, real‑time)
 │   │   ├─ III.K  Quantum Imaginary‑Time Evolution (QITE)
@@ -345,7 +345,7 @@ Fault‑tolerant heterogeneous/hybrid quantum system
 │   │   ├─ II.E   Linear‑Differential‑Equation (LDE) oracles (Berry‑Childs‑Kothari)
 │   │   ├─ II.F   Carleman‑linearized ODE/PDE prototypes (low‑order Navier-Stokes)
 │   │   ├─ II.G   Quantum Finite‑Element/ Q‑FEM on tiny meshes (≤ 4×4)
-│   │   ├─ II.H.1 QW‑based Dirac first‑order hyperbolic solver (few sites)
+│   │   ├─ II.H.1 Quantum walk‑based Dirac first‑order hyperbolic solver (few sites)
 │   │   ├─ II.I.1 Spectral Schrödinger solver (small Fourier grid)
 │   │   ├─ III.M   Quantum Car‑Parrinello MD (prototype, few electrons)
 │   │   ├─ IV.S.1 Trotter‑Suzuki Dirac kinetic + mass (3‑site lattice)
