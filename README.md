@@ -1,6 +1,8 @@
 # Quantum-Native-Algos
 A compilation of quantum-native solver techniques that can be used to map and run on a quantum computer. Compiled by Onri Jay Benally. 
 
+---
+
 The purpose of this repository is to monitor computational techniques (over time) that can be used to determine whether a working mathematical or computational framework of interest may be eligible for quantum simulation. 
 
 Interestingly, some models such as the Landau-Lifshitz-Gilbert (LLG) equation (used in micromagnetism studies) can be systematically derived from Lindbladian dynamics, which are based on the general form of Markovian master equations used to describe open quantum systems. In this example alone, LLG solvers are typically implemented on classical computing resources, especially that of general-purpose graphics processing units (GPUs). However, through careful derivation, such a method can transcend the classical description. Although this is not always the case for other classical or semi-classical frameworks and models, examples like these that are physics-informed or physics-supported should encourage one to explore the limits. 
