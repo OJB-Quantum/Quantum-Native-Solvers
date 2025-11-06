@@ -480,7 +480,7 @@ Fault‑tolerant heterogeneous/hybrid quantum system
 48. Gottesman, D., 1998, ‘The Heisenberg representation of quantum computers’, arXiv quant‑ph/9807006, <https://arxiv.org/abs/quant-ph/9807006>.  
 49. Babbush, R., et al., 2018, ‘Low‑depth quantum simulation of materials’, *Phys. Rev. X* 8, 011044, <https://doi.org/10.1103/PhysRevX.8.011044>.  
 50. Nguyen, N. H., et al., 2020, ‘Quantum simulation of Dirac equation with trapped ions’, *Nat. Commun.* 11, 3720, <https://doi.org/10.1038/s41467-020-17519-4>.  
-51. Montanaro, A., 2021, ‘Quantum algorithms: an overview’, *npj Quantum Inf.* 7, 55, <https://doi.org/10.1038/s41534-021-00379-1>. 
+51. Grinko, D., Gacon, J., Zoufal, C. et al. (2021) ‘Iterative quantum amplitude estimation’, *npj Quantum Inf* 7, 52, <https://doi.org/10.1038/s41534-021-00379-1>. 
 52. Syamlal, M., Copen, C., Takahashi, M. & Hall, B. (2024) ‘Computational Fluid Dynamics on Quantum Computers’, *arXiv*:2406.18749, <https://arxiv.org/abs/2406.18749>. 
 53. Penuel, J., Katabarwa, A., Johnson, P. D., Farquhar, C., Cao, Y. & Garrett, M. C. (2024) ‘Feasibility of accelerating incompressible computational fluid dynamics simulations with fault‑tolerant quantum computers’, *arXiv*:2406.06323, <https://arxiv.org/abs/2406.06323>. 
 54. Li, J., Li, W., Xiao, X., Liu, L., Li, Z., Ren, J. & Fang, W. (2025) ‘Multi‑set variational quantum dynamics algorithm for simulating nonadiabatic dynamics on quantum computers’, *arXiv*:2503.07388, <https://arxiv.org/abs/2503.07388>. 
