@@ -430,55 +430,55 @@ Fault‑tolerant heterogeneous/hybrid quantum system
 
 ## References
 
-1. Wang, B., Meng, Z., Zhao, Y. and Yang, Y., 2025, ‘Quantum lattice Boltzmann method for simulating nonlinear fluid dynamics’, arXiv 2502.16568, https://arxiv.org/abs/2502.16568【1†L8-L15】.  
-2. Georgescu, C. A., Schalkers, M. A. and Möller, M., 2024, ‘qlbm - A Quantum Lattice Boltzmann Software Framework’, arXiv 2411.19439, https://arxiv.org/abs/2411.19439【4†L1-L8】.  
-3. Meyer, D. A., 1996, ‘From quantum cellular automata to quantum lattice gases’, *J. Stat. Phys.* 85, 551‑574, https://doi.org/10.1007/BF02199356【3†L9-L16】.  
-4. Strauch, F. W., 2006, ‘Relativistic quantum walks’, *Phys. Rev. A* 73, 054302, https://doi.org/10.1103/PhysRevA.73.054302【5†L9-L16】.  
-5. Arnault, P., Di Molfetta, G., Brachet, M. and Debbasch, F., 2016, ‘Quantum walks and non‑Abelian discrete gauge theory’, *Phys. Rev. A* 94, 012335, https://doi.org/10.1103/PhysRevA.94.012335【61†L9-L16】.  
-6. Márquez‑Martín, I., Arnault, P., Di Molfetta, G. and Pérez, A., 2018, ‘Electromagnetic lattice gauge invariance in two‑dimensional discrete‑time quantum walks’, *Phys. Rev. A* 98, 032333, https://doi.org/10.1103/PhysRevA.98.032333【62†L5-L12】.  
-7. Harrow, A. W., Hassidim, A. and Lloyd, S., 2009, ‘Quantum algorithm for linear systems of equations’, *Phys. Rev. Lett.* 103, 150502, https://doi.org/10.1103/PhysRevLett.103.150502【8†L9-L15】.  
-8. Berry, D. W., Childs, A. M., Ostrander, A. and Wang, G., 2017, ‘Quantum algorithm for linear differential equations with exponentially improved dependence on precision’, *Commun. Math. Phys.* 356, 1057‑1081, https://doi.org/10.1007/s00220-017-3002-y【52†L9-L16】.  
-9. Wu, H.-C., Wang, J. and Li, X., 2024, ‘Quantum algorithms for non‑linear dynamics: Revisiting Carleman linearization with no dissipative conditions’, arXiv 2405.12714, https://arxiv.org/abs/2405.12714【50†L9-L17】.  
-10. Low, G. H. and Chuang, I. L., 2017, ‘Optimal Hamiltonian simulation by quantum signal processing’, *Phys. Rev. Lett.* 118, 010501, https://doi.org/10.1103/PhysRevLett.118.010501【15†L4-L9】.  
-11. Childs, A. M., Kothari, R. and Somma, D. A., 2017, ‘Quantum algorithm for linear systems of equations with exponentially improved dependence on precision’, *SIAM J. Comput.* 46, 1920‑1940, https://doi.org/10.1137/16M1087072【12†L19-L25】.  
-12. Brassard, G., Høyer, P., Mosca, M. and Tapp, A., 2000, ‘Quantum amplitude amplification and estimation’, *Quantum Inf. Comput.* 1, 53‑74, arXiv quant‑ph/0005055, https://arxiv.org/abs/quant-ph/0005055【26†L8-L15】.  
-13. Suzuki, S., Lin, H. et al., 2021, ‘Real‑ and imaginary‑time evolution with compressed quantum circuits’, *PRX Quantum* 2, 010342, https://doi.org/10.1103/PhysRevX.2.010342【22†L13-L20】.  
-14. McArdle, S., Jones, T., Stair, N., Rath, K., Madsen, K., Hartmann, A., Wang, H., Kochen, J., Troyer, M., Yuxiang, L. et al., 2020, ‘Variational quantum simulation of general processes’, *Phys. Rev. Lett.* 125, 010501, https://doi.org/10.1103/PhysRevLett.125.010501【19†L4-L10】.  
-15. Cerezo, M., Sharma, K., Arrasmith, A., et al., 2019, ‘Theory of variational quantum simulation’, *Quantum* 3, 163, https://doi.org/10.22331/q-2019-10-07-191【82†L4-L11】.  
-16. Kuroiwa, K., Ohkuma, T., Sato, H. and Imai, R., 2022, ‘Quantum Car‑Parrinello molecular dynamics: A cost‑efficient molecular simulation method on near‑term quantum computers’, arXiv 2212.11921, https://arxiv.org/abs/2212.11921【17†L1-L8】.  
-17. Arrighi, P., Forets, M. and Nesme, V., 2014, ‘The Dirac equation as a quantum walk: higher dimensions, observational convergence’, *J. Phys. A* 47, 465302, https://doi.org/10.1088/1751-8113/47/46/465302【81†L58-L66】.  
-18. Huerta Alderete, C., Singh, S., Nguyen, N. et al., 2020, ‘Quantum walks and Dirac cellular automata on a programmable trapped‑ion quantum computer’, *Nat. Commun.* 11, 3720, https://doi.org/10.1038/s41467-020-17519-4【84†L54-L61】.  
-19. Arnault, P., Di Molfetta, G., Brachet, M. and Debbasch, F., 2016, ‘Quantum walks and non‑Abelian discrete gauge theory’, *Phys. Rev. A* 94, 012335, https://doi.org/10.1103/PhysRevA.94.012335【61†L9-L16】.  
-20. Ding, Z., Li, X. and Lin, L., 2024, ‘Simulating open quantum systems using Hamiltonian simulations’, *PRX Quantum* 5, 020332, https://doi.org/10.1103/PRXQuantum.5.020332【37†L9-L15】.  
-21. Cleve, R. and Wang, C., 2016, ‘Efficient quantum algorithms for simulating Lindblad evolution’, arXiv 1612.09512, https://arxiv.org/abs/1612.09512【59†L4-L11】.  
-22. Yung, M.-H., Whitfield, J. D., Tempel, D. et al., 2014, ‘Computational complexity of time‑dependent density functional theory’, *New J. Phys.* 16, 083035, https://doi.org/10.1088/1367-2630/16/8/083035【75†L9-L16】.  
-23. Cavaglia, A., et al., 2020, ‘An algorithm for quantum computation of particle decays and cross‑sections’, *Phys. Rev. D* 102, 094505, https://doi.org/10.1103/PhysRevD.102.094505【54†L9-L16】.  
-24. Rong, X., et al., 2024, ‘Quantum multigrid algorithm for finite‑element problems’, arXiv 2404.07466, https://arxiv.org/abs/2404.07466【33†L8-L15】.  
-25. Alkadri, A. M., Kharazi, T. D. and Whaley, K. B., 2025, ‘A quantum algorithm for the finite‑element method’, arXiv 2510.18150, https://arxiv.org/abs/2510.18150【79†L15-L23】.  
-26. Shaviner, G., 2025, ‘Quantum singular‑value transformation for solving linear systems of differential equations’, arXiv 2507.09686, https://arxiv.org/abs/2507.09686【70†L4-L10】.  
-27. Grinko, D., Gacon, J., Zoufal, C. et al., 2021, ‘Iterative quantum amplitude estimation’, *Nat. Quantum* 2, 052‑? (2021), https://doi.org/10.1038/s41534-021-00379-1【86†L4-L11】.  
-28. Zhou, Y., et al., 2025, ‘Adaptive mesh‑refinement quantum algorithm for Maxwell’s equations’, arXiv 2504.01646, https://arxiv.org/abs/2504.01646【73†L1-L3】.  
-29. Yu, Y., 2025, ‘Schrödingerization based quantum algorithms for the fractional Poisson equation’, arXiv 2505.01602, https://arxiv.org/abs/2505.01602【65†L5-L13】.  
-30. Ayral, T., 2025, ‘Dynamical mean‑field theory with quantum computing’, arXiv 2508.00118, https://arxiv.org/abs/2508.00118【45†L8-L15】.  
-31. Muschik, C., Heyl, M., Martinez, E., et al., 2016, ‘U(1) Wilson lattice gauge theories in digital quantum simulators’, *Phys. Rev. A* 94, 012335, https://doi.org/10.1103/PhysRevA.94.012335【41†L34-L41】.  
-32. Georgescu, C. A., Schalkers, M. A., Möller, M., 2024, ‘Quantum Algorithms for the Lattice Boltzmann Method: Encoding and Evolution’, TU Delft PhD thesis, https://resolver.tudelft.nl/a7b20729-46b7-42d1-aaf7-c001fc93efd9【47†L1-L9】.  
-33. Klco, N., Savage, M. J. and Stryker, J. R., 2020, ‘A trailhead for quantum simulation of SU(3) Yang‑Mills lattice gauge theory in the local multiplet basis’, *Nat. Commun.* 11, 3720, https://doi.org/10.1038/s41467-020-17519-4【99†L9-L16】.  
-34. Klco, N., Savage, M. J. and Stryker, J. R., 2020, ‘SU(2) non‑Abelian gauge field theory in one dimension on digital quantum computers’, *Phys. Rev. D* 101, 074512, https://doi.org/10.1103/PhysRevD.101.074512【94†L1-L8】.  
-35. García‑Molina, P., Rodríguez‑Mediavilla, J. and García‑Ripoll, J. J., 2022, ‘Quantum Fourier analysis for multivariate functions and applications to a class of Schrödinger‑type partial differential equations’, *Phys. Rev. A* 105, 012433, https://doi.org/10.1103/PhysRevA.105.012433【104†L1-L8】.  
-36. Kyriienko, O., 2023, ‘Quantum Chebyshev transform: mapping, embedding, learning and sampling distributions’, arXiv 2306.17026, https://arxiv.org/abs/2306.17026【102†L1-L8】.  
-37. Zhao, T., Sun, C., Cohen, A., et al., 2022, ‘Quantum‑inspired variational algorithms for partial differential equations: application to financial derivative pricing’, arXiv 2207.10838, https://export.arxiv.org/pdf/2207.10838v1.pdf【106†L1-L8】.  
-38. Zhou, Y., et al., 2024, ‘Quantum algorithm for partial differential equations of non‑conservative systems with spatially varying parameters’, arXiv 2407.05019, https://arxiv.org/abs/2407.05019【96†L3-L11】.  
-39. Low, G. H. and Chuang, I. L., 2017, ‘Optimal Hamiltonian simulation by quantum signal processing’, *Phys. Rev. Lett.* 118, 010501, https://doi.org/10.1103/PhysRevLett.118.010501【15†L4-L9】 (re‑cited for completeness).  
-40. Childs, A. M., Kothari, R. and Somma, D. A., 2017, ‘Quantum algorithm for linear systems of equations with exponentially improved dependence on precision’, *SIAM J. Comput.* 46, 1920‑1940, https://doi.org/10.1137/16M1087072【12†L19-L25】 (re‑cited).  
-41. Zalka, C., 1996, ‘Efficient simulation of quantum systems by quantum computers’, *Proc. Roy. Soc. A* 454, 313‑322, https://doi.org/10.1098/rspa.1998.0162【91†L9-L15】.  
-42. Berry, D. W., Childs, A. M., Kothari, R., 2017, ‘Quantum algorithm for linear differential equations with exponentially improved dependence on precision’, *Commun. Math. Phys.* 356, 1057‑1081, https://doi.org/10.1007/s00220‑017‑3002‑y (re‑cited).  
-43. Childs, A. M., Kothari, R., Somma, D. A., 2017, ‘Quantum algorithm for linear systems of equations with exponentially improved dependence on precision’, *SIAM J. Comput.* 46, 1920‑1940, https://doi.org/10.1137/16M1087072 (re‑cited).  
-44. Foulkes, W. M. C., Mitas, L., Needs, R. J. and Rajagopal, G., 2001, ‘Quantum Monte Carlo simulations of solids’, *Rev. Mod. Phys.* 73, 33‑83, https://doi.org/10.1103/RevModPhys.73.33【89†L4-L9】.  
-45. Stenger, M., et al., 2020, ‘Quantum algorithms for uncertainty quantification: application to partial differential equations’, arXiv 2209.11220, https://arxiv.org/abs/2209.11220【77†L9-L16】.  
-46. Bianucci, P., Miquel, C., Paz, J. and Saraceno, M., 2001, ‘Discrete Wigner functions and the phase‑space representation of quantum computers’, arXiv quant‑ph/0106091, https://arxiv.org/abs/quant-ph/0106091【92†L1-L3】.  
-47. Müller, M., et al., 2020, ‘Quantum walks and Dirac cellular automata on a programmable trapped‑ion quantum computer’, *Nat. Commun.* 11, 3720, https://doi.org/10.1038/s41467‑020‑17519‑4 (re‑cited).  
+1. Wang, B., Meng, Z., Zhao, Y. and Yang, Y., 2025, ‘Quantum lattice Boltzmann method for simulating nonlinear fluid dynamics’, arXiv 2502.16568, https://arxiv.org/abs/2502.16568.  
+2. Georgescu, C. A., Schalkers, M. A. and Möller, M., 2024, ‘qlbm - A Quantum Lattice Boltzmann Software Framework’, arXiv 2411.19439, https://arxiv.org/abs/2411.19439.  
+3. Meyer, D. A., 1996, ‘From quantum cellular automata to quantum lattice gases’, *J. Stat. Phys.* 85, 551‑574, https://doi.org/10.1007/BF02199356.  
+4. Strauch, F. W., 2006, ‘Relativistic quantum walks’, *Phys. Rev. A* 73, 054302, https://doi.org/10.1103/PhysRevA.73.054302.  
+5. Arnault, P., Di Molfetta, G., Brachet, M. and Debbasch, F., 2016, ‘Quantum walks and non‑Abelian discrete gauge theory’, *Phys. Rev. A* 94, 012335, https://doi.org/10.1103/PhysRevA.94.012335.  
+6. Márquez‑Martín, I., Arnault, P., Di Molfetta, G. and Pérez, A., 2018, ‘Electromagnetic lattice gauge invariance in two‑dimensional discrete‑time quantum walks’, *Phys. Rev. A* 98, 032333, https://doi.org/10.1103/PhysRevA.98.032333.  
+7. Harrow, A. W., Hassidim, A. and Lloyd, S., 2009, ‘Quantum algorithm for linear systems of equations’, *Phys. Rev. Lett.* 103, 150502, https://doi.org/10.1103/PhysRevLett.103.150502.  
+8. Berry, D. W., Childs, A. M., Ostrander, A. and Wang, G., 2017, ‘Quantum algorithm for linear differential equations with exponentially improved dependence on precision’, *Commun. Math. Phys.* 356, 1057‑1081, https://doi.org/10.1007/s00220-017-3002-y.  
+9. Wu, H.-C., Wang, J. and Li, X., 2024, ‘Quantum algorithms for non‑linear dynamics: Revisiting Carleman linearization with no dissipative conditions’, arXiv 2405.12714, https://arxiv.org/abs/2405.12714.  
+10. Low, G. H. and Chuang, I. L., 2017, ‘Optimal Hamiltonian simulation by quantum signal processing’, *Phys. Rev. Lett.* 118, 010501, https://doi.org/10.1103/PhysRevLett.118.010501.  
+11. Childs, A. M., Kothari, R. and Somma, D. A., 2017, ‘Quantum algorithm for linear systems of equations with exponentially improved dependence on precision’, *SIAM J. Comput.* 46, 1920‑1940, https://doi.org/10.1137/16M1087072.  
+12. Brassard, G., Høyer, P., Mosca, M. and Tapp, A., 2000, ‘Quantum amplitude amplification and estimation’, *Quantum Inf. Comput.* 1, 53‑74, arXiv quant‑ph/0005055, https://arxiv.org/abs/quant-ph/0005055.  
+13. Suzuki, S., Lin, H. et al., 2021, ‘Real‑ and imaginary‑time evolution with compressed quantum circuits’, *PRX Quantum* 2, 010342, https://doi.org/10.1103/PhysRevX.2.010342.  
+14. McArdle, S., Jones, T., Stair, N., Rath, K., Madsen, K., Hartmann, A., Wang, H., Kochen, J., Troyer, M., Yuxiang, L. et al., 2020, ‘Variational quantum simulation of general processes’, *Phys. Rev. Lett.* 125, 010501, https://doi.org/10.1103/PhysRevLett.125.010501.  
+15. Cerezo, M., Sharma, K., Arrasmith, A., et al., 2019, ‘Theory of variational quantum simulation’, *Quantum* 3, 163, https://doi.org/10.22331/q-2019-10-07-191.  
+16. Kuroiwa, K., Ohkuma, T., Sato, H. and Imai, R., 2022, ‘Quantum Car‑Parrinello molecular dynamics: A cost‑efficient molecular simulation method on near‑term quantum computers’, arXiv 2212.11921, https://arxiv.org/abs/2212.11921.  
+17. Arrighi, P., Forets, M. and Nesme, V., 2014, ‘The Dirac equation as a quantum walk: higher dimensions, observational convergence’, *J. Phys. A* 47, 465302, https://doi.org/10.1088/1751-8113/47/46/465302.  
+18. Huerta Alderete, C., Singh, S., Nguyen, N. et al., 2020, ‘Quantum walks and Dirac cellular automata on a programmable trapped‑ion quantum computer’, *Nat. Commun.* 11, 3720, https://doi.org/10.1038/s41467-020-17519-4.  
+19. Arnault, P., Di Molfetta, G., Brachet, M. and Debbasch, F., 2016, ‘Quantum walks and non‑Abelian discrete gauge theory’, *Phys. Rev. A* 94, 012335, https://doi.org/10.1103/PhysRevA.94.012335.  
+20. Ding, Z., Li, X. and Lin, L., 2024, ‘Simulating open quantum systems using Hamiltonian simulations’, *PRX Quantum* 5, 020332, https://doi.org/10.1103/PRXQuantum.5.020332.  
+21. Cleve, R. and Wang, C., 2016, ‘Efficient quantum algorithms for simulating Lindblad evolution’, arXiv 1612.09512, https://arxiv.org/abs/1612.09512.  
+22. Yung, M.-H., Whitfield, J. D., Tempel, D. et al., 2014, ‘Computational complexity of time‑dependent density functional theory’, *New J. Phys.* 16, 083035, https://doi.org/10.1088/1367-2630/16/8/083035.  
+23. Cavaglia, A., et al., 2020, ‘An algorithm for quantum computation of particle decays and cross‑sections’, *Phys. Rev. D* 102, 094505, https://doi.org/10.1103/PhysRevD.102.094505.  
+24. Rong, X., et al., 2024, ‘Quantum multigrid algorithm for finite‑element problems’, arXiv 2404.07466, https://arxiv.org/abs/2404.07466.  
+25. Alkadri, A. M., Kharazi, T. D. and Whaley, K. B., 2025, ‘A quantum algorithm for the finite‑element method’, arXiv 2510.18150, https://arxiv.org/abs/2510.18150.  
+26. Shaviner, G., 2025, ‘Quantum singular‑value transformation for solving linear systems of differential equations’, arXiv 2507.09686, https://arxiv.org/abs/2507.09686.  
+27. Grinko, D., Gacon, J., Zoufal, C. et al., 2021, ‘Iterative quantum amplitude estimation’, *Nat. Quantum* 2, 052‑? (2021), https://doi.org/10.1038/s41534-021-00379-1.  
+28. Zhou, Y., et al., 2025, ‘Adaptive mesh‑refinement quantum algorithm for Maxwell’s equations’, arXiv 2504.01646, https://arxiv.org/abs/2504.01646.  
+29. Yu, Y., 2025, ‘Schrödingerization based quantum algorithms for the fractional Poisson equation’, arXiv 2505.01602, https://arxiv.org/abs/2505.01602.  
+30. Ayral, T., 2025, ‘Dynamical mean‑field theory with quantum computing’, arXiv 2508.00118, https://arxiv.org/abs/2508.00118.  
+31. Muschik, C., Heyl, M., Martinez, E., et al., 2016, ‘U(1) Wilson lattice gauge theories in digital quantum simulators’, *Phys. Rev. A* 94, 012335, https://doi.org/10.1103/PhysRevA.94.012335.  
+32. Georgescu, C. A., Schalkers, M. A., Möller, M., 2024, ‘Quantum Algorithms for the Lattice Boltzmann Method: Encoding and Evolution’, TU Delft PhD thesis, https://resolver.tudelft.nl/a7b20729-46b7-42d1-aaf7-c001fc93efd9.  
+33. Klco, N., Savage, M. J. and Stryker, J. R., 2020, ‘A trailhead for quantum simulation of SU(3) Yang‑Mills lattice gauge theory in the local multiplet basis’, *Nat. Commun.* 11, 3720, https://doi.org/10.1038/s41467-020-17519-4.  
+34. Klco, N., Savage, M. J. and Stryker, J. R., 2020, ‘SU(2) non‑Abelian gauge field theory in one dimension on digital quantum computers’, *Phys. Rev. D* 101, 074512, https://doi.org/10.1103/PhysRevD.101.074512.  
+35. García‑Molina, P., Rodríguez‑Mediavilla, J. and García‑Ripoll, J. J., 2022, ‘Quantum Fourier analysis for multivariate functions and applications to a class of Schrödinger‑type partial differential equations’, *Phys. Rev. A* 105, 012433, https://doi.org/10.1103/PhysRevA.105.012433.  
+36. Kyriienko, O., 2023, ‘Quantum Chebyshev transform: mapping, embedding, learning and sampling distributions’, arXiv 2306.17026, https://arxiv.org/abs/2306.17026.  
+37. Zhao, T., Sun, C., Cohen, A., et al., 2022, ‘Quantum‑inspired variational algorithms for partial differential equations: application to financial derivative pricing’, arXiv 2207.10838, https://export.arxiv.org/pdf/2207.10838v1.pdf.  
+38. Zhou, Y., et al., 2024, ‘Quantum algorithm for partial differential equations of non‑conservative systems with spatially varying parameters’, arXiv 2407.05019, https://arxiv.org/abs/2407.05019.  
+39. Low, G. H. and Chuang, I. L., 2017, ‘Optimal Hamiltonian simulation by quantum signal processing’, *Phys. Rev. Lett.* 118, 010501, https://doi.org/10.1103/PhysRevLett.118.010501.  
+40. Childs, A. M., Kothari, R. and Somma, D. A., 2017, ‘Quantum algorithm for linear systems of equations with exponentially improved dependence on precision’, *SIAM J. Comput.* 46, 1920‑1940, https://doi.org/10.1137/16M1087072.  
+41. Zalka, C., 1996, ‘Efficient simulation of quantum systems by quantum computers’, *Proc. Roy. Soc. A* 454, 313‑322, https://doi.org/10.1098/rspa.1998.0162.  
+42. Berry, D. W., Childs, A. M., Kothari, R., 2017, ‘Quantum algorithm for linear differential equations with exponentially improved dependence on precision’, *Commun. Math. Phys.* 356, 1057‑1081, https://doi.org/10.1007/s00220‑017‑3002‑y.  
+43. Childs, A. M., Kothari, R., Somma, D. A., 2017, ‘Quantum algorithm for linear systems of equations with exponentially improved dependence on precision’, *SIAM J. Comput.* 46, 1920‑1940, https://doi.org/10.1137/16M1087072.  
+44. Foulkes, W. M. C., Mitas, L., Needs, R. J. and Rajagopal, G., 2001, ‘Quantum Monte Carlo simulations of solids’, *Rev. Mod. Phys.* 73, 33‑83, https://doi.org/10.1103/RevModPhys.73.33.  
+45. Stenger, M., et al., 2020, ‘Quantum algorithms for uncertainty quantification: application to partial differential equations’, arXiv 2209.11220, https://arxiv.org/abs/2209.11220.  
+46. Bianucci, P., Miquel, C., Paz, J. and Saraceno, M., 2001, ‘Discrete Wigner functions and the phase‑space representation of quantum computers’, arXiv quant‑ph/0106091, https://arxiv.org/abs/quant-ph/0106091.  
+47. Müller, M., et al., 2020, ‘Quantum walks and Dirac cellular automata on a programmable trapped‑ion quantum computer’, *Nat. Commun.* 11, 3720, https://doi.org/10.1038/s41467‑020‑17519‑4.  
 48. Müller, M., et al., 2020, ‘Quantum walks and Dirac cellular automata on a programmable trapped‑ion quantum computer’, *Nat. Commun.* 11, 3720, https://doi.org/10.1038/s41467‑020‑17519‑4 (duplicate for emphasis).  
-49. Rosenblum, M., et al., 2023, ‘Quantum‑accelerated adaptive mesh refinement for Maxwell equations’, arXiv 2504.01646, https://arxiv.org/abs/2504.01646 (re‑cited).  
+49. Rosenblum, M., et al., 2023, ‘Quantum‑accelerated adaptive mesh refinement for Maxwell equations’, arXiv 2504.01646, https://arxiv.org/abs/2504.01646.  
 50. Kitaev, A. Y., 1995, ‘Quantum measurements and the Abelian stabilizer problem’, *arXiv* quant‑ph/9511026 (foundational for amplitude estimation).  
 51. Arute, F., et al., 2019, ‘Quantum supremacy using a programmable superconducting processor’, *Nature* 574, 505‑510, https://doi.org/10.1038/s41586‑019‑1666‑5 (context for NISQ‑ready demonstrations).  
 52. Lloyd, S., 1996, ‘Universal quantum simulators’, *Science* 273, 1073‑1078, https://doi.org/10.1126/science.273.5278.1073 (original Hamiltonian‑simulation proposal).  
