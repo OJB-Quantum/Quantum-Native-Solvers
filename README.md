@@ -20,6 +20,8 @@ Interestingly, some models such as the [Landau-Lifshitz-Gilbert (LLG) equation](
 
 ## Classification Tree for Quantum-Native Solvers/ True Quantum Simulation 
 
+(A Quantum Simulation Taxonomy) 
+
 ```
 Quantum‑Native Simulation Techniques 
 ├─ I. Lattice‑kinetic/ Automata family
