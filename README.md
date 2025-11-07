@@ -3,7 +3,7 @@ A compilation of quantum-native solver techniques that can be used to map and ru
 
 [![License](https://img.shields.io/badge/Creative_Commons-License-green)](https://choosealicense.com/licenses/cc-by-4.0) 
 
-Primary URL for the repository: <https://github.com/OJB-Quantum/Quantum-Native-Solvers/>
+Primary URL for the repository: <https://github.com/OJB-Quantum/Quantum-Native-Solvers>
 
 ---
 
