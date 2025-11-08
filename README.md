@@ -1,5 +1,5 @@
 # Quantum-Native-Solvers
-A compilation of quantum-native solver techniques that can be used to map and run on a quantum computer. Compiled by Onri Jay Benally. 
+A compilation of quantum-native solver techniques that can be mapped and ran on a quantum computer. Compiled by Onri Jay Benally. 
 
 [![License](https://img.shields.io/badge/Creative_Commons-License-green)](https://choosealicense.com/licenses/cc-by-4.0) 
 
