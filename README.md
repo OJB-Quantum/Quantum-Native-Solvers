@@ -99,7 +99,7 @@ Quantum‑Native Simulation Techniques
 │   │   ├─ T1. Finite‑difference/plane‑wave discretization + Trotter
 │   │   ├─ T2. LCU/ qubitization of kinetic + potential operators
 │   │   └─ T3. Interaction‑picture schemes for driven potentials
-│   └─ U. Finite‑Temperature Correlators via TFD (Kubo/Schwinger–Keldysh/OTOCs) [xref: III‑P]
+│   └─ U. Finite‑Temperature Correlators via TFD (Kubo/Schwinger–Keldysh/OTOCs) 
 │       ├─ U1. Linear‑response & spectral functions at finite‑T via |TFD(β)⟩ (Kubo framework)
 │       ├─ U2. Out‑of‑time‑order correlators (OTOCs) from doubled‑register/TFD circuits
 │       └─ U3. Schwinger–Keldysh contour ↔ TFD mapping for real‑time finite‑T observables
