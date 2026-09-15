@@ -370,7 +370,7 @@ Heterogeneous Quantum Computer (Architected for Fault-Tolerant Compatibility)
 │   ├─ Electro-optic (LiNbO₃), opto-mechanical, Rydberg ensembles
 │   ├─ Superconducting metamaterial waveguides (engineered μw buses/ slow-light or TWPA media for transduction nodes & paramps)
 │   ├─ Targets: internal η ≥ 0.1–0.5, added noise ≲ 1 photon
-│   └─ With JPA/ JTWPA pre-amps (paramps), pump-noise filtering
+│   └─ With JPA/ JTWPA/KI-TWPA pre-amps (paramps), pump-noise filtering
 ├─ Quantum Memory: Superconducting Cat (bosonic)
 │   ├─ Passive bit-flip suppression (noise bias)
 │   ├─ Repetition-cat outer code; bias-preserving gates (SNAP-enabled)
