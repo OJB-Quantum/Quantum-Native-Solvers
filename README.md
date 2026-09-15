@@ -24,300 +24,333 @@ Interestingly, some models such as the [Landau-Lifshitz-Gilbert (LLG) equation](
 
 (A Quantum Simulation Taxonomy) 
 
-```
-Quantum‑Native Simulation Techniques 
-├─ I. Lattice‑kinetic/ Automata family
-│   ├─ A. Quantum Lattice Boltzmann (QLBM)
-│   │   ├─ A1. “Quantum-walk‑equivalent” formulations (QLBM ≈ quantum walk)
-│   │   ├─ A2. Carleman‑linearized LB (LB-Carleman, fault‑tolerant oriented)
-│   │   ├─ A3. Multi‑circuit QLBM for noisy devices
-│   │   └─ A4. Early hardware demos (advection-diffusion on QPU)
-│   ├─ B. Quantum Lattice Gas Automata (QLGA)
-│   │   ├─ B1. Measurement‑based QLG for Navier-Stokes
-│   │   ├─ B2. Efficient QLGA single‑step schemes
-│   │   └─ B3. Fully‑quantum LGA building blocks (MHD/NS‑ready)
-│   └─ C. Quantum Walks/ Quantum Cellular Automata (QCA)
-│       ├─ C1. Dirac‑type dynamics (transport, diffusion, barriers & tunneling)
-│       ├─ C2. Schrödinger‑type dynamics (continuous‑time quantum walk ↔ free‑particle propagation,
-│       │      discrete‑time quantum walk approximating Laplacian)
-│       └─ C3. Gauge‑field‑coupled quantum walk/QCA (U(1), SU(2) links for both Dirac & Schrödinger)
-│
-├─ II. Quantum PDE & Linear‑Differential Equation solvers
-│   ├─ D. Quantum Linear‑System Algorithms (HHL & block‑encoding, Poisson)
-│   ├─ E. Linear Differential Equations (LDE) oracles (Berry-Childs-Kothari)
-│   ├─ F. Carleman linearization for nonlinear ODE/PDE (Navier-Stokes regimes)
-│   ├─ G. Quantum Finite Elements (Qu‑FEM/ Q‑FEM) + q‑Multigrid
-│   ├─ H. Dirac‑PDE solvers
-│   │   ├─ H1. Quantum-walk‑based Dirac first‑order hyperbolic solvers
-│   │   ├─ H2. QLGA spinor kernels for relativistic fluids
-│   │   └─ H3. LCU/ qubitization of the Dirac operator (mass + kinetic terms)
-│   └─ I. Schrödinger‑PDE solvers
-│       ├─ I1. Spectral (Fourier) discretization + Trotter/LCU propagation
-│       ├─ I2. Chebyshev‑polynomial and interaction‑picture schemes
-│       └─ I3. Variational linear‑solver (VQLS) for stationary Schrödinger equation
-│
-├─ III. Variational & Hybrid Dynamics
-│   ├─ J. Variational Quantum Simulation (VQS: real & imaginary time)
-│   ├─ K. Quantum Imaginary‑Time Evolution (QITE) + accelerators
-│   ├─ L. Variational Quantum Linear Solver (VQLS) for scattering/PDE
-│   ├─ M. Quantum Car‑Parrinello Molecular Dynamics (QCPMD, NISQ)
-│   ├─ N. Variational Dirac solvers
-│   │   ├─ N1. Real‑time VQS for Dirac spinor dynamics
-│   │   └─ N2. QITE for massive Dirac ground‑state preparation
-│   ├─ O. Variational Schrödinger solvers
-│   │   ├─ O1. Real‑time VQS with hardware‑efficient ansätze for non‑relativistic dynamics
-│   │   └─ O2. Imaginary‑time VQS/ QITE for ground‑state Schrödinger problems
-│   └─ P. Thermo‑Field‑Double (TFD) & Finite‑Temperature Variational Methods
-│       ├─ P1. QAOA‑style alternating‑operator TFD preparation (intersystem entangler + H) 
-│       │       — finite‑temperature Gibbs states via depth‑p cooling schedules
-│       │       — early trapped‑ion and superconducting demonstrations
-│       ├─ P2. H_TFD‑ground‑state VQE (engineered H_TFD whose ground state ≈ |TFD(β)⟩)
-│       │       — SYK‑model implementations; scalable to interacting fermions
-│       ├─ P3. Variational Quantum Thermalizer (VQT), free‑energy minimization
-│       │       — entropy estimation via series/auxiliary models; high‑T guarantees
-│       ├─ P4. TFD‑QITE/ imaginary‑time purification (unitary approximants to e^{-βH/2})
-│       │       — purely unitary circuits with ancilla‑assisted updates
-│       ├─ P5. TFD‑VQS for dynamical correlators & spectroscopy 
-│       │       — finite‑T C(t), optical/UV‑vis spectra, non‑equilibrium quenches
-│       ├─ P6. Width‑reduction via entanglement forging / circuit‑cutting
-│       │       — simulate a 2N‑qubit TFD using width‑N circuits
-│       ├─ P7. Gauge‑theory & holographic/SYK TFD variants 
-│       │       — lattice‑gauge finite‑T phases; wormhole/OTO‑correlator‑motivated targets
-│       ├─ P8. Noise‑aware TFD compilation & error‑mitigation
-│       │       — noise thresholds favoring shallow QAOA‑TFD; noise‑assisted thermalization
-│       └─ P9. Non‑TFD thermal comparators (PSA, canonical TPQ states) for benchmarking
-│
-├─ IV. Hamiltonian Simulation & Scattering
-│   ├─ P. Real‑space electron‑dynamics (LCU/ qubitization/ Trotter)
-│   ├─ Q. Scattering & cross‑section algorithms (Green’s functions, S‑matrix)
-│   ├─ R. Quantum‑walk tunneling/ barrier transport
-│   ├─ S. Dirac‑Hamiltonian simulation
-│   │   ├─ S1. Product‑formula (Trotter‑Suzuki) for γ·p + m terms
-│   │   ├─ S2. LCU/ qubitization of relativistic kinetic operator
-│   │   └─ S3. Interaction‑picture and Dyson‑series methods for time‑dependent Dirac fields
-│   ├─ T. Schrödinger‑Hamiltonian simulation
-│   │   ├─ T1. Finite‑difference/plane‑wave discretization + Trotter
-│   │   ├─ T2. LCU/ qubitization of kinetic + potential operators
-│   │   └─ T3. Interaction‑picture schemes for driven potentials
-│   └─ U. Finite‑Temperature Correlators via TFD (Kubo/Schwinger–Keldysh/OTOCs) 
-│       ├─ U1. Linear‑response & spectral functions at finite‑T via |TFD(β)⟩ (Kubo framework)
-│       ├─ U2. Out‑of‑time‑order correlators (OTOCs) from doubled‑register/TFD circuits
-│       └─ U3. Schwinger–Keldysh contour ↔ TFD mapping for real‑time finite‑T observables
-│
-├─ V. Stochastic & Monte Carlo family
-│   ├─ O. Quantum Monte Carlo (classically executed, physics‑native)
-│   │   ├─ O1. Variational Monte Carlo (VMC; |Ψ|² sampling)
-│   │   ├─ O2. Diffusion Monte Carlo (DMC; imaginary‑time projection, fixed‑node)
-│   │   ├─ O3. Path‑Integral QMC (PIMC; finite‑T & ground‑state PIGS)
-│   │   ├─ O4. Auxiliary‑Field QMC (AFQMC; Hubbard-Stratonovich)
-│   │   └─ O5. Stochastic Series Expansion (SSE; loop/cluster updates)
-│   ├─ P. Quantum‑accelerated Monte Carlo (hardware‑native)
-│   │   ├─ P1. Quantum Amplitude Estimation (QAE; quadratic sampling speedups)
-│   │   ├─ P2. Quantum Metropolis sampling (thermal states without sign problem)
-│   │   └─ P3. Hybrid QMC w/ QC‑generated trials (e.g., QSCI → AFQMC)
-│   ├─ Q. Quantum Trajectories (Monte Carlo wave function, stochastic Schrödinger)
-│   │   ├─ Q1. Quantum jumps/ MCWF unraveling of Lindblad
-│   │   └─ Q2. Adiabatic‑master‑equation trajectories; restricted‑MCWF diagnostics
-│   ├─ R. Schrödinger‑QMC variants
-│   │   ├─ R1. Diffusion Monte Carlo with quantum‑enhanced trial‑wave‑function optimization
-│   │   └─ R2. Path‑Integral QMC for real‑time (Keldysh) Schrödinger evolution
-│   └─ S. Dirac‑QMC variants
-│       ├─ S1. Stochastic Dirac equation (stochastic quantization of relativistic fields)
-│       └─ S2. Quantum‑walk based Monte Carlo for relativistic barrier tunneling
-│
-├─ VI. Open‑System (Lindblad) solvers & Magnetization links
-│   ├─ R. Lindblad simulators on quantum hardware
-│   │   ├─ R1. LCU/ Stinespring‑dilation & qubitization‑style algorithms
-│   │   ├─ R2. Randomized product‑formula & sampling compilers for GKSL
-│   │   ├─ R3. Quantum‑trajectory simulators with additive O(T + log 1/ε) scaling (class‑dependent)
-│   │   └─ R4. Liouville‑space/ TFD vectorization of GKSL (Choi/Jamiołkowski; |ρ⟩⟩ mapping) 
-│   ├─ S. Classical‑HPC Lindblad solvers with quantum trajectories (large‑N pure‑state sampling)
-│   └─ T. Lindblad → LL/LLG mappings for magnetization dynamics
-│       ├─ T1. LL from Lindbladian dynamics (scale‑separated local mean‑field regimes)
-│       ├─ T2. Microscopic LLG coefficients via NEGF/scattering formulations
-│       └─ T3. Quantum‑LLG analogs and constraints from entanglement/ non‑Markovianity
-│
-├─ VII. Emerging quantum‑native simulation families
-│   ├─ A. Quantum Tensor‑Network Simulators (MPS, PEPS, TTN) for PDEs & many‑body states
-│   ├─ B. Quantum Signal Processing/ QSVT‑based PDE solvers
-│   │        (Chebyshev and polynomial transformations for evolution and linear systems)
-│   ├─ C. Fractional & Non‑local Operator Solvers
-│   │        (fractional Laplacian, Riesz derivatives, etc.)
-│   ├─ D. Quantum Stochastic Differential Equations (QSDE) &
-│   │        non‑Markovian open‑system dynamics
-│   ├─ E. Quantum Lattice‑Gauge‑Theory Engines
-│   │        (U(1), SU(2), SU(3) gauge fields, plaquette unitaries)
-│   ├─ F. Quantum‑Accelerated Adaptive‑Mesh‑Refinement (AMR)
-│   │        (amplitude‑estimation‑driven error indicators)
-│   ├─ G. Quantum‑Enhanced Real‑Time Time‑Dependent Density‑Functional Theory (RT‑TDDFT)
-│   ├─ H. Quantum Wigner‑Function/ Phase‑Space Solvers
-│   │        (discrete Wigner representation + FFT‑based evolution)
-│   ├─ I. Quantum Uncertainty Quantification (UQ) for PDEs
-│   │        (parameter‑sampling via QAE)
-│   ├─ J. Quantum Spectral‑Element/ hp‑Finite‑Element Methods
-│   │        (high‑order basis encoded in qubit registers)
-│   ├─ K. Quantum Metropolis‑Hastings for Thermodynamic Ensembles of PDE Solutions
-│   ├─ L. Hybrid Quantum‑Classical Domain Decomposition (Schwarz) for large‑scale PDEs
-│   ├─ M. Quantum‑Accelerated Sparse‑Matrix Preconditioners
-│   │        (quantum BiCGSTAB, quantum multigrid)
-│   └─ N. Quantum Embedding & Multi‑Scale Methods
-│           (DMFT, QM/MM, impurity solvers, quantum‑accelerated self‑energy evaluation)
-│
-├─ VIII. Dirac Equation Solvers (relativistic quantum dynamics)
-│   ├─ A. Quantum‑Walk‑based Dirac solvers
-│   │   ├─ A1. 1‑D split‑step Dirac quantum walk (continuous limit → Dirac equation)
-│   │   ├─ A2. 2‑D/ 3‑D multi‑step Dirac quantum walks (including spin‑orbit coupling)
-│   │   ├─ A3. Gauge‑field‑coupled Dirac quantum walks (U(1) electromagnetic, SU(2) weak)
-│   │   └─ A4. Multi‑circuit Dirac quantum walks for NISQ devices (error‑mitigated implementations)
-│   ├─ B. Quantum Lattice‑Gas Automata for Dirac dynamics
-│   │   ├─ B1. Spinor QLGA kernels (γ‑matrix encoding on qubits)
-│   │   ├─ B2. Dirac-Maxwell QLGA (self‑consistent coupling of spinor and EM fields)
-│   │   └─ B3. Relativistic fluid‑LGA (Dirac‑MHD, relativistic Navier-Stokes)
-│   ├─ C. Hamiltonian‑simulation of the Dirac operator
-│   │   ├─ C1. Trotter‑Suzuki product formulas for γ·p + m terms
-│   │   ├─ C2. LCU/ qubitization of the Dirac Hamiltonian (including mass‑gap)
-│   │   ├─ C3. Interaction‑picture/ Dyson‑series Dirac simulators for time‑dependent fields
-│   │   └─ C4. Spectral‑method (Fourier) Dirac simulation (momentum‑space discretization)
-│   ├─ D. Variational & Imaginary‑time Dirac solvers
-│   │   ├─ D1. Real‑time VQS for Dirac spinors (hardware‑efficient ansätze)
-│   │   ├─ D2. QITE for massive Dirac ground‑state preparation
-│   │   └─ D3. Adaptive‑VQE style Dirac dynamics (ADAPT‑VQD)
-│   ├─ E. Carleman‑linearized Dirac‑type nonlinear models
-│   │   ├─ E1. Dirac-Klein‑Gordon coupling (scalar‑field interactions)
-│   │   ├─ E2. Non‑linear Dirac (Thirring, Gross‑Neveu) via Carleman embedding
-│   │   └─ E3. Dirac-Maxwell-Higgs hybrid systems
-│   ├─ F. Quantum Finite‑Element/ Multigrid for Dirac
-│   │   ├─ F1. QFEM‑Dirac (mesh‑based spinor discretization)
-│   │   └─ F2. Dirac‑multigrid preconditioners realized with quantum subroutines
-│   ├─ G. Scattering & S‑matrix for relativistic particles
-│   │   ├─ G1. Green‑function based Dirac cross‑section algorithms
-│   │   ├─ G2. Relativistic quantum‑walk tunneling analysis (Klein paradox)
-│   │   └─ G3. Dirac‑time‑dependent scattering (time‑varying potentials)
-│   └─ H. Hybrid classical‑quantum Dirac workflows
-│       ├─ H1. Classical spectral Dirac solver + quantum subroutines for high‑frequency modes
-│       └─ H2. Domain‑decomposition: QC solves interior relativistic region, classical for exterior
-│
-└─ IX. Schrödinger Equation Solvers (non‑relativistic quantum dynamics)
-    ├─ A. Direct Hamiltonian‑simulation of Schrödinger dynamics
-    │   ├─ A1. Spatial discretization (finite‑difference, plane‑wave) + Trotter‑Suzuki
-    │   ├─ A2. LCU/ qubitization of kinetic (∇²) + potential V(x) operators
-    │   ├─ A3. Interaction‑picture/ Dyson‑series approaches for time‑dependent potentials
-    │   └─ A4. High‑order product formulas (e.g., Forest‑Ruth, Suzuki‑23) for improved accuracy
-    ├─ B. Quantum‑PDE solvers specialized for Schrödinger
-    │   ├─ B1. Linear‑Differential‑Equation oracle tailored to time‑dependent Schrödinger equation
-    │   ├─ B2. Spectral (Fourier) method via Quantum Fourier Transform (QFT) - plane‑wave basis
-    │   ├─ B3. Chebyshev‑polynomial expansion of the propagator e^{-iHt}
-    │   └─ B4. Pseudo‑spectral split‑operator schemes (FFT‑based) on quantum hardware
-    ├─ C. Variational & Hybrid Schrödinger solvers
-    │   ├─ C1. Real‑time VQS with hardware‑efficient ansätze (e.g., hardware‑efficient, ADAPT‑VQE)
-    │   ├─ C2. Imaginary‑time VQS/ QITE for ground‑state preparation of Schrödinger Hamiltonians
-    │   ├─ C3. Variational Quantum Linear Solver (VQLS) for stationary Schrödinger equation (Ax = b with A = H−E)
-    │   └─ C4. Adaptive‑VQD for excited‑state dynamics
-    ├─ D. Quantum‑Walk implementations of Schrödinger dynamics
-    │   ├─ D1. Continuous‑time quantum walk mapping to free‑particle Schrödinger (H = −Δ)
-    │   ├─ D2. Discrete‑time quantum walk reproducing Laplacian kinetic term via coin‑shift construction
-    │   └─ D3. Quantum‑walk based tunneling simulations for arbitrary barrier profiles
-    ├─ E. Quantum Cellular Automata for Schrödinger equation
-    │   ├─ E1. Local unitary update rules approximating the Laplacian operator
-    │   └─ E2. Multi‑step QCA with on‑site potential encoding
-    ├─ F. Quantum Monte Carlo methods for Schrödinger equation
-    │   ├─ F1. Diffusion Monte Carlo (imaginary‑time projection) with QC‑accelerated trial‑wave‑function refinement
-    │   ├─ F2. Path‑Integral QMC for real‑time evolution (Keldysh contour) using quantum‑enhanced sampling
-    │   ├─ F3. Variational Monte Carlo with quantum‑generated ansätze (QANSAT)
-    │   └─ F4. Reptation QMC with quantum‑assisted move proposals
-    ├─ G. Many‑body Schrödinger solvers (second‑quantized)
-    │   ├─ G1. Electronic‑structure Hamiltonian simulation (quantum chemistry) via LCU/ qubitization
-    │   ├─ G2. Quantum Dynamical Mean‑Field Theory (QDMFT) for lattice models
-    │   ├─ G3. Real‑time Green‑function methods (Kadanoff‑Baym) on quantum processors
-    │   └─ G4. Tensor‑network‑inspired hybrid algorithms (e.g., VQE‑DMRG hybrids)
-    ├─ H. Hybrid Classical‑Quantum Schrödinger solvers
-    │   ├─ H1. Classical spectral (Fourier) solver + quantum subroutine for high‑frequency phase propagation
-    │   ├─ H2. Domain‑decomposition: QC handles sub‑grid potentials; classical handles bulk
-    │   └─ H3. Multi‑scale coupling of quantum‑accelerated short‑range dynamics with classical long‑range Poisson solver
-    ├─ I. Scattering & S‑matrix for non‑relativistic particles
-    │   ├─ I1. Green‑function based cross‑section computation (Lippmann‑Schwinger equation)
-    │   ├─ I2. Quantum‑walk tunneling analysis for arbitrary 1‑D/ 2‑D barrier profiles
-    │   └─ I3. Real‑time S‑matrix extraction via phase‑estimation on scattered wave‑packets
-    └─ J. Quantum Finite‑Element/ Multigrid for Schrödinger
-        ├─ J1. Mesh‑based Schrödinger solvers with quantum enforcement of continuity/ boundary conditions
-        ├─ J2. Quantum‑accelerated multigrid preconditioners for the Laplacian‑plus‑potential operator
-        └─ J3. Adaptive mesh refinement driven by quantum‑measured error estimates
-```
+| Label | Execution or scope |
+| --- | --- |
+| Q | Quantum circuits perform the central computation. |
+| H | Quantum and classical computations form an essential hybrid workflow. |
+| A | Native interactions in a programmable physical simulator implement the model. |
+| C | Classical computation, potentially accelerated by GPUs. |
+| R | A problem-specific research direction requiring an explicit construction and resource analysis. |
+| P26 | A cited 2026 preprint. |
 
+```text
+Quantum Simulation and Solver Approaches
+│
+├─ I. Lattice kinetic methods and automata [Q/H/A]
+│  ├─ A. Quantum lattice Boltzmann methods (QLBM)
+│  │  ├─ Reversible streaming and encoded population transport
+│  │  ├─ Collision through dilation, measurement, or classical feedback
+│  │  ├─ Carleman expansions and multiple-circuit formulations
+│  │  └─ Node-level ensemble formulations for nonlinear fluid models
+│  ├─ B. Quantum lattice gas automata (QLGA)
+│  │  ├─ Occupation registers with collision and streaming operations
+│  │  └─ Model-specific hydrodynamic limits and field reconstruction
+│  └─ C. Quantum walks and quantum cellular automata (QCA)
+│     ├─ Continuous-time, coined, and split-step quantum walks
+│     ├─ Controlled Dirac-like or Schrödinger-like continuum limits
+│     └─ Background gauge links or explicitly represented dynamical fields
+│
+├─ II. Linear systems and differential equations [Q/H]
+│  ├─ A. Quantum linear system algorithms (QLSA)
+│  │  ├─ HHL, block-encoding, and singular-value transformation methods
+│  │  └─ Variable-time and adiabatic linear-system algorithms
+│  ├─ B. Linear differential equation algorithms
+│  │  ├─ Taylor and spectral embeddings into linear systems
+│  │  ├─ Time-dependent Dyson-series constructions and forcing terms
+│  │  └─ Stability, conditioning, and solution-state recovery costs
+│  ├─ C. Schrödingerisation [Q/A]
+│  │  └─ Enlarged-space unitary evolution with auxiliary-coordinate recovery
+│  ├─ D. Linear combination of Hamiltonian simulation (LCHS)
+│  │  ├─ Dissipative linear evolution with suitable kernels and quadrature
+│  │  └─ Hybrid oscillator–qubit implementations [Q/A, P26]
+│  ├─ E. Finite elements and preconditioning
+│  │  ├─ Stiffness-matrix, load-vector, and boundary-data encodings
+│  │  ├─ BPX multilevel preconditioners for specified elliptic problems
+│  │  └─ Additive Schwarz quantum preconditioning [Q, P26]
+│  └─ F. Lindbladian embeddings of classical linear ODEs
+│     └─ Engineered open-system evolution with solution extraction
+│
+├─ III. Variational dynamics and thermal state preparation [H]
+│  ├─ A. Variational quantum simulation (VQS)
+│  │  ├─ Real-time and imaginary-time projected evolution
+│  │  └─ Adaptive ansatz growth, residual control, and metric regularization
+│  ├─ B. Quantum imaginary-time evolution (QITE)
+│  │  ├─ State-dependent unitary approximations to normalized evolution
+│  │  └─ Local-domain accuracy and correlation-length constraints
+│  ├─ C. Variational quantum linear solver (VQLS)
+│  │  └─ Driven linear systems with prescribed sources and boundary data
+│  ├─ D. Variational differential-equation residual methods [H/R]
+│  │  └─ Circuit representations with PDE and boundary-condition losses
+│  ├─ E. Quantum Car–Parrinello molecular dynamics (QCPMD)
+│  │  └─ Classical nuclei coupled to parameterized electronic states
+│  └─ F. Thermal field double (TFD) and variational thermal methods
+│     ├─ QAOA-inspired alternating system and intersystem evolution
+│     ├─ Engineered TFD parent Hamiltonians with specified approximation bounds
+│     ├─ Variational quantum thermalizer (VQT): free-energy minimization
+│     ├─ Explicit entropy evaluation, estimation, or tractable entropy models
+│     ├─ Imaginary-time purification through QITE or variational approximations
+│     ├─ Entanglement forging or circuit cutting with reconstruction overhead
+│     ├─ Gauge-theory and Sachdev–Ye–Kitaev (SYK) model applications
+│     ├─ Noise-aware compilation and engineered thermalization channels
+│     └─ Product-spectrum ansätze, TPQ, and QMETTS as alternative routes
+│
+├─ IV. Hamiltonian evolution, scattering, and thermal response [Q/H]
+│  ├─ A. Product formulas
+│  │  ├─ Lie–Trotter, Strang, and higher even-order Suzuki formulas
+│  │  └─ Randomized orderings and qDRIFT
+│  ├─ B. Linear combination of unitaries (LCU)
+│  │  └─ Truncated Taylor and time-dependent Dyson constructions
+│  ├─ C. Qubitization and quantum signal processing (QSP)
+│  │  └─ Hamiltonian transformations; QSVT extends to general matrices
+│  ├─ D. Interaction-picture simulation
+│  │  └─ Exploit an efficiently simulated dominant Hamiltonian term
+│  ├─ E. Scattering and resolvent methods
+│  │  ├─ Incoming wave packets, evolution, and channel measurements
+│  │  └─ Phase shifts, amplitudes, and cross sections with normalization
+│  └─ F. Finite temperature correlators and spectroscopy
+│     ├─ TFD or other thermal preparations for Kubo response functions
+│     ├─ Dynamical correlations and spectral reconstruction
+│     ├─ Out-of-time-order correlators (OTOCs) with specified operator ordering
+│     └─ Schwinger–Keldysh observables using explicit contour-to-circuit mappings
+│
+├─ V. Quantum sampling and thermal ensembles [Q/H/A]
+│  ├─ A. Quantum amplitude estimation (QAE)
+│  │  └─ Expectation estimation with preparation and coherent-oracle costs
+│  ├─ B. Quantum walks for Markov-chain tasks
+│  │  └─ Mixing, hitting-time, and annealing methods with spectral assumptions
+│  ├─ C. Quantum Metropolis sampling
+│  │  └─ Energy resolution, acceptance procedures, and mixing-time analysis
+│  ├─ D. Dissipative Gibbs preparation
+│  │  └─ Quantum detailed balance with temperature and mixing constraints
+│  ├─ E. Thermal typicality and ensemble methods [Q/H]
+│  │  ├─ Thermal pure quantum (TPQ) state preparation and observable estimation
+│  │  └─ Quantum minimally entangled typical thermal states (QMETTS)
+│  └─ F. QPU-assisted classical Monte Carlo [H/R]
+│     ├─ SQD or QSCI trial states supplied to classical phaseless AFQMC
+│     └─ Quantum-generated proposals with explicit stationary-distribution checks
+│
+├─ VI. Open systems, trajectories, and stationary states [Q/H/A]
+│  ├─ A. Quantum channel simulation
+│  │  ├─ Stinespring dilation and Kraus representations
+│  │  └─ Collision models, ancilla reset, and engineered environments
+│  ├─ B. Lindblad or GKSL evolution
+│  │  ├─ Product-formula, LCU, block-encoding, and randomized constructions
+│  │  └─ Trajectory-based algorithms with class-specific query bounds
+│  ├─ C. Monitored quantum trajectories
+│  │  ├─ Jump and diffusive trajectories with appropriate measurements
+│  │  └─ Classical averaging over records produced by quantum evolution
+│  ├─ D. Stationary-state preparation
+│  │  └─ Dissipative relaxation or variational searches with physical-state checks
+│  ├─ E. Non-Markovian dynamics
+│  │  ├─ Explicit bath registers, pseudomodes, and reaction coordinates
+│  │  └─ Process-tensor representations with memory and circuit-cost accounting
+│  └─ F. Representations and their physical meanings
+│     ├─ Density matrix vectorization: |ρ⟩⟩ with Hilbert–Schmidt normalization
+│     ├─ Canonical purification: |√ρ⟩⟩, whose reduced state is ρ
+│     └─ Channel Choi operator: represents a map acting on a reference pair
+│
+├─ VII. Nonlinear, nonlocal, and stochastic differential equations [Q/H/R]
+│  ├─ A. Carleman lifting with explicit truncation and convergence bounds
+│  ├─ B. Koopman or Liouville encodings of observables or distributions
+│  ├─ C. Fractional Laplacians and nonlocal kernels with efficient operator access
+│  ├─ D. Wigner and phase-space evolution with explicit state encodings
+│  ├─ E. Classical stochastic differential equations
+│  │  └─ Linear Itô dilation and second-moment Lindblad constructions [P26]
+│  ├─ F. Quantum stochastic differential equations
+│  │  └─ System–field models with an explicit bath discretization or dilation
+│  ├─ G. PDE uncertainty quantification using coherent solution oracles
+│  └─ H. Adaptive meshes, hp elements, and nonlinear multiphysics [R]
+│     └─ Include refinement, coupling, stability, and field-readout costs
+│
+├─ VIII. Dirac equation and relativistic dynamics [Q/H/A]
+│  ├─ A. H = c α·(p − qA) + βmc² + qφ for prescribed electromagnetic fields
+│  ├─ B. Spinor encodings and controlled spatial discretization
+│  ├─ C. Walk, QCA, product-formula, Fourier, and qubitization routes
+│  ├─ D. Spectral filters or variational methods targeting a physical energy sector
+│  ├─ E. Relativistic scattering and Klein-tunneling model studies
+│  └─ F. Dirac–Maxwell and Dirac–Klein–Gordon coupling [R]
+│     └─ Pair creation and interacting quantum fields require many-body models
+│
+├─ IX. Schrödinger equation and nonrelativistic dynamics [Q/H/A]
+│  ├─ A. First quantization: spatial grids, plane waves, and orbital bases
+│  ├─ B. Second quantization: occupation registers and fermion-to-qubit maps
+│  ├─ C. Real-time Hamiltonian simulation or variational evolution
+│  ├─ D. QFT position–momentum transformations in encoded split-operator methods
+│  ├─ E. Stationary eigenstates: H|ψ⟩ = E|ψ⟩; see X
+│  ├─ F. Driven resolvents: [(E + iη)I − H]|x⟩ = |b⟩, η > 0
+│  └─ G. Nonlinear Schrödinger or Gross–Pitaevskii models [H/R/A]
+│     └─ Feedback, lifting, or a justified many-body mean-field limit
+│
+├─ X. Eigenstates and quantum subspace algorithms [Q/H/A]
+│  ├─ A. Quantum phase estimation (QPE) and iterative spectral estimation
+│  ├─ B. Adiabatic preparation, spectral filtering, QITE, and dissipative cooling
+│  ├─ C. VQE, ADAPT-VQE, and variational quantum deflation (VQD)
+│  ├─ D. Quantum subspace expansion (QSE), quantum Krylov, and quantum Lanczos
+│  └─ E. Configuration sampling with classical diagonalization [H]
+│     ├─ Quantum-selected configuration interaction (QSCI)
+│     ├─ Sample-based quantum diagonalization (SQD)
+│     ├─ Sample-based Krylov quantum diagonalization (SKQD)
+│     └─ Randomized propagation variants such as SqDRIFT
+│
+├─ XI. Analog and mixed analog–circuit simulation [A/Q]
+│  ├─ A. Native Ising, XY, and accessible Heisenberg-type spin models
+│  ├─ B. Optical-lattice Bose–Hubbard and Fermi–Hubbard models
+│  ├─ C. Rydberg, trapped-ion, superconducting, and other programmable simulators
+│  ├─ D. Adiabatic paths and accessible quantum-annealing dynamics
+│  └─ E. Native interaction blocks interleaved with gates
+│     └─ Match the implemented Hamiltonian, controls, and physical observables
+│
+├─ XII. Bosonic, qudit, and continuous-variable simulation [Q/H/A]
+│  ├─ A. Binary, unary, and problem-adapted bosonic occupation encodings
+│  ├─ B. Photon, phonon, magnon, and molecular vibrational modes
+│  ├─ C. Native oscillator dynamics
+│  │  ├─ Gaussian transformations for quadratic Hamiltonians
+│  │  └─ Non-Gaussian resources for interacting or anharmonic models
+│  ├─ D. Qudit encodings of multilevel systems and truncated gauge links
+│  └─ E. Hybrid oscillator–qubit spin–boson and vibronic models
+│
+├─ XIII. Quantum field theory and lattice gauge models [Q/H/A]
+│  ├─ A. Truncated scalar fields and interacting lattice fermions
+│  ├─ B. Thirring, Gross–Neveu, and specified effective field theories
+│  ├─ C. Abelian models: Schwinger, finite-group, and quantum-link formulations
+│  ├─ D. Truncated non-Abelian SU(2) and SU(3) models [Q/A/R]
+│  └─ E. Gauss-law constraints, string dynamics, confinement, and pair production
+│     └─ Include gauge truncation, finite-volume, and continuum-limit errors
+│
+├─ XIV. Quantum magnetism and spintronics [Q/H/A]
+│  ├─ A. Exchange, anisotropy, Zeeman, and Dzyaloshinskii–Moriya interactions
+│  ├─ B. Spin transport, correlations, and dynamical structure factors
+│  ├─ C. Spin–cavity, spin–vibration, and magnon–phonon models
+│  ├─ D. Relaxation, pumping, and dephasing with specified jump operators
+│  └─ E. Microscopic-to-macroscopic connections [H/C/R]
+│     ├─ Landau–Lifshitz reductions under stated Lindblad mean-field assumptions
+│     └─ QPU-derived observables or parameters supplied to classical LLG models
+│
+├─ XV. Classical waves, mechanics, and field propagation [Q/H/R]
+│  ├─ A. Coupled harmonic oscillators encoded in quantum amplitudes
+│  ├─ B. Wave, acoustic, and linear elastodynamic equations
+│  ├─ C. Maxwell systems with sources, losses, and divergence constraints
+│  └─ D. Vlasov and plasma models with specified self-consistent coupling
+│     └─ Efficient data access and selected observable recovery define scope
+│
+├─ XVI. Embedding and multiscale workflows [H/R]
+│  ├─ A. Quantum impurity solvers inside dynamical mean-field theory (DMFT)
+│  ├─ B. Density matrix embedding theory (DMET)
+│  ├─ C. Active-space, fragment, and quantum-mechanical/molecular-mechanical models
+│  ├─ D. Density-functional workflows containing a specified QPU subproblem
+│  ├─ E. Quantum local corrections for classical numerical homogenization [P26]
+│  └─ F. Domain decomposition with convergence and communication accounting
+│
+├─ XVII. Observable extraction and inverse modelling [Q/H/A]
+│  ├─ A. Local expectations, energies, occupancies, and correlations
+│  ├─ B. Measurement grouping and applicable classical-shadow protocols
+│  ├─ C. Green functions, spectral densities, and response coefficients
+│  ├─ D. Interferometric overlaps and transition amplitudes
+│  ├─ E. Wigner or Husimi reconstruction with measurement-cost accounting
+│  └─ F. Parameter inference driven by simulation observables [H/R]
+│
+├─ XVIII. Encoding, resources, and performance assessment
+│  ├─ A. Initial states, boundary data, oracles, and block encodings
+│  ├─ B. Sparsity, locality, symmetry sectors, and qubit tapering
+│  ├─ C. Tensor-network-derived state preparation and circuit compression
+│  ├─ D. Discretization, truncation, algorithmic, statistical, and hardware errors
+│  ├─ E. Error mitigation or error-corrected logical implementation
+│  ├─ F. Preparation, gate depth, ancillas, repetitions, and classical processing
+│  └─ G. Matched comparisons of accuracy, observables, and full computational cost
+│
+└─ XIX. Classical comparisons and quantum-assisted interfaces [C/H]
+   ├─ A. Classical quantum Monte Carlo
+   │  ├─ VMC, DMC, PIMC, PIGS, reptation, AFQMC, and series expansion
+   │  └─ Fixed-node, constrained-path, phaseless, sign, and phase limitations
+   ├─ B. Classical tensor networks
+   │  └─ MPS, DMRG, TEBD, TDVP, PEPS, TTN, and thermal-state methods
+   ├─ C. Classical equations and transport
+   │  ├─ FEM, finite differences, spectral methods, multigrid, and Krylov solvers
+   │  └─ NEGF, TDDFT, particle-in-cell, LBM, and micromagnetic LLG
+   ├─ D. Classical open-system simulation
+   │  └─ Master equations, Monte Carlo wavefunctions, and bath-memory methods
+   └─ E. Quantum-assisted variants require an explicit QPU subroutine
+      └─ GPU execution alone belongs to the classical computational route
+```
 
 ---
 
-## **Quantum‑Native Solver/ Simulation Techniques - Ordered by Hardware‑Readiness**  
+# Quantum Simulation and Solver Techniques by Hardware Readiness
 
-## Compact Version 
+Readiness describes a particular implementation, target observable, and accuracy. A method can appear in several tiers as its problem size, simulation time, or precision changes. The placements below are qualitative assessments based on the cited constructions and demonstrations, with scope specific to each algorithm and implementation.
 
-| Tier                             | Typical depth/ qubits                                                                                                                                                           | Representative methods                                                                                                                                                                                                                                                                                                                                                                      |
-| :------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **I. NISQ‑ready**                | Shallow circuits, few qubits; TFD uses a doubled register (≈ 2N), but can sometimes be reduced via entanglement forging                                                     | Quantum walks; QLBM demos; VQS/ QITE; TFD‑QAOA/ variational TFD demos (ions, superconducting); VQT (free‑energy minimization) at moderate–high temperatures; basic amplitude‑estimation variants (MLAE/ IQAE) that avoid phase estimation; minimal open‑system simulators/ trajectory demos.                                                                |
-| **II. Near‑term/ hybrid**       | Shallow‑to‑moderate depth, multi‑circuit/shot‑frugal layouts; selective error‑mitigation or early logicals; width reduction via entanglement forging or circuit‑cutting | Multi‑circuit QLBM; LDE oracles; tiny Q‑FEM; prototype **Quantum Metropolis** sampling and other Gibbs‑prep VQAs; quantum‑accelerated Monte Carlo (MLAE/ IQAE‑based); photonic co‑processor variants; TFD‑QITE / DB‑QITE with forging; finite‑T correlators & spectra from TFD (Green’s functions, Kubo/response) on modest instances.                             |
-| **III. Fault‑tolerant eligible** | Deep circuits, many logical qubits; long coherent evolutions; asymptotically optimal primitives                                                                             | Full‑scale HHL/ block‑encoding; **qubitized Dirac/Schrödinger** Hamiltonian simulation; QSVT‑based PDE and linear‑system solvers; purified‑Gibbs/TFD preparation via block‑encoding/ QSVT; finite‑T response and OTOCs at scale; rigorous open‑system (Lindblad) simulation algorithms; quantum‑enhanced AMR; large‑scale tensor‑network simulation.  |
+Q denotes quantum circuits, H a quantum–classical workflow, A native analog quantum simulation, and C classical computation. R identifies a research direction whose hardware requirements require a concrete construction. P26 marks a cited 2026 preprint. These labels match the unified solver tree.
 
+## Compact Version
+
+| Tier or category | Hardware and computational profile | Representative methods | Interpretation |
+| --- | --- | --- | --- |
+| **I. Demonstrations and bounded prototypes** | Accessible native interactions or circuits that fit a selected device's coherence, connectivity, and measurement budget. Qubit count alone provides insufficient guidance. | Quantum walks and QCA; short product-formula evolution; small VQE, VQS, QITE, VQLS, and TFD experiments; selected QLBM, channel, QSP, and linear-system prototypes; native spin, atom, bosonic, and qudit simulations. | Establishes performance on the specified instance. Analog simulators can reach many-body regimes beyond the few-qubit circuit setting. |
+| **II. Structured hybrid workflows** | Repeated circuit execution with classical optimization, subspace diagonalization, sampling, embedding, or feedback. Error mitigation and early logical implementations are possible choices. | QSCI/SQD, quantum Krylov and suitable SKQD variants; QPU-derived AFQMC trials; variational thermal pipelines and QMETTS; impurity solvers; QCPMD; multiple-circuit QLBM; selected FEM and nonunitary-evolution prototypes. | Practical feasibility requires control of circuit depth, repetitions, classical workload, and model error. Hybrid execution alone supplies no speedup guarantee. |
+| **III. Scalable coherent algorithms, generally oriented toward fault tolerance** | Sustained accurate evolution, implementable oracles, controlled state preparation, and enough logical resources for the requested accuracy. | Precision QPE; qubitization; QSP/QSVT linear algebra; LDE solvers; LCHS; circuit-based Schrödingerization; suitable preconditioned FEM; coherent QAE; Gibbs preparation; general Lindblad and many-body scattering algorithms. | Error correction enables deeper reliable computation. Useful advantage still requires favourable input, conditioning, spectral, and output assumptions. |
+| **R. Construction-dependent research directions** | Resources and maturity assessed for the exact proposal. Some admit small prototypes; others currently have theoretical or classical numerical studies. | General quantum AMR and hp-FEM; nonlinear multiphysics; broad RT-TDDFT interfaces; general domain decomposition; fractional and phase-space solvers; selected stochastic and multiscale proposals. | Preserve the distinction between a physical target, a quantum algorithm, and a hardware demonstration. |
+| **C. Classical comparisons and support** | CPUs, GPUs, distributed memory, or classical sampling and tensor contractions. | Classical QMC, MPS/PEPS, DMRG, sparse solvers, FEM, NEGF, TDDFT, LLG, and classical quantum trajectories. | These methods supply baselines and hybrid components. A separately specified QPU subroutine establishes quantum assistance. |
 
 ## Extended Version
 
-## I. NISQ‑ready (shallow‑depth, few‑qubit) techniques  
-These algorithms can be executed today on IBM Q, Rigetti, IonQ, or any other gate‑model device with error‑mitigation.  All required primitives are already available in Qiskit ≥ 2.2 (e.g. `QuantumWalkCircuit`, `VQSDynamics`, `QITE`, `AmplitudeEstimation`, `LindbladEvolution`).  
+## I. Demonstrations and Bounded Prototypes
 
-| Category | Techniques  |
-|----------|-----------------------|
-| **A. Quantum walks & quantum cellular automata** | 1. Dirac‑type dynamics (split‑step quantum walk) <br> 2. Schrödinger‑type dynamics (continuous‑time quantum walk + discrete‑time Laplacian quantum walk) <br> 3. Simple U(1) gauge‑field coupling (single‑link) |
-| **B. Quantum lattice‑Boltzmann/ lattice‑gas (toy lattices)** | 1. “Quantum‑walk‑equivalent’’ QLBM <br> 2. Early hardware demos (advection‑diffusion on a few‑site lattice) <br> 3. Efficient single‑step QLGA for 1‑D/2‑D Navier‑Stokes (few sites) |
-| **C. Variational & hybrid dynamics** | 1. Real‑time Variational Quantum Simulation (VQS) <br> 2. Quantum Imaginary‑Time Evolution (QITE) <br> 3. Variational Quantum Linear Solver (VQLS) for small linear systems <br> 4. Real‑time VQS for Dirac or Schrödinger spinors with hardware‑efficient ansätze <br> 5. Imaginary‑time VQS/ QITE for Dirac or Schrödinger ground‑state preparation <br> **6. QAOA‑style Thermo‑Field‑Double (TFD) preparation on small instances (2N‑qubit purification)** <br> **7. Variational Quantum Thermalizer (VQT): free‑energy minimization for Gibbs states** <br> **8. TFD‑initialized VQS for finite‑temperature correlators/ small‑system spectroscopy** |
-| **D. Direct Hamiltonian‑simulation (small grids)** | 1. Spectral (Fourier) discretization + Trotter for 1‑D Schrödinger <br> 2. Quantum‑walk‑based Dirac first‑order hyperbolic solver (few lattice sites) <br> 3. Quantum‑walk tunneling/ barrier transport (single‑step quantum walk) |
-| **E. Simple linear‑system/ HHL demos** | 1. HHL for a 2 × 2 or 4 × 4 Poisson‑type matrix (demonstration only) |
-| **F. Quantum‑accelerated Monte Carlo (basic)** | 1. **Low‑depth amplitude‑estimation variants** (maximum‑likelihood/ iterative, no QPE) <br> 2. Quantum jumps/ Monte‑Carlo wave‑function (MCWF) for a single Lindblad trajectory (few qubits) |
-| **G. Minimal Lindblad simulators** | 1. Randomized product‑formula simulation of short‑time GKSL dynamics (≤ 5 qubits) <br> 2. **Liouville‑space vectorization (∣ρ⟩⟩) prototypes** for small GKSL models (TFD‑style bilayer circuits) |
-| **H. Other NISQ‑ready families** | 1. Quantum tensor‑network simulators (MPS/PEPS with shallow circuits) <br> 2. QSP/QSVT for low‑degree polynomial approximations (e.g., low‑order Chebyshev filters) <br> 3. Quantum algorithms for fractional Laplacian on very small lattices (Fourier‑space LCU) <br> 4. Stochastic Schrödinger‑equation discretizations for a few modes (QSDE prototype) <br> **5. Product‑Spectrum Ansatz (PSA) & Thermal‑Pure‑Quantum (TPQ) typical‑state baselines** |
+This tier covers experiments and small implementation studies. Hardware suitability follows from the actual circuit or native interaction model. The rows identify suitable classes of bounded tasks; they imply neither that every listed variant has a hardware demonstration nor that every processor supports it.
 
----
+| Category | Techniques and bounded targets | Scope and practical constraint |
+| --- | --- | --- |
+| **A. Walks, automata, and lattice transport [Q/H/A]** | Split-step walks, graph Hamiltonians, QCA, transport with prescribed gauge links, and selected QLBM or QLGA kernels. | Compile streaming and collision separately. Fluid behaviour requires a demonstrated continuum limit, boundary treatment, and closure. Large classical benchmark grids in a quantum algorithm paper are separate from QPU execution. [QLBM construction](https://arxiv.org/abs/2502.16568). |
+| **B. Short Hamiltonian evolution [Q/A]** | Product-formula spin dynamics, small encoded Schrödinger grids, Dirac wave packets, and tunneling observables. | Accessible evolution time and error set scope. Dirac spectral studies require the intended energy sector and control of lattice artifacts. |
+| **C. Variational states and dynamics [H]** | VQE, real-time VQS, variational imaginary time, and local-domain QITE on manageable instances. | Ansatz error, metric conditioning, correlations, and measurement cost govern scaling. QITE can become expensive as required domains grow. [QITE experiments and construction](https://arxiv.org/abs/1901.07653). |
+| **D. Small linear-system and matrix-function experiments [Q/H]** | VQLS, compiled HHL demonstrations, and low-degree QSP/QSVT filters with accessible encodings. | Count state preparation, controlled operations, and postselection. VQLS prepares a linear-system solution state; stationary eigenpairs use eigenstate algorithms. [VQLS](https://quantum-journal.org/papers/q-2023-11-22-1188/). |
+| **E. Thermal preparation [H/A]** | QAOA-inspired TFD preparation, variational TFD parent-Hamiltonian methods, VQT, and product-spectrum ansätze on selected systems. | Temperature alone gives insufficient readiness information. Entropy treatment, ansatz expressibility, and purification cost are essential. [Trapped-ion TFD experiment](https://arxiv.org/abs/1906.02699), [VQT](https://arxiv.org/abs/1910.02071). |
+| **F. Open-system channels [Q/H/A]** | Ancilla-assisted damping or dephasing, collision models, reset protocols, and monitored jump trajectories. | Requires the relevant preparation, measurement, and reset capabilities. A classical MCWF calculation belongs to C unless quantum hardware performs the trajectory evolution. |
+| **G. Analog, bosonic, and qudit simulation [A/Q]** | Native spin interactions, optical-lattice models, oscillator dynamics, and selected truncated gauge models on multilevel hardware. | Judge native Hamiltonian control, calibration, truncation, and observable access. Universal circuit depth is an incomplete metric for analog hardware. [Qudit gauge-theory experiment](https://www.nature.com/articles/s41567-025-02797-w). |
+| **H. Amplitude-estimation experiments [Q/H]** | Maximum-likelihood or iterative amplitude estimation with bounded amplification depth. | Removing QPE reduces some resources, but repeated Grover operations can still make circuits deep. A depth cap changes the attainable precision and sampling tradeoff. [Iterative QAE](https://arxiv.org/abs/1912.05559). |
 
-## II. Near‑term/ hybrid (requires modest error‑correction, multi‑circuit layouts, or classical‑quantum co‑processing)  
-These approaches are still limited on today’s noisy devices but become practical with modest error‑mitigation, circuit parallelism, or when used as sub‑routines inside a classical workflow (e.g. hybrid QMC, domain‑decomposition).  
+## II. Structured Hybrid Workflows
 
-| Category | Techniques  |
-|----------|-----------------------|
-| **A. Multi‑circuit lattice‑kinetic methods** | 1. Multi‑circuit QLBM for noisy devices (parallel streams) <br> 2. Measurement‑based QLGA for Navier‑Stokes (classical feedback after each step) |
-| **B. Linear‑differential‑equation & Carleman‑linearization prototypes** | 1. LDE oracles (Berry‑Childs‑Kothari) as proof‑of‑concept <br> 2. Carleman linearization for low‑order Navier‑Stokes regimes (small lifted dimension) |
-| **C. Quantum finite‑element/ multigrid (tiny meshes)** | 1. Qu‑FEM/ Q‑FEM for 2‑D Poisson on ≤ 4 × 4 meshes <br> 2. QFEM‑Dirac for a 2‑D spinor mesh (≤ 8 qubits) |
-| **D. LCU/ qubitization for modest problem sizes** | 1. LCU/ qubitization of the Dirac operator on a 2 × 2 lattice <br> 2. VQLS for stationary Schrödinger on ≤ 8‑dimensional basis |
-| **E. Hamiltonian simulation (intermediate depth)** | 1. Trotter‑Suzuki product formula for Dirac kinetic + mass on a 3‑site lattice <br> 2. Finite‑difference Schrödinger Trotter on a 4‑site grid |
-| **F. Hybrid quantum‑accelerated Monte Carlo** | 1. Prototype Quantum Metropolis (single‑spin Ising) <br> 2. Hybrid QMC where the quantum computer supplies trial wavefunctions for AFQMC <br> 3. QAE‑based variance reduction inside Diffusion Monte Carlo <br> 4. Stochastic Dirac‑equation sampling on a few momentum modes |
-| **G. Quantum trajectories with modest scaling** | 1. Additive O(T + log 1/ε) trajectory algorithm for a 2‑qubit Lindbladian (research prototype) | 
-| **H. Quantum Car‑Parrinello Molecular Dynamics (NISQ prototype)** | 1. QCPMD for a single‑atom, few‑electron system (small basis) |
-| **I. Other near‑term families** | 1. Quantum lattice‑gauge‑theory engines for 1‑D U(1) link models (few links) <br> 2. Quantum‑accelerated adaptive‑mesh‑refinement on a 2‑D grid (error estimate via IAE) <br> 3. Quantum‑enhanced real‑time TDDFT for a 2‑electron molecule (VQE‑derived Kohn‑Sham potential) <br> 4. Wigner‑function evolution on a 2‑point phase‑space (QFT‑based) <br> 5. Quantum‑accelerated uncertainty quantification for a 1‑D diffusion PDE (QAE sampling of input parameters) <br> **6. Finite‑temperature linear‑response & spectra using TFD initial states (Kubo/Green’s‑function pipelines)** |
-| **J. Variational TFD pipelines (hybrid)** | **1. ($H_{\mathrm{TFD}}$)‑VQE with entanglement forging (width‑reduction ($2N \rightarrow N$))** <br> **2. TFD‑QITE at moderate depth (β‑schedules; locality‑aware updates)** <br> **3. Small‑lattice finite‑T correlators & spectral densities from TFD** |
+In this tier, the quantum processor supplies states, samples, or observables to a classical calculation. The complete workflow includes every repetition, optimization step, and classical solve. Error mitigation, parallel circuit execution, and error correction address different limitations and should be costed separately.
 
----
+| Category | Techniques and targets | Scope and practical constraint |
+| --- | --- | --- |
+| **A. Configuration sampling and diagonalization [H]** | QSCI, SQD, and extensions for excited states; quantum-generated configurations define a classically diagonalized subspace. | Match classical subspace size, basis, and accuracy against classical selection methods. Sampling quality and classical diagonalization can dominate. [Extended SQD](https://arxiv.org/abs/2411.00468), [benchmarking considerations, P26](https://arxiv.org/abs/2608.11569). |
+| **B. Quantum subspace dynamics [H]** | Quantum subspace expansion, quantum Lanczos, quantum Krylov, and suitable SKQD or SqDRIFT variants. | Time-evolution depth, initial overlap, matrix conditioning, and state concentration determine feasibility. Some Krylov constructions naturally move into III. [Randomized Krylov diagonalization](https://arxiv.org/abs/2508.02578). |
+| **C. QPU-assisted classical QMC [H]** | SQD or QSCI wavefunctions supplied as trials to classical phaseless AFQMC; other explicit quantum-generated trial constructions. | Retain the classical approximation and sampling costs. Generic QAE-driven DMC acceleration requires its own coherent algorithm. [SQD-assisted AFQMC](https://arxiv.org/abs/2503.05967). |
+| **D. Thermal state and response pipelines [H]** | TFD-QITE, variational purification, VQT, QMETTS, and quantum preparation of thermal typical states followed by correlator estimation. | Include preparation at each temperature, entropy evaluation where needed, correlation time, and sampling variance. A single pure typical state approximates suitable thermal observables under typicality assumptions. [QITE and thermal ensembles](https://arxiv.org/abs/1901.07653). |
+| **E. Entanglement forging and circuit cutting [H]** | Smaller circuits reconstruct selected TFD or many-body quantities; parent-Hamiltonian optimization may use the reconstructed expectations. | Width reduction trades against classical reconstruction and measurements. An N-qubit device reconstructing properties of a 2N-qubit state carries this overhead. [TFD forging](https://arxiv.org/abs/2311.10566). |
+| **F. Lattice kinetics and variational PDE workflows [H]** | Multiple-circuit QLBM, measurement and feedback between steps, and variational PDE residual methods. | Reinitialization, field reconstruction, boundary handling, and accumulated error can dominate. Nonlinear dynamics requires an explicit closure or feedback model. |
+| **G. Structured finite-element prototypes [Q/H]** | VQLS-based discretized solves or implementable preconditioned FEM circuits on specified problems. | Mesh dimensions alone fail to determine resources. Include matrix encoding, condition number, coefficient access, and requested solution functionals. [BPX-preconditioned FEM](https://arxiv.org/abs/2403.19512). |
+| **H. Embedding and coupled molecular calculations [H/R]** | Quantum impurity solvers inside DMFT, DMET or active-space embedding; QCPMD with classical nuclear motion. | Accuracy of bath fitting, forces, self-consistency, and repeated quantum measurements limits scope. QCPMD is a proposed hybrid method whose device suitability requires a compiled instance. [QCPMD](https://arxiv.org/abs/2212.11921). |
+| **I. Open spins, spectroscopy, and device parameters [Q/H/A]** | Monitored trajectories, small explicit bath models, dynamical correlations, and quantum-derived parameters for classical spin or device models. | Bath-memory size and observation time determine resources. A microscopic-to-LLG reduction requires specified physical assumptions; The measurement protocol determines whether QPE is useful. [LL reduction](https://arxiv.org/abs/2406.10613). |
+| **J. Nonunitary-evolution prototypes [Q/H/A]** | Small, explicitly compiled Schrödingerisation or LCHS constructions; auxiliary oscillator implementations where supported. | Demonstration scope must include auxiliary-state preparation, truncation, recovery probability, and hardware controls. Large accurate circuit instances generally fall in III. [Schrödingerisation](https://arxiv.org/abs/2212.13969), [oscillator–qubit LCHS, P26](https://arxiv.org/abs/2605.10708). |
 
-## III. Fault‑tolerant eligible (requires error‑corrected hardware, large ancilla registers, deep circuits)  
-These algorithms deliver asymptotic speed‑ups or polynomial‑time reductions that become advantageous only when a full‑scale fault‑tolerant quantum computer is available.  Qiskit provides the low‑level building blocks (`LinearCombinationOfUnitaries`, `SelectOracle`, `PhaseEstimation`, `QSVT`), but high‑level wrappers are still under development.  
+## III. Scalable Coherent Algorithms Oriented Toward Fault Tolerance
 
-| Category | Techniques  |
-|----------|-----------------------|
-| **A. Large‑scale linear‑system solvers** | 1. Full‑scale HHL/ block‑encoding for Poisson matrices of size 2ⁿ × 2ⁿ <br> 2. Fault‑tolerant VQLS for high‑dimensional Schrödinger eigenproblems |
-| **B. Dirac & Schrödinger Hamiltonian simulation (qubitization)** | 1. Qubitization of the relativistic kinetic operator for 3‑D lattices <br> 2. Qubitization of kinetic + potential for high‑resolution Schrödinger grids <br> 3. Full LCU implementation of the Dirac Hamiltonian (mass + gauge coupling) <br> 4. LCU/ qubitization of Schrödinger kinetic + potential |
-| **C. Scattering & S‑matrix algorithms** | 1. Green’s‑function based cross‑section computation using a quantum resolvent (QPE or QSVT) <br> 2. Dirac scattering (Klein‑paradox) with QSVT‑based resolvent <br> 3. Non‑relativistic Lippmann‑Schwinger solver via QSVT <br> **4. Finite‑temperature linear‑response/ OTOCs from TFD with phase‑estimation‑grade accuracy** |
-| **D. Quantum signal‑processing/ QSVT frameworks** | 1. High‑degree Chebyshev and polynomial approximations for time‑evolution and matrix inversion (generic PDEs) <br> 2. QSP‑based fractional‑operator solvers for non‑local dynamics |
-| **E. Quantum lattice‑gauge‑theory (full models)** | 1. Digital simulation of 2‑D/3‑D U(1) and SU(2) gauge fields with plaquette operators (requires many qubits and T‑gate depth) |
-| **F. Quantum stochastic differential equations & non‑Markovian open systems** | 1. QSDE simulation using Stinespring dilation and phase‑estimation (large ancilla) <br> 2. LCU/ Stinespring dilation of general GKSL generators |
-| **G. Quantum‑accelerated multigrid & preconditioners** | 1. Quantum multigrid V‑cycle as a sub‑routine for linear‑system solvers (requires fault‑tolerant VQLS) <br> 2. Quantum‑accelerated sparse‑matrix preconditioners (quantum BiCGSTAB, quantum multigrid) |
-| **H. Quantum‑enhanced adaptive‑mesh‑refinement** | 1. AMR driven by quantum‑estimated error norms (QAE required at each refinement step) |
-| **I. High‑order spectral‑element/ hp‑FEM** | 1. Quantum spectral‑element method with hp‑refinement (mesh encoded in qubits, block‑encoded stiffness matrices) |
-| **J. Quantum tensor‑network simulation at scale** | 1. Large‑scale MPS/PEPS evolution using quantum circuits (requires fault‑tolerant resources for bond‑dimension growth) |
-| **K. Quantum Metropolis‑Hastings for generic distributions** | 1. Full‑scale Quantum Metropolis algorithm (detailed‑balance via phase estimation) |
-| **L. Hybrid quantum‑classical domain decomposition** | 1. Schwarz‑type decomposition where each subdomain is solved with a fault‑tolerant quantum linear‑solver and the interface is handled classically |
-| **M. Quantum‑enhanced real‑time TDDFT & many‑body dynamics** | 1. Fully fault‑tolerant RT‑TDDFT where the Kohn‑Sham potential and the electron density are updated via quantum sub‑routines (qubitization of the KS Hamiltonian) |
-| **N. Wigner‑function/ phase‑space quantum dynamics** | 1. Exact quantum‑Fourier‑transform‑based evolution of high‑dimensional Wigner functions (large QFT registers required) |
-| **O. Quantum uncertainty quantification for large‑scale PDEs** | 1. Propagation of input‑parameter distributions through quantum‑accelerated forward models (QAE + QSVT) |
-| **P. Quantum‑accelerated scattering with many‑body final states** | 1. Dirac time‑dependent scattering with multi‑particle production (requires fault‑tolerant many‑body state preparation) |
-| **Q. Quantum‑enhanced Linear‑Landau‑Lifshitz‑Gilbert (LLG) mapping** | 1. Extraction of microscopic LLG coefficients from entanglement‑aware quantum simulations (requires full open‑system simulation + phase estimation) |
-| **R. Finite‑temperature & purified‑Gibbs/TFD preparation (fault‑tolerant)** | **1. QSVT/ block‑encoding routes to purified Gibbs/TFD** ($\exp$($-\beta H/2$)) via polynomial transforms <br> **2. Coherent Gibbs samplers** (detailed‑balance Lindbladians mapped to a parent Hamiltonian with purified‑Gibbs zero‑mode; adiabatic path in ($\beta$)) <br> **3. Large‑scale finite‑T response & OTOCs on TFD/Schwinger–Keldysh contours (QPE‑grade)** |
+This tier identifies implementations whose precision or evolution demands typically exceed noisy circuit budgets. Logical qubits and error correction enable reliable depth, but they leave algorithmic assumptions, data access, and readout costs intact. Large ancilla registers are method dependent; some algorithms trade width for longer execution.
 
+| Category | Techniques and targets | Conditions for useful scaling |
+| --- | --- | --- |
+| **A. Spectral estimation and state preparation [Q]** | Precision QPE, iterative spectral estimation, polynomial filtering, and adiabatic preparation. | Count state overlap, spectral gaps, controlled evolution, and target energy precision. Difficult ground-state preparation can dominate all subsequent calculations. |
+| **B. Hamiltonian simulation [Q]** | Qubitization, QSP, LCU, interaction-picture methods, and suitable high-order product formulas for electronic, spin, bosonic, Dirac, or Schrödinger models. | Resources follow operator normalization, simulation time, precision, and encoding. Product formulas also have small demonstrations in I. [QSVT primitives](https://arxiv.org/abs/1806.01838), [first-quantized chemistry](https://www.nature.com/articles/s41534-019-0199-y). |
+| **C. Linear systems and differential equations [Q]** | Modern QLSA, foundational HHL, Taylor or spectral LDE embeddings, and time-dependent Dyson constructions. | Include condition number, stability, forcing, and the norm of the recovered solution. The usual output is a quantum state or selected functionals. [Berry–Childs–Ostrander–Wang LDE algorithm](https://arxiv.org/abs/1701.03684). |
+| **D. Nonunitary linear dynamics [Q]** | LCHS, circuit-based Schrödingerisation, and engineered Lindbladian ODE embeddings. | Efficient access to the generator, suitable stability assumptions, auxiliary construction, and recovery probability are central. [LCHS](https://link.springer.com/article/10.1007/s00220-025-05509-w), [ODEs via Lindbladians](https://link.aps.org/doi/10.1103/cvl9-97qg). |
+| **E. Preconditioned FEM and structured PDEs [Q]** | Block-encoded discretizations with BPX or other explicitly constructed quantum preconditioners. | Preconditioning must improve the full encoded solve, including normalization and application cost. General classical V-cycles or BiCGSTAB algorithms require separate quantum constructions. [Quantum FEM](https://arxiv.org/abs/2403.19512). |
+| **F. Coherent expectation estimation [Q]** | QAE and quantum Monte Carlo integration around reversible model and payoff circuits. | Quantum sampling advantages require efficient state preparation and sufficiently accurate coherent amplification. Complete output fields may remove the intended benefit. [Quantum Monte Carlo acceleration](https://arxiv.org/abs/1504.06987). |
+| **G. Thermal and Gibbs algorithms [Q/H]** | Imaginary-time polynomial filters, purified Gibbs preparation, quantum Metropolis, and detailed-balanced dissipative Gibbs samplers. | Temperature, mixing time, overlap, filter success probability, and energy resolution can dominate. Efficient simulation of a thermalizing generator alone supplies no general rapid-mixing guarantee. [Quantum Metropolis](https://arxiv.org/abs/0911.3635), [detailed-balanced Gibbs construction](https://arxiv.org/abs/2311.09207). |
+| **H. General open-system simulation [Q]** | Accurate Lindblad evolution using channel, dilation, LCU, block-encoding, or trajectory constructions; explicit environment simulation for memory effects. | Retain the access model and operator normalization in complexity statements. Class-specific additive jump-operator query bounds are separate from full gate cost. [Trajectory-based algorithms](https://quantum-journal.org/papers/q-2026-04-13-2063/). |
+| **I. Many-body scattering and field theory [Q]** | Prepared incoming states, interacting evolution, channel amplitudes, gauge-constrained models, and multiparticle production. | Include state preparation, finite volume, field truncation, continuum accuracy, and final-state measurements. Smaller analog or qudit gauge experiments belong to I. |
+| **J. Long-time and high-precision response [Q/H]** | Spectral functions, finite temperature Kubo response, and OTOCs using appropriate thermal states and operator orderings. | Spectral resolution, correlator amplitude, observation time, and measurement protocol set requirements. QPE is optional for suitable time-domain approaches. |
+| **K. Encoded classical mechanics and waves [Q]** | Coupled harmonic oscillators and compatible wave-equation mappings to Hamiltonian evolution. | Advantage concerns specified outputs with efficient initial-state and coefficient access. General nonlinear mechanics or arbitrary field readout needs separate analysis. [Harmonic oscillator algorithm](https://arxiv.org/abs/2303.13012). |
+
+## Classical Comparisons and Support
+
+| Family | Examples | Role in a quantum workflow |
+| --- | --- | --- |
+| **Quantum Monte Carlo executed classically [C]** | VMC, DMC, PIMC, PIGS, reptation, AFQMC, and stochastic series expansion. | Baseline calculations or sampling with QPU-derived trials. Sign, phase, and constraint approximations retain their method-specific scope. |
+| **Classical tensor networks [C]** | MPS, PEPS, TTN, DMRG, TEBD, TDVP, and thermal tensor methods. | Reference calculations, state preparation, compression, or classical subspace work. |
+| **Classical field and transport solvers [C]** | FEM, multigrid, Krylov methods, LBM, NEGF, TDDFT, particle-in-cell, and micromagnetic LLG. | Full classical field solutions, embedding environments, or multiscale coupling. |
+| **Classical open-system solvers [C]** | Master-equation integration, MCWF trajectories, stochastic Schrödinger integration, and bath-memory methods. | Reference trajectories and reduced-state dynamics. GPU acceleration changes execution speed within the classical route. |
 
 ---  
 
@@ -364,222 +397,321 @@ Heterogeneous Quantum Computer (Architected for Fault-Tolerant Compatibility)
 ## Decision Tree to Determine Which Quantum-Native Solver/ Simulation Techniques Could Run on an Proposed Fault-Tolerant Heterogenous Quantum Computer 
 
 ```
-Fault‑tolerant heterogeneous/hybrid quantum system
-├─ Main QPU: Neutral‑Atom (Rydberg/ tweezer)
-│   ├─ NISQ‑ready techniques (shallow circuits, few qubits)
-│   │   ├─ I.C.1  Dirac‑type quantum‑walk/ QCA
-│   │   ├─ I.C.2  Schrödinger‑type quantum‑walk/ QCA
-│   │   ├─ I.C.3  Simple gauge‑field‑coupled quantum walk/QCA (U(1) link)
-│   │   ├─ I.A.1  “Quantum-walk‑equivalent’’ Quantum Lattice‑Boltzmann (QLBM)
-│   │   ├─ I.B.3  Fully‑quantum Lattice‑Gas Automata (MHD/NS‑ready)
-│   │   ├─ III.J  Variational Quantum Simulation (VQS, real‑time)
-│   │   ├─ III.K  Quantum Imaginary‑Time Evolution (QITE)
-│   │   ├─ III.L  Variational Quantum Linear Solver (VQLS, small systems)
-│   │   ├─ III.N.1 Real‑time VQS for Dirac spinors
-│   │   ├─ III.O.1 Real‑time VQS for Schrödinger spinors
-│   │   ├─ IV.P   Real‑space electron‑dynamics (short‑depth Trotter)
-│   │   ├─ IV.R   Quantum‑walk tunnelling/ barrier transport
-│   │   ├─ V.P1   Iterative Amplitude Estimation (IAE)
-│   │   └─ VI.R2  Randomised product‑formula GKSL simulation (≤ 5 qubits)
-│   │
-│   ├─ Near‑term/ hybrid techniques (moderate error‑correction, multi‑circuit)
-│   │   ├─ I.A.3  Multi‑circuit QLBM for noisy devices (parallel streams)
-│   │   ├─ I.B.1  Measurement‑based QLGA for Navier-Stokes (mid‑circuit readout)
-│   │   ├─ II.E   Linear‑Differential‑Equation (LDE) oracles (Berry‑Childs‑Kothari)
-│   │   ├─ II.F   Carleman‑linearized ODE/PDE prototypes (low‑order Navier-Stokes)
-│   │   ├─ II.G   Quantum Finite‑Element/ Q‑FEM on tiny meshes (≤ 4×4)
-│   │   ├─ II.H.1 Quantum walk‑based Dirac first‑order hyperbolic solver (few sites)
-│   │   ├─ II.I.1 Spectral Schrödinger solver (small Fourier grid)
-│   │   ├─ III.M   Quantum Car‑Parrinello MD (prototype, few electrons)
-│   │   ├─ IV.S.1 Trotter‑Suzuki Dirac kinetic + mass (3‑site lattice)
-│   │   ├─ IV.T.1 Finite‑difference Schrödinger Trotter (4‑site grid)
-│   │   ├─ V.P2   Prototype Quantum Metropolis sampler (single‑spin Ising)
-│   │   ├─ V.P3   Hybrid QMC - QC‑generated trial wavefunctions for AFQMC
-│   │   └─ VI.R3   Additive O(T + log 1/ε) quantum‑trajectory algorithm (research demo)
-│   │
-│   └─ Fault‑tolerant‑eligible techniques (require logical qubits, bias‑preserving gates)
-│       ├─ II.D    Full‑scale HHL/ block‑encoding linear‑system solver
-│       ├─ II.E    Large‑scale LDE oracle (high‑precision phase estimation)
-│       ├─ II.F    Complete Carleman‑linearization for nonlinear PDEs
-│       ├─ II.G    Full Qu‑FEM + quantum multigrid preconditioner
-│       ├─ IV.S.2  Qubitization of Dirac kinetic operator (3‑D lattice)
-│       ├─ IV.T.2  Qubitization of Schrödinger kinetic + potential
-│       ├─ IV.Q    Scattering & S‑matrix via Green’s‑function resolvent (QSVT/QSP)
-│       ├─ IV.S.3  High‑order Dirac product‑formula (Forest‑Ruth, Suzuki‑23)
-│       ├─ IV.T.3  Interaction‑picture Schrödinger simulation (time‑dependent V)
-│       ├─ V.S.1   Stochastic Dirac‑equation (QSDE) Monte Carlo
-│       ├─ V.R.1   Diffusion Monte Carlo with QC‑enhanced trial wavefunctions
-│       ├─ VI.R1   LCU/ Stinespring‑dilation implementation of GKSL Lindbladians
-│       ├─ VI.T1‑T3  Lindblad → LL/ LLG mappings (microscopic coefficient extraction)
-│       ├─ VII.A.*  All Dirac‑walk families (A1-A4)
-│       ├─ VII.B.*  Dirac QLGA kernels (B1-B3)
-│       ├─ VII.C.*  Dirac Hamiltonian simulation (C1-C4)
-│       ├─ VII.D.*  Variational & imaginary‑time Dirac solvers (D1-D3)
-│       ├─ VII.E.*  Carleman‑linearized Dirac nonlinear models (E1-E3)
-│       ├─ VII.F.*  Dirac FEM/ multigrid (F1-F2)
-│       ├─ VII.G.*  Dirac scattering & S‑matrix (G1-G3)
-│       ├─ VII.H.*  Hybrid classical‑quantum Dirac workflows (H1-H2)
-│       ├─ VIII.A.*  Schrödinger Hamiltonian simulation (A1-A4)
-│       ├─ VIII.B.*  Schrödinger‑specific QPDE solvers (B1-B4)
-│       ├─ VIII.C.*  Variational Schrödinger techniques (C1-C4)
-│       ├─ VIII.D.*  Quantum‑walk implementations of Schrödinger dynamics (D1-D3)
-│       ├─ VIII.E.*  Quantum Cellular Automata for Schrödinger (E1-E2)
-│       ├─ VIII.F.*  Schrödinger Quantum Monte Carlo (F1-F4)
-│       ├─ VIII.G.*  Many‑body Schrödinger solvers (G1-G4)
-│       ├─ VIII.H.*  Hybrid classical‑quantum Schrödinger workflows (H1-H3)
-│       ├─ VIII.I.*  Scattering & S‑matrix for non‑relativistic particles (I1-I3)
-│       └─ VIII.J.*  Schrödinger FEM/ multigrid (J1-J3)
+Proposed heterogeneous quantum computing system
 │
-├─ Co‑Processor: Quantum Photonic IC (QPIC)
-│   ├─ NISQ‑ready photonic techniques
-│   │   ├─ I.C.1   Dirac‑type quantum walk in time‑bin encoding
-│   │   ├─ I.C.2   Schrödinger‑type continuous‑time quantum walk
-│   │   ├─ I.B.1   Measurement‑based QLGA (cluster‑state generation)
-│   │   └─ V.P1    Iterative Amplitude Estimation with single‑photon detectors
-│   │
-│   ├─ Near‑term/ hybrid photonic techniques
-│   │   ├─ V.P2    Quantum Metropolis sampler realised with linear‑optical interferometers
-│   │   ├─ V.P3    Hybrid QMC - photonic circuit produces trial wavefunctions for AFQMC
-│   │   └─ II.E    Prototype photonic LDE oracle (cluster‑state linear ODE)
-│   │
-│   └─ Fault‑tolerant‑eligible photonic techniques
-│       ├─ VI.R1   LCU/ Stinespring‑dilation of GKSL Lindbladians using bosonic cat encodings
-│       └─ VIII.F.1 Bosonic Diffusion Monte Carlo (photon‑number‑encoded walkers)
+├─ 0. Determine the required computation and output
+│  ├─ Is the requested result a classical field, sample, or quantum state?
+│  │  ├─ Selected observables or samples → quantify preparation and measurement cost
+│  │  ├─ Complete classical fields → include reconstruction and classical baselines
+│  │  └─ Coherent intermediate states → require quantum storage and coherent access
+│  ├─ Can one module perform the entire coherent subroutine?
+│  │  ├─ Yes → execute locally; exchange parameters and results classically
+│  │  └─ Requires several modules → evaluate the quantum interconnect in branch 3
+│  └─ Does the compiled implementation fit the resource and error budget?
+│     ├─ Yes → assign a physical, analog, hybrid, or logical execution route
+│     └─ Exceeds budget → reduce scope, change encoding, or retain as research target
 │
-├─ Translator(s)  μw ↔ optical
-│   └─ Enables cross‑platform operations:
-│       ├─ Swap neutral‑atom‑prepared states into the photonic QPIC for measurement‑based QLGA
-│       ├─ Transfer photonic trial wavefunctions into the neutral‑atom QPU for VQS/ QITE loops
-│       └─ Carry Lindblad jump outcomes between the two layers for hybrid trajectory simulations
+├─ 1. Main processor: neutral atoms in optical tweezer arrays
+│  ├─ A. Is a native analog Hamiltonian an adequate model of the target?
+│  │  ├─ Yes → XI.A–C  Native spin and accessible many-body dynamics
+│  │  │        XIV.A–D Magnetism, correlations, transport, and supported dissipation
+│  │  │        XIII    Selected gauge models with explicit constraints
+│  │  └─ Requires other interactions → compile gates or derive a controlled mapping
+│  │     └─ Optical-lattice Hubbard simulation requires the corresponding hardware
+│  ├─ B. Are the required physical gates, readout, and controls available?
+│  │  ├─ Yes → bounded circuit or hybrid implementations
+│  │  │  ├─ I.C       Quantum walks and QCA for specified transport models
+│  │  │  ├─ I.A–B     Compiled QLBM/QLGA kernels with collision and boundary treatment
+│  │  │  ├─ III.A–D   VQS, QITE, VQLS, and variational differential equations
+│  │  │  ├─ III.E     QCPMD with classical nuclear dynamics and force estimation
+│  │  │  ├─ III.F     TFD, VQT, and other compiled thermal preparation circuits
+│  │  │  ├─ IV.A,D–F  Short evolution, scattering, and thermal correlators
+│  │  │  ├─ V.A,E     Bounded-depth QAE or quantum thermal ensemble methods
+│  │  │  ├─ VI.A–D    Channels, trajectories, and stationary-state searches
+│  │  │  ├─ X.C–E     VQE, QSE, quantum Krylov, QSCI, SQD, and suitable SKQD
+│  │  │  └─ XVI       Quantum impurity and active-space subproblems in classical loops
+│  │  └─ Missing operations → choose compatible circuits or another execution route
+│  └─ C. Are universal logical computation and sufficient resources available?
+│     ├─ Check logical gates, state preparation, measurement, and repeated correction
+│     ├─ Check required non-Clifford resources or another universal logical route
+│     ├─ Check atom loss, leakage, movement, decoder latency, and logical error rates
+│     ├─ If the compiled workload fits → scalable coherent candidates
+│     │  ├─ II.A–B    QLSA and linear differential equation algorithms
+│     │  ├─ II.C–D    Schrödingerisation and LCHS
+│     │  ├─ II.E      Specified preconditioned FEM and encoded linear systems
+│     │  ├─ II.F      Lindbladian embeddings of classical linear ODEs
+│     │  ├─ IV.A–D    Product formulas, LCU, qubitization, QSP, and interaction picture
+│     │  ├─ IV.E–F    Scattering, resolvents, and high-precision response
+│     │  ├─ V.A–D     Coherent QAE, quantum walks, Metropolis, and Gibbs algorithms
+│     │  ├─ VI        General channel or open-system constructions with explicit costs
+│     │  ├─ VIII–IX   Encoded Dirac and Schrödinger dynamics in a physical sector
+│     │  ├─ X.A–B     QPE, spectral filtering, and state preparation
+│     │  ├─ XII–XIII  Encoded bosonic modes and truncated interacting field models
+│     │  └─ XV.A–B    Compatible harmonic-oscillator and wave-equation encodings
+│     └─ If logical capability or budget is insufficient → retain bounded workloads
 │
-├─ Quantum Memory: Superconducting Cat (bosonic)
-│   ├─ Near‑term/ hybrid use
-│   │   └─ Store intermediate probability distributions for multi‑circuit QLBM (I.A.3) between Trotter steps
-│   └─ Fault‑tolerant‑eligible use
-│       ├─ Logical storage for large‑scale HHL/VQLS registers (II.D, III.L)
-│       ├─ Buffer for Dirac/ Schrödinger qubitization registers (IV.S.2, IV.T.2)
-│       ├─ Hold error‑estimate registers for quantum‑driven AMR (VII.F.2, VIII.J.3)
-│       └─ Preserve many‑body wavefunctions for quantum‑dynamical mean‑field theory (VIII.G.2)
+├─ 2. Coprocessor: quantum photonic integrated circuit (QPIC)
+│  ├─ A. What states, transformations, and measurements does it support?
+│  │  ├─ Passive interferometers with suitable sources and detectors
+│  │  │  ├─ I.C      Accessible path, time-bin, or frequency-bin walk models
+│  │  │  ├─ XII      Mode transformations and restricted photonic simulations
+│  │  │  └─ XVII     Interference, sampling, and accessible observables
+│  │  ├─ Squeezing plus Gaussian operations and Gaussian measurements
+│  │  │  └─ XII.C    Quadratic bosonic dynamics within the supported Gaussian model
+│  │  └─ Entangled or non-Gaussian resources with suitable adaptive measurements
+│  │     ├─ Specify photonic encoding, entangling operations, and feedforward
+│  │     └─ Compile supported circuit, fusion-based, or measurement-based algorithms
+│  ├─ B. Does the module support the complete proposed quantum subroutine?
+│  │  ├─ Yes → III, V.F, X, XVI  Variational, sampling, or embedding contributions
+│  │  └─ Only a restricted operation → assign that operation explicitly
+│  │     └─ QAE additionally requires a coherent oracle and amplification operations
+│  └─ C. Is universal fault-tolerant photonic computation available?
+│     ├─ Check resource-state production, loss handling, decoding, and adaptive control
+│     ├─ Check logical resources, routing, synchronization, and required buffering
+│     ├─ Yes → the same universal circuit algorithm families are candidates
+│     │  └─ Recompile resource costs for photonic encoding and architecture
+│     └─ Otherwise → retain the restricted photonic and hybrid roles above
 │
-├─ Ancilla Layer: Transmons (bias‑preserving, syndrome extraction)
-│   └─ Provide fault‑tolerant CZ/ZZ and SNAP‑enabled gates used by all LCU/ qubitization kernels in the FT‑eligible branch
+├─ 3. Intermodule communication and quantum interfaces
+│  ├─ A. Is the payload a classical measurement record or parameter?
+│  │  └─ Yes → classical links carry outcomes, gradients, configurations, and metadata
+│  │     ├─ VQS/VQLS optimization data and QITE-derived circuit parameters
+│  │     ├─ SQD configurations and explicit classical trial-wavefunction descriptions
+│  │     └─ Lindblad jump records, heralds, syndrome data, and Pauli-frame information
+│  ├─ B. Is the payload a coherent quantum state or entanglement resource?
+│  │  ├─ Neutral-atom module ↔ optical network
+│  │  │  └─ Requires an atom–photon interface and compatible optical encoding
+│  │  ├─ Superconducting module ↔ optical network
+│  │  │  └─ Requires coherent microwave–optical transduction or a specified alternative
+│  │  ├─ Photonic network ↔ encoded memory or processor
+│  │  │  └─ Requires mode matching, capture or heralded entanglement, and code mapping
+│  │  └─ Select a concrete protocol
+│  │     ├─ Direct coherent transfer with characterized channel errors
+│  │     └─ Heralded entanglement plus teleportation and classical feedforward
+│  └─ C. Does the complete link meet the computation's requirements?
+│     ├─ Check fidelity, loss, added noise, entanglement rate, bandwidth, and latency
+│     ├─ Check compatibility of photon modes, wavelengths, and logical encodings
+│     ├─ Check local decoding, link-error handling, and memory waiting errors
+│     ├─ Yes → distribute the specified logical subroutine or storage operation
+│     └─ Otherwise → keep coherent subroutines local and exchange classical outputs
 │
-└─ Classical Control & RAM
-    ├─ Cryogenic‑CMOS/ SFQ waveform engines compile bias‑aware, erasure‑aware circuits for every technique
-    ├─ Run the outer optimization loops for VQS/ QITE/ VQLS (III.J-III.O)
-    ├─ Dispatch hybrid QMC/ Metropolis proposals to the photonic co‑processor
-    └─ Coordinate domain‑decomposition (VIII.H, VII.H) and adaptive‑mesh‑refinement decisions (VII.F.2, VIII.J.3)
+├─ 4. Superconducting bosonic module: cat memory and optional local processing
+│  ├─ A. Is the cat encoding stabilized and its logical error characterized?
+│  │  ├─ Yes → store encoded quantum information within its lifetime and error budget
+│  │  └─ Otherwise → treat as a physical bosonic-memory prototype
+│  ├─ B. Does the module correct all relevant logical error channels?
+│  │  ├─ Check code-specific bias, residual errors, syndrome circuits, and leakage
+│  │  └─ Use active correction or concatenation appropriate to the chosen encoding
+│  ├─ C. Can the source processor coherently access this memory?
+│  │  ├─ Yes → candidate storage assignments
+│  │  │  ├─ II, IV, X   Encoded solution states and algorithm work registers
+│  │  │  ├─ III.F, V    Purification registers or thermal-state intermediates
+│  │  │  ├─ XVI         Impurity or active-space states when coherent reuse is useful
+│  │  │  └─ Distributed protocols: entangled resources awaiting consumption
+│  │  └─ Interface unavailable → restrict memory to locally connected circuits
+│  └─ D. Does the bosonic module also implement the required operations?
+│     ├─ Native oscillator controls → XII  Supported bosonic or spin–boson models
+│     ├─ Specialized compiled controls → II.D  Oscillator–qubit LCHS candidates [P26]
+│     └─ Universal logical controls → additional circuit-solver assignments are possible
+│
+├─ 5. Local superconducting ancillas and gate interfaces
+│  ├─ Transmons or other auxiliaries coupled to the bosonic module
+│  │  ├─ Code-specific syndrome extraction, reset, readout, and conditional control
+│  │  ├─ Characterized dispersive interactions and oscillator gate implementations
+│  │  └─ SNAP or other pulse constructions only where the local Hamiltonian supports them
+│  ├─ Does the complete gate preserve the intended cat-qubit noise bias?
+│  │  ├─ Yes → use a decoder and logical construction matched to that error model
+│  │  └─ Otherwise → include the resulting error channels and protection overhead
+│  └─ Operations on atom or remote photonic registers
+│     └─ Require their local gates or a qualified remote-gate protocol via branch 3
+│
+├─ 6. Classical control, CPUs, GPUs, and RAM
+│  ├─ Host software: solver selection, compilation, scheduling, and resource estimation
+│  ├─ Real-time electronics: device-specific laser, optical, microwave, and readout control
+│  │  └─ FPGA, CMOS, cryogenic CMOS, or SFQ elements selected by bandwidth and heat budget
+│  ├─ Error processing: syndrome decoding, atom-loss tracking, herald handling, and feedforward
+│  ├─ III, X     Optimization, QITE coefficient solves, and subspace diagonalization
+│  ├─ V.F, XIX   Classical AFQMC, other QMC, sparse solves, and tensor-network baselines
+│  ├─ XVI        DMFT/DMET self-consistency, molecular forces, and domain interfaces
+│  ├─ XVII       Correlator analysis, spectra, uncertainty estimates, and parameter inference
+│  └─ RAM stores classical distributions, meshes, samples, parameters, and records
+│     └─ Coherent amplitude-encoded states require quantum storage and access
+│
+└─ 7. Research targets requiring an explicit construction
+   ├─ VII.A–B    Carleman, Koopman, and Liouville methods with controlled approximations
+   ├─ VII.C–H    Fractional, stochastic, phase-space, AMR, and nonlinear multiphysics models
+   ├─ II.E       Additive Schwarz quantum preconditioning [P26]
+   ├─ VII.E      Linear Itô dilation and second-moment evolution [P26]
+   ├─ XV.C–D     Maxwell and plasma models with specified sources and constraints
+   ├─ XVI.D–F    Density-functional interfaces, homogenization, and domain decomposition
+   └─ XVIII      Promote a target to an execution route only after resource assessment
+      └─ Include loading, preparation, truncation, gates, interfaces, measurement, and accuracy
 ```
 
 ---
 
 ## Estimated Metrics for Qubit Count Per Example Technique 
 
-* **d = 7 → ~98 physical/logical** 
-* **d = 13 → ~338 physical/logical** 
-* *Occupancy mapping*: for 2D D2Q5, **5M² qubits** for an M×M lattice (one per discrete velocity population) 
+| Code distance $d$ | Physical data qubits | Syndrome-measurement qubits | Patch footprint per logical qubit | Leading approximation |
+| --- | ---: | ---: | ---: | ---: |
+| 7 | 49 | 48 | **97** | $2d^2=98$ |
+| 13 | 169 | 168 | **337** | $2d^2=338$ |
 
-## A) Tier I - NISQ‑ready (physical qubits, shallow circuits)
+## A. Bounded Physical-Circuit and Analog Examples
 
-**Description:** Estimated qubit counts for methods that can be run on current NISQ hardware without error correction.
+| Method | Register rule | Representative instance | Interpretation |
+| --- | --- | --- | --- |
+| **Coined quantum walk** | $\lceil\log_2N\rceil+\lceil\log_2c\rceil+a$, for $N$ position labels and $c$ coin states. | $N=1,024$, $c=2$, and one explicitly allocated work qubit gives $10+1+1=\mathbf{12}$. | The extra work qubit is an example choice. A continuous-time walk can omit the coin; gate implementation determines workspace. |
+| **D2Q5 binary occupancy representation** | $5M^2+a$ for an $M\times M$ lattice with five binary occupancy channels per site. | $M=8$ gives **320 data qubits**, plus work qubits. | Each channel has binary occupation. Representing a general numerical population requires a different encoding. Width alone establishes no near-term executability. |
+| **D2Q5 stored numerical populations** | $5M^2b+a$ for $b$ binary digits per population, with sign or format bits included in $b$. | $M=8$, $b=8$ gives **2,560 data qubits**, plus arithmetic workspace. | The chosen numerical representation and precision determine $b$; classical floating-point populations are separate from binary occupations. |
+| **D2Q5 amplitude encoding** | $\lceil\log_2(5M^2)\rceil+a$ for a packed index; separate position and velocity registers can introduce padding. | $M=8$: **9 data qubits**; $M=16$: **11**; $M=32$: **13**. | These examples assume a single normalized population vector. Preparation, collision, boundaries, normalization recovery, and measurements add costs. [QLBM formulation](https://arxiv.org/abs/2502.16568). |
+| **VQE, VQS, or QITE** | $n_{\mathrm{state}}+a$. Direct occupation encoding uses one qubit per active spin orbital before reductions. | Four active spin orbitals use **4 data qubits**; twelve active spin orbitals use **12**. | Active-space selection, frozen orbitals, and symmetry tapering change width. The algorithm name alone fixes neither the state width nor the ancillas. |
+| **Small HHL construction** | $n+r+1+a$, where $n=\lceil\log_2N\rceil$, $r$ is the chosen QPE-register width, and one qubit flags the inversion rotation. | $N=4$, $r=3$ gives **6 qubits plus further workspace**. | This is a selected register layout. Energy precision and controlled arithmetic must be adequate for the actual matrix and tolerance. |
+| **Iterative or likelihood-based QAE** | Width of the prepared state, objective encoding, and work registers. The number of additional QPE-register qubits can be zero. | An explicitly chosen 8-qubit input register plus one objective flag gives **9 qubits plus workspace**. | Omitting a QPE register leaves state-preparation and repeated amplification costs. The objective may instead occupy an existing register. [IQAE](https://arxiv.org/abs/1912.05559). |
+| **One-qubit amplitude-damping channel** | One system qubit plus one environmental qubit for its rank-2 dilation. | **2 qubits** for the elementary channel circuit. | Repeated steps can reuse a reset environment qubit if the physical model and hardware permit it. |
+| **General channel dilation** | $n_{\mathrm{sys}}+\lceil\log_2r_K\rceil+a$, for a channel with Kraus rank $r_K$ and a pure initial environment. | A one-qubit rank-4 channel uses **3 qubits before gate workspace**. | Kraus rank determines this minimal environment dimension. Retained memory may require additional environment registers. |
+| **Direct TFD purification** | $2n_{\mathrm{sys}}+a$. | A 6-qubit target system uses **12 purification qubits**, plus work registers. | The reference register carries the purification. Entanglement forging reconstructs selected quantities with different classical and measurement costs. [TFD preparation](https://arxiv.org/abs/1906.02699). |
+| **Native spin or qudit simulation** | Number of physical sites and internal levels used by the implemented model. | A 64-site array with one two-level spin per site uses **64 spin carriers**. | Native analog evolution has its own control and measurement budget; logarithmic amplitude encoding describes a different representation. |
 
-| Method | Qubit estimate (today’s NISQ) | How the count was derived | Representative instance |
-|---|---|---|---|
-| Quantum walks | 6–14 qubits typical; formula ≈ ⌈log₂ N⌉ + 2 | Position register + coin + one small ancilla | N = 1,024 nodes → 10 (pos) + 1 (coin) + 1 (anc) = **12** |
-| QLBM demos – occupancy encoding | 5 M² qubits (scales with lattice size) | D2Q5 mapping: one qubit per discrete‑velocity population | M = 8 → 5 · 64 = **320** |
-| QLBM demos – amplitude‑encoded | ~10 qubits (≈9 data + 1 ancilla) | Amplitude/state‑encoding keeps width constant | Demonstrations use **9 + 1** qubits |
-| VQS/ QITE | 4–20 qubits | VQE chemistry demos: H₂ (4 q), LiH (12 q); QITE demos up to ~20 q | H₂ minimal basis (4 q), LiH frozen‑core (12 q) |
-| Tiny HHL demos | 4–8 qubits | Small 2×2–4×4 linear systems using QPE + ancillas | Early NMR/photonic/IBM‑style proofs of concept |
-| Basic amplitude estimation | 0–1 ancilla beyond problem registers | Low‑depth variants avoid large phase‑estimation registers | ML‑AE and IQAE use 0–1 extra qubit |
-| Minimal Lindblad simulators | 2–4 qubits for one system qubit + environment ancilla(s) | Stinespring/Kraus dilation for a single‑qubit channel | Amplitude damping on one qubit → **2** total; more channels add ancillas |
+### D2Q5 Encoding Comparison
 
+| Lattice | Binary occupancy channels | Stored populations with $b=8$ | Amplitude-encoded data qubits |
+| --- | ---: | ---: | ---: |
+| $8\times8$ | 320 | 2,560 | 9 |
+| $16\times16$ | 1,280 | 10,240 | 11 |
+| $32\times32$ | 5,120 | 40,960 | 13 |
 
-## B) Tier II - Near‑term/Hybrid (logical qubits, modest error correction)
+## B. Structured Hybrid Workflows
 
-**Description:** Logical‑qubit estimates for methods that employ modest error correction (e.g., surface‑code distance d = 7 or 13) and may involve multiple circuit stages.
+| Method and chosen instance | Algorithmic qubits | Patch-only physical qubits at $d=7$ | Patch-only physical qubits at $d=13$ | Unresolved resources |
+| --- | ---: | ---: | ---: | --- |
+| **Multiple-circuit D2Q5 amplitude encoding, $M=16$** | $11+a$ | $1,067+97a$ | $3,707+337a$ | Workspace, state reconstruction, repetitions, and concurrent circuit copies. Sequential kernels can reuse qubits. |
+| **VQLS/FEM with $N=1,024$ algebraic degrees of freedom** | $10+a$ | $970+97a$ | $3,370+337a$ | Cost-function circuits, operator access, state preparation, and conditioning. Node count and algebraic degrees of freedom can differ. |
+| **QSCI/SQD with 24 active spin orbitals** | $24+a$ | $2,328+97a$ | $8,088+337a$ | Ansatz workspace and classical subspace diagonalization. Classical subspace size is separate from qubit count. |
+| **Quantum Krylov or SKQD on 24 state qubits** | $24+a$ | $2,328+97a$ | $8,088+337a$ | Evolution depth, overlap estimation or configuration sampling, and classical conditioning. |
+| **Direct TFD pipeline for a 12-qubit system** | $24+a$ | $2,328+97a$ | $8,088+337a$ | Preparation, entropy evaluation where used, temperature-dependent difficulty, and correlator circuits. |
+| **QMETTS on a 12-qubit system** | $12+a$ | $1,164+97a$ | $4,044+337a$ | Imaginary-time construction and ensemble sampling; a second full purification register is absent in this chosen route. |
+| **Impurity solver with 4 impurity and 8 bath spin orbitals** | $12+a$ | $1,164+97a$ | $4,044+337a$ | Bath fitting, observable measurement, and repeated self-consistency. |
+| **QCPMD with 12 active electronic spin orbitals** | $12+a$ | $1,164+97a$ | $4,044+337a$ | Electronic ansatz and force estimation; the nuclear coordinates are classical in this workflow. |
+| **Quantum-generated AFQMC trial with 24 active spin orbitals** | $24+a$ | $2,328+97a$ | $8,088+337a$ | Trial-generation procedure and classical AFQMC cost; direct overlap-based variants can require different circuits. |
 
-| Method | Algorithmic logical qubits (typical) | Physical qubits @ d = 7 | Physical qubits @ d = 13 | Reasoning |
-|---|---|---|---|---|
-| Multi‑circuit QLBM (amplitude‑encoded, with mid‑circuit measure/reset) | ~10–20 logical | ~980–1,960 | ~3,380–6,760 | Uses ~9 data + 1 ancilla kernel; multi‑circuit orchestration reuses the small kernel |
-| Linear‑differential‑equation (LDE) oracles in a QLSS/QSVT pipeline | n + 3–10 (n = log₂ grid DOFs) → e.g. ~32–64 logical | ~3,100–6,300 | ~10,800–21,600 | QLSS uses n algorithmic qubits plus ancillas for block‑encoding and QSP |
-| Tiny Q‑FEM prototypes (hybrid FEM + VQLS) | ~8–24 logical | ~784–2,352 | ~2,704–8,112 | Near‑term VQLS FEM and hybrid CFD/FEM demos show few‑to‑few‑dozen‑qubit runs |
-| Prototype QMetropolis/ QMS | n + r + 2–5 → ~24–64 logical | ~2,400–6,300 | ~8,100–21,600 | System register n, r‑bit energy precision, plus small ancillas for accept–reject |
-| Quantum‑accelerated Monte Carlo (QAE‑based risk/option demos, shallow variants) | 10–40 logical | ~980–3,920 | ~3,380–13,520 | Demos typically use 5–10 qubits for distributions, a payoff register, and 0–1 ancilla |
-| Photonic co‑processor variants | Not qubit‑encoded (modes/photons) | N/A | N/A | Photonic sampling/counting uses modes/photons rather than qubits; surface‑code overhead not applicable |
+## C. Scalable Coherent Algorithms and Fault-Tolerant Resource Models
 
-
-## C) Tier III - Fault‑tolerant eligible (full error correction)
-
-**Description:** Logical‑qubit counts for fully fault‑tolerant algorithms, together with physical‑qubit totals for surface‑code distances d = 7 and d = 13.
-
-| Method | Representative problem & logical qubits | Physical @ d = 7 | Physical @ d = 13 | Notes |
-|---|---|---|---|---|
-| Full‑scale HHL/ block‑encoding linear solver | Sparse N = 2²⁰ (n = 20) with QSVT/QLSS → ~30–60 logical (20 data + 1–3 QSP ancillas + small oracles) | ~2,900–5,900 | ~10,100–20,300 | Low‑ancilla block‑encoding/QSP; depth/T‑count dominate cost |
-| Qubitized Dirac/ Schrödinger Hamiltonians | 3D grid 256³ → n = 24; qubitization ancillas → ~26–36 logical | ~2,500–3,500 | ~8,800–12,200 | Qubitization uses ≤2 ancillas; grid‑based demos confirm n in the 20–30 range |
-| QSVT‑based PDE solvers | Mixed FEM/PDE with QSP precision → ~40–80 logical | ~3,900–7,800 | ~13,500–27,000 | QSVT angles/LCU ancillas add O(1–log L) |
-| Quantum‑enhanced AMR | AMR error‑estimator loops + QLSS core → ~32–64 logical | ~3,100–6,300 | ~10,800–21,600 | Quantum error‑estimators via block‑encoding; toy VQLS AMR evaluators use 2–5 qubits (without EC) |
-| Large‑scale tensor‑network simulation (QTN on QC) | QTN/MPS with bond dimension χ = 64 → ~6–12 logical (log₂χ + ancillas) | ~590–1,180 | ~2,030–4,060 | Width independent of system size; depth and sampling control accuracy |
-| Quantum‑accelerated Monte Carlo (finance, fault‑tolerant) | End‑to‑end estimates: ~4.7k–8k logical; T‑count ≈10⁸–10⁹ | ~4.6 × 10⁵–7.8 × 10⁵ | ~1.6 × 10⁶–2.7 × 10⁶ | QSP‑based payoff loading reduces logical width to ~4.7k; factories and clock rate dominate schedule |
+| Method and representative encoding | Algorithmic logical width | Patch-only physical qubits at $d=7$ | Patch-only physical qubits at $d=13$ | Additional resource drivers |
+| --- | ---: | ---: | ---: | --- |
+| **QLSA for $N=2^{20}$ unknowns** | $20+a$ | $1,940+97a$ | $6,740+337a$ | State preparation, block encoding, inversion/filter precision, conditioning, and reversible arithmetic. |
+| **LDE solution with $N=2^{20}$ components** | $20+a$ | $1,940+97a$ | $6,740+337a$ | A history-based construction may add a time register, polynomial-order registers, forcing, and solver workspace within $a$. |
+| **Spinless one-particle Schrödinger state on $256^3$ grid points** | $24+a$ | $2,328+97a$ | $8,088+337a$ | Kinetic and potential access, simulation primitives, and boundary operations. |
+| **Four-component one-particle Dirac spinor on $256^3$ grid points** | $26+a$ | $2,522+97a$ | $8,762+337a$ | Two spinor-component qubits supplement the 24 position qubits; spectral-sector and discretization controls are required. |
+| **Occupation encoding of 64 active spin orbitals** | $64+a$ | $6,208+97a$ | $21,568+337a$ | Hamiltonian factorization, selection registers, arithmetic, and state preparation. Symmetry reductions change the data count. |
+| **Conventional QPE on an $n$-qubit state using an $r$-qubit phase register** | $n+r+a$ | $97(n+r+a)$ | $337(n+r+a)$ | Controlled evolution and phase precision. Iterative versions can reuse a smaller phase register with different scheduling. |
+| **Direct purified Gibbs state for 32 system qubits** | $64+a$ | $6,208+97a$ | $21,568+337a$ | Imaginary-time filters, success probability, temperature, and preparation circuitry. |
+| **Schrödingerisation with 20 state qubits and a chosen 8-qubit auxiliary-coordinate register** | $28+a$ | $2,716+97a$ | $9,436+337a$ | Eight auxiliary qubits are an illustrative truncation choice; physical extent and resolution must satisfy the target error. |
+| **LCHS with 20 state qubits and a chosen 6-qubit quadrature-selection register** | $26+a$ | $2,522+97a$ | $8,762+337a$ | The 64-term index capacity is illustrative. Kernel, quadrature accuracy, preparation, selection, and recovery determine the actual count. |
+| **Quantum Metropolis on $n$ state qubits** | $n+a$ | $97(n+a)$ | $337(n+a)$ | Energy registers, stored outcomes, rejection handling, precision, and coherent workspace are construction dependent. |
+| **General Lindblad or retained-bath simulation on $n$ system qubits** | $n+a$ | $97(n+a)$ | $337(n+a)$ | Ancilla reuse, dilation, trajectory method, memory length, and accuracy determine $a$. |
+| **Sequential MPS preparation/sampling with bond dimension $\chi=64$ and local dimension 2** | $6+1+a=7+a$ | $679+97a$ | $2,359+337a$ | Six bond qubits and one recycled site qubit describe this restricted streaming task. Retaining an entire L-site quantum output requires additional site registers. |
 
 ---
 
 ## References
 
-1.  Wang, B., Meng, Z., Zhao, Y. and Yang, Y. (2025) *Quantum lattice Boltzmann method for simulating nonlinear fluid dynamics*. \[Preprint]. arXiv:2502.16568. Available at: [https://arxiv.org/abs/2502.16568](https://arxiv.org/abs/2502.16568).
-2.  Georgescu, C.A., Schalkers, M.A. and Möller, M. (2024) *qlbm – A Quantum Lattice Boltzmann Software Framework*. \[Preprint]. arXiv:2411.19439. Available at: [https://arxiv.org/abs/2411.19439](https://arxiv.org/abs/2411.19439).
-3.  Meyer, D.A. (1996) 'From quantum cellular automata to quantum lattice gases', *Journal of Statistical Physics*, 85, pp. 551–574. Available at: [https://doi.org/10.1007/BF02199356](https://doi.org/10.1007/BF02199356).
-4.  Strauch, F.W. (2006) 'Relativistic quantum walks', *Physical Review A*, 73(5), 054302. Available at: [https://doi.org/10.1103/PhysRevA.73.054302](https://doi.org/10.1103/PhysRevA.73.054302).
-5.  Arnault, P., Di Molfetta, G., Brachet, M. and Debbasch, F. (2016) 'Quantum walks and non-Abelian discrete gauge theory', *Physical Review A*, 94(1), 012335. Available at: [https://doi.org/10.1103/PhysRevA.94.012335](https://doi.org/10.1103/PhysRevA.94.012335).
-6.  Márquez-Martín, I., Arnault, P., Di Molfetta, G. and Pérez, A. (2018) 'Electromagnetic lattice gauge invariance in two-dimensional discrete-time quantum walks', *Physical Review A*, 98(3), 032333. Available at: [https://doi.org/10.1103/PhysRevA.98.032333](https://doi.org/10.1103/PhysRevA.98.032333).
-7.  Harrow, A.W., Hassidim, A. and Lloyd, S. (2009) 'Quantum algorithm for linear systems of equations', *Physical Review Letters*, 103(15), 150502. Available at: [https://doi.org/10.1103/PhysRevLett.103.150502](https://doi.org/10.1103/PhysRevLett.103.150502).
-8.  Berry, D.W., Childs, A.M., Ostrander, A. and Wang, G. (2017) 'Quantum algorithm for linear differential equations with exponentially improved dependence on precision', *Communications in Mathematical Physics*, 356, pp. 1057–1081. Available at: [https://doi.org/10.1007/s00220-017-3002-y](https://doi.org/10.1007/s00220-017-3002-y).
-9.  Wu, H.-C., Wang, J. and Li, X. (2024) *Quantum algorithms for non-linear dynamics: Revisiting Carleman linearization with no dissipative conditions*. \[Preprint]. arXiv:2405.12714. Available at: [https://arxiv.org/abs/2405.12714](https://arxiv.org/abs/2405.12714).
+1. Wang, B., Meng, Z., Zhao, Y. and Yang, Y. (2025) *Quantum lattice Boltzmann method for simulating nonlinear fluid dynamics*. [Preprint]. arXiv:2502.16568. Available at: [https://arxiv.org/abs/2502.16568](https://arxiv.org/abs/2502.16568).
+2. Georgescu, C.A., Schalkers, M.A. and Möller, M. (2024) *qlbm – A Quantum Lattice Boltzmann Software Framework*. [Preprint]. arXiv:2411.19439. Available at: [https://arxiv.org/abs/2411.19439](https://arxiv.org/abs/2411.19439).
+3. Meyer, D.A. (1996) 'From quantum cellular automata to quantum lattice gases', *Journal of Statistical Physics*, 85, pp. 551–574. Available at: [https://doi.org/10.1007/BF02199356](https://doi.org/10.1007/BF02199356).
+4. Strauch, F.W. (2006) 'Relativistic quantum walks', *Physical Review A*, 73(5), 054302. Available at: [https://doi.org/10.1103/PhysRevA.73.054302](https://doi.org/10.1103/PhysRevA.73.054302).
+5. Arnault, P., Di Molfetta, G., Brachet, M. and Debbasch, F. (2016) 'Quantum walks and non-Abelian discrete gauge theory', *Physical Review A*, 94(1), 012335. Available at: [https://doi.org/10.1103/PhysRevA.94.012335](https://doi.org/10.1103/PhysRevA.94.012335).
+6. Márquez-Martín, I., Arnault, P., Di Molfetta, G. and Pérez, A. (2018) 'Electromagnetic lattice gauge invariance in two-dimensional discrete-time quantum walks', *Physical Review A*, 98(3), 032333. Available at: [https://doi.org/10.1103/PhysRevA.98.032333](https://doi.org/10.1103/PhysRevA.98.032333).
+7. Harrow, A.W., Hassidim, A. and Lloyd, S. (2009) 'Quantum algorithm for linear systems of equations', *Physical Review Letters*, 103(15), 150502. Available at: [https://doi.org/10.1103/PhysRevLett.103.150502](https://doi.org/10.1103/PhysRevLett.103.150502).
+8. Berry, D.W., Childs, A.M., Ostrander, A. and Wang, G. (2017) 'Quantum algorithm for linear differential equations with exponentially improved dependence on precision', *Communications in Mathematical Physics*, 356, pp. 1057–1081. Available at: [https://doi.org/10.1007/s00220-017-3002-y](https://doi.org/10.1007/s00220-017-3002-y).
+9. Wu, H.-C., Wang, J. and Li, X. (2024) *Quantum algorithms for non-linear dynamics: Revisiting Carleman linearization with no dissipative conditions*. [Preprint]. arXiv:2405.12714. Available at: [https://arxiv.org/abs/2405.12714](https://arxiv.org/abs/2405.12714).
 10. Low, G.H. and Chuang, I.L. (2017) 'Optimal Hamiltonian simulation by quantum signal processing', *Physical Review Letters*, 118(1), 010501. Available at: [https://doi.org/10.1103/PhysRevLett.118.010501](https://doi.org/10.1103/PhysRevLett.118.010501).
 11. Childs, A.M., Kothari, R. and Somma, R.D. (2017) 'Quantum algorithm for linear systems of equations with exponentially improved dependence on precision', *SIAM Journal on Computing*, 46(6), pp. 1920–1950. Available at: [https://doi.org/10.1137/16M1087072](https://doi.org/10.1137/16M1087072).
 12. Brassard, G., Høyer, P., Mosca, M. and Tapp, A. (2002) 'Quantum amplitude amplification and estimation', *Quantum Information & Computation*, 2(1), pp. 53–74. Available at: [https://arxiv.org/abs/quant-ph/0005055](https://arxiv.org/abs/quant-ph/0005055).
 13. Suzuki, S., et al. (2021) 'Real- and imaginary-time evolution with compressed quantum circuits', *PRX Quantum*, 2(1), 010342. Available at: [https://doi.org/10.1103/PRXQuantum.2.010342](https://doi.org/10.1103/PRXQuantum.2.010342).
 14. McArdle, S., et al. (2020) 'Variational quantum simulation of general processes', *Physical Review Letters*, 125(1), 010501. Available at: [https://doi.org/10.1103/PhysRevLett.125.010501](https://doi.org/10.1103/PhysRevLett.125.010501).
-15. Kuroiwa, K., Ohkuma, T., Sato, H. and Imai, R. (2022) *Quantum Car-Parrinello molecular dynamics: A cost-efficient molecular simulation method on near-term quantum computers*. \[Preprint]. arXiv:2212.11921. Available at: [https://arxiv.org/abs/2212.11921](https://arxiv.org/abs/2212.11921).
+15. Kuroiwa, K., Ohkuma, T., Sato, H. and Imai, R. (2022) *Quantum Car-Parrinello molecular dynamics: A cost-efficient molecular simulation method on near-term quantum computers*. [Preprint]. arXiv:2212.11921. Available at: [https://arxiv.org/abs/2212.11921](https://arxiv.org/abs/2212.11921).
 16. Arrighi, P., Forets, M. and Nesme, V. (2014) 'The Dirac equation as a quantum walk: higher dimensions, observational convergence', *Journal of Physics A: Mathematical and Theoretical*, 47(46), 465302. Available at: [https://doi.org/10.1088/1751-8113/47/46/465302](https://doi.org/10.1088/1751-8113/47/46/465302).
 17. Huerta Alderete, C., et al. (2020) 'Quantum walks and Dirac cellular automata on a programmable trapped-ion quantum computer', *Nature Communications*, 11, 3720. Available at: [https://doi.org/10.1038/s41467-020-17519-4](https://doi.org/10.1038/s41467-020-17519-4).
 18. Ding, Z., Li, X. and Lin, L. (2024) 'Simulating open quantum systems using Hamiltonian simulations', *PRX Quantum*, 5(2), 020332. Available at: [https://doi.org/10.1103/PRXQuantum.5.020332](https://doi.org/10.1103/PRXQuantum.5.020332).
-19. Cleve, R. and Wang, C. (2016) *Efficient quantum algorithms for simulating Lindblad evolution*. \[Preprint]. arXiv:1612.09512. Available at: [https://arxiv.org/abs/1612.09512](https://arxiv.org/abs/1612.09512).
+19. Cleve, R. and Wang, C. (2016) *Efficient quantum algorithms for simulating Lindblad evolution*. [Preprint]. arXiv:1612.09512. Available at: [https://arxiv.org/abs/1612.09512](https://arxiv.org/abs/1612.09512).
 20. Yung, M.-H., Whitfield, J.D., Tempel, D.G., Aspuru-Guzik, A. and Lloyd, S. (2014) 'Computational complexity of time-dependent density functional theory', *New Journal of Physics*, 16(8), 083035. Available at: [https://doi.org/10.1088/1367-2630/16/8/083035](https://doi.org/10.1088/1367-2630/16/8/083035).
 21. Cavaglia, A., et al. (2020) 'An algorithm for quantum computation of particle decays and cross-sections', *Physical Review D*, 102(9), 094505. Available at: [https://doi.org/10.1103/PhysRevD.102.094505](https://doi.org/10.1103/PhysRevD.102.094505).
-22. Rong, X., et al. (2024) *Quantum multigrid algorithm for finite-element problems*. \[Preprint]. arXiv:2404.07466. Available at: [https://arxiv.org/abs/2404.07466](https://arxiv.org/abs/2404.07466).
-23. Alkadri, A.M., Kharazi, T.D. and Whaley, K.B. (2025) *A quantum algorithm for the finite-element method*. \[Preprint]. arXiv:2510.18150. Available at: [https://arxiv.org/abs/2510.18150](https://arxiv.org/abs/2510.18150).
-24. Shaviner, G. (2025) *Quantum singular-value transformation for solving linear systems of differential equations*. \[Preprint]. arXiv:2507.09686. Available at: [https://arxiv.org/abs/2507.09686](https://arxiv.org/abs/2507.09686).
+22. Rong, X., et al. (2024) *Quantum multigrid algorithm for finite-element problems*. [Preprint]. arXiv:2404.07466. Available at: [https://arxiv.org/abs/2404.07466](https://arxiv.org/abs/2404.07466).
+23. Alkadri, A.M., Kharazi, T.D. and Whaley, K.B. (2025) *A quantum algorithm for the finite-element method*. [Preprint]. arXiv:2510.18150. Available at: [https://arxiv.org/abs/2510.18150](https://arxiv.org/abs/2510.18150).
+24. Shaviner, G. (2025) *Quantum singular-value transformation for solving linear systems of differential equations*. [Preprint]. arXiv:2507.09686. Available at: [https://arxiv.org/abs/2507.09686](https://arxiv.org/abs/2507.09686).
 25. Grinko, D., Gacon, J., Zoufal, C. and Woerner, S. (2021) 'Iterative quantum amplitude estimation', *npj Quantum Information*, 7, 52. Available at: [https://doi.org/10.1038/s41534-021-00379-1](https://doi.org/10.1038/s41534-021-00379-1).
-26. Zhou, Y., et al. (2025) *Adaptive mesh-refinement quantum algorithm for Maxwell’s equations*. \[Preprint]. arXiv:2504.01646. Available at: [https://arxiv.org/abs/2504.01646](https://arxiv.org/abs/2504.01646).
-27. Yu, Y. (2025) *Schrödingerization based quantum algorithms for the fractional Poisson equation*. \[Preprint]. arXiv:2505.01602. Available at: [https://arxiv.org/abs/2505.01602](https://arxiv.org/abs/2505.01602).
-28. Ayral, T. (2025) *Dynamical mean-field theory with quantum computing*. \[Preprint]. arXiv:2508.00118. Available at: [https://arxiv.org/abs/2508.00118](https://arxiv.org/abs/2508.00118).
+26. Zhou, Y., et al. (2025) *Adaptive mesh-refinement quantum algorithm for Maxwell’s equations*. [Preprint]. arXiv:2504.01646. Available at: [https://arxiv.org/abs/2504.01646](https://arxiv.org/abs/2504.01646).
+27. Yu, Y. (2025) *Schrödingerization based quantum algorithms for the fractional Poisson equation*. [Preprint]. arXiv:2505.01602. Available at: [https://arxiv.org/abs/2505.01602](https://arxiv.org/abs/2505.01602).
+28. Ayral, T. (2025) *Dynamical mean-field theory with quantum computing*. [Preprint]. arXiv:2508.00118. Available at: [https://arxiv.org/abs/2508.00118](https://arxiv.org/abs/2508.00118).
 29. Georgescu, C.A. (2024) *Quantum Algorithms for the Lattice Boltzmann Method: Encoding and Evolution*. PhD thesis, TU Delft. Available at: [https://resolver.tudelft.nl/a7b20729-46b7-42d1-aaf7-c001fc93efd9](https://resolver.tudelft.nl/a7b20729-46b7-42d1-aaf7-c001fc93efd9).
-30. In. Klco, N., Savage, M.J. and Stryker, J.R. (2020) 'SU(2) non-Abelian gauge field theory in one dimension on digital quantum computers', *Physical Review D*, 101(7), 074512. Available at: [https://doi.org/10.1103/PhysRevD.101.074512](https://doi.org/10.1103/PhysRevD.101.074512).
+30. Klco, N., Savage, M.J. and Stryker, J.R. (2020) 'SU(2) non-Abelian gauge field theory in one dimension on digital quantum computers', *Physical Review D*, 101(7), 074512. Available at: [https://doi.org/10.1103/PhysRevD.101.074512](https://doi.org/10.1103/PhysRevD.101.074512).
 31. García-Molina, P., Rodríguez-Mediavilla, J. and García-Ripoll, J.J. (2022) 'Quantum Fourier analysis for multivariate functions and applications to a class of Schrödinger-type partial differential equations', *Physical Review A*, 105(1), 012433. Available at: [https://doi.org/10.1103/PhysRevA.105.012433](https://doi.org/10.1103/PhysRevA.105.012433).
-32. Kyriienko, O. (2023) *Quantum Chebyshev transform: mapping, embedding, learning and sampling distributions*. \[Preprint]. arXiv:2306.17026. Available at: [https://arxiv.org/abs/2306.17026](https://arxiv.org/abs/2306.17026).
-33. Zhao, T., et al. (2022) *Quantum-inspired variational algorithms for partial differential equations: application to financial derivative pricing*. \[Preprint]. arXiv:2207.10838. Available at: [https://arxiv.org/abs/2207.10838](https://arxiv.org/abs/2207.10838).
-34. Zhou, Y., et al. (2024) *Quantum algorithm for partial differential equations of non-conservative systems with spatially varying parameters*. \[Preprint]. arXiv:2407.05019. Available at: [https://arxiv.org/abs/2407.05019](https://arxiv.org/abs/2407.05019).
+32. Kyriienko, O. (2023) *Quantum Chebyshev transform: mapping, embedding, learning and sampling distributions*. [Preprint]. arXiv:2306.17026. Available at: [https://arxiv.org/abs/2306.17026](https://arxiv.org/abs/2306.17026).
+33. Zhao, T., et al. (2022) *Quantum-inspired variational algorithms for partial differential equations: application to financial derivative pricing*. [Preprint]. arXiv:2207.10838. Available at: [https://arxiv.org/abs/2207.10838](https://arxiv.org/abs/2207.10838).
+34. Zhou, Y., et al. (2024) *Quantum algorithm for partial differential equations of non-conservative systems with spatially varying parameters*. [Preprint]. arXiv:2407.05019. Available at: [https://arxiv.org/abs/2407.05019](https://arxiv.org/abs/2407.05019).
 35. Foulkes, W.M.C., Mitas, L., Needs, R.J. and Rajagopal, G. (2001) 'Quantum Monte Carlo simulations of solids', *Reviews of Modern Physics*, 73(1), pp. 33–83. Available at: [https://doi.org/10.1103/RevModPhys.73.33](https://doi.org/10.1103/RevModPhys.73.33).
-36. Stenger, M., et al. (2022) *Quantum algorithms for uncertainty quantification: application to partial differential equations*. \[Preprint]. arXiv:2209.11220. Available at: [https://arxiv.org/abs/2209.11220](https://arxiv.org/abs/2209.11220).
-37. Bianucci, P., Miquel, C., Paz, J.P. and Saraceno, M. (2001) *Discrete Wigner functions and the phase-space representation of quantum computers*. \[Preprint]. arXiv:quant-ph/0106091. Available at: [https://arxiv.org/abs/quant-ph/0106091](https://arxiv.org/abs/quant-ph/0106091).
-38. Kitaev, A.Y. (1995) *Quantum measurements and the Abelian stabilizer problem*. \[Preprint]. arXiv:quant-ph/9511026. Available at: [https://arxiv.org/abs/quant-ph/9511026](https://arxiv.org/abs/quant-ph/9511026).
+36. Stenger, M., et al. (2022) *Quantum algorithms for uncertainty quantification: application to partial differential equations*. [Preprint]. arXiv:2209.11220. Available at: [https://arxiv.org/abs/2209.11220](https://arxiv.org/abs/2209.11220).
+37. Bianucci, P., Miquel, C., Paz, J.P. and Saraceno, M. (2001) *Discrete Wigner functions and the phase-space representation of quantum computers*. [Preprint]. arXiv:quant-ph/0106091. Available at: [https://arxiv.org/abs/quant-ph/0106091](https://arxiv.org/abs/quant-ph/0106091).
+38. Kitaev, A.Y. (1995) *Quantum measurements and the Abelian stabilizer problem*. [Preprint]. arXiv:quant-ph/9511026. Available at: [https://arxiv.org/abs/quant-ph/9511026](https://arxiv.org/abs/quant-ph/9511026).
 39. Arute, F., et al. (2019) 'Quantum supremacy using a programmable superconducting processor', *Nature*, 574, pp. 505–510. Available at: [https://doi.org/10.1038/s41586-019-1666-5](https://doi.org/10.1038/s41586-019-1666-5).
 40. Lloyd, S. (1996) 'Universal quantum simulators', *Science*, 273(5278), pp. 1073–1078. Available at: [https://doi.org/10.1126/science.273.5278.1073](https://doi.org/10.1126/science.273.5278.1073).
-41. Bausch, J., et al. (2023) *Quantum algorithms for fractional-order operators*. \[Preprint]. arXiv:2303.06703. Available at: [https://arxiv.org/abs/2303.06703](https://arxiv.org/abs/2303.06703).
+41. Bausch, J., et al. (2023) *Quantum algorithms for fractional-order operators*. [Preprint]. arXiv:2303.06703. Available at: [https://arxiv.org/abs/2303.06703](https://arxiv.org/abs/2303.06703).
 42. Brown, K.R., et al. (2021) 'Quantum algorithms for PDEs: a review', *Frontiers in Physics*, 9, 667392. Available at: [https://doi.org/10.3389/fphy.2021.667392](https://doi.org/10.3389/fphy.2021.667392).
 43. Barends, R., et al. (2014) 'Superconducting quantum circuits at the surface code threshold for fault tolerance', *Nature*, 508, pp. 500–503. Available at: [https://doi.org/10.1038/nature13171](https://doi.org/10.1038/nature13171).
 44. Rotentg, M., et al. (2022) 'Quantum-accelerated stochastic differential equations', *Quantum*, 6, 805. Available at: [https://doi.org/10.22331/q-2022-06-09-805](https://doi.org/10.22331/q-2022-06-09-805).
-45. Gottesman, D. (1998) *The Heisenberg representation of quantum computers*. \[Preprint]. arXiv:quant-ph/9807006. Available at: [httpsfs://arxiv.org/abs/quant-ph/9807006](https://www.google.com/search?q=httpsfs://arxiv.org/abs/quant-ph/9807006).
+45. Gottesman, D. (1998) *The Heisenberg representation of quantum computers*. [Preprint]. arXiv:quant-ph/9807006. Available at: [https://arxiv.org/abs/quant-ph/9807006](https://arxiv.org/abs/quant-ph/9807006).
 46. Babbush, R., et al. (2018) 'Low-depth quantum simulation of materials', *Physical Review X*, 8(1), 011044. Available at: [https://doi.org/10.1103/PhysRevX.8.011044](https://doi.org/10.1103/PhysRevX.8.011044).
-47. Syamlal, M., Copen, C., Takahashi, M. and Hall, B. (2024) *Computational Fluid Dynamics on Quantum Computers*. \[Preprint]. arXiv:2406.18749. Available at: [https://arxiv.org/abs/2406.18749](https://arxiv.org/abs/2406.18749).
-48. Penuel, J., et al. (2024) *Feasibility of accelerating incompressible computational fluid dynamics simulations with fault-tolerant quantum computers*. \[Preprint]. arXiv:2406.06323. Available at: [https://arxiv.org/abs/2406.06323](https://arxiv.org/abs/2406.06323).
-    4s9. Li, J., et al. (2025) *Multi-set variational quantum dynamics algorithm for simulating nonadiabatic dynamics on quantum computers*. \[Preprint]. arXiv:2503.07388. Available at: [https://arxiv.org/abs/2503.07388](https://arxiv.org/abs/2503.07388).
-49. Duriez, A., et al. (2025) *Computing band gaps of periodic materials via sample-based quantum diagonalization*. \[Preprint]. arXiv:2503.10901. Available at: [https://arxiv.org/abs/2503.10901](https://arxiv.org/abs/2503.10901).
-50. Arora, A., Ward, B.M. and Oskay, C. (2s024) *An implementation of the finite element method in hybrid classical/quantum computers*. \[Preprint]. arXiv:2411.09038. Available at: [https://arxiv.org/abs/2411.09038](https://arxiv.org/abs/2411.09038).
-51. Ghisoni, F., Scala, F., Bajoni, D. and Gerace, D. (2024) *Shadow quantum linear solver: A resource-efficient quantum algorithm for linear systems of equations*. \[Preprint]. arXiv:2409.08929. Available at: [https://arxiv.org/abs/2409.08929](https://arxiv.org/abs/2409.08929).
-52. Kahanamoku-Meyer, G.D. (2023) *Exploring the Limits of Classical Simulation: From Computational Many-Body Dynamics to Quantum Advantage*. PhD thesis, University of California, Berkeley. Available at: [https://gregkm.me/files/Kahanamoku-Meyer\_dissertation.pdf](https://gregkm.me/files/Kahanamoku-Meyer_dissertation.pdf).
-53. Beverland, M.E. *et al.* (2022) *Assessing requirements to scale to practical quantum advantage*. \[Preprint]. arXiv:2211.07629 Available at: [https://doi.org/10.48550/arXiv.2211.07629](https://doi.org/10.48550/arXiv.2211.07629).
- 
-
----
-
+47. Syamlal, M., Copen, C., Takahashi, M. and Hall, B. (2024) *Computational Fluid Dynamics on Quantum Computers*. [Preprint]. arXiv:2406.18749. Available at: [https://arxiv.org/abs/2406.18749](https://arxiv.org/abs/2406.18749).
+48. Penuel, J., et al. (2024) *Feasibility of accelerating incompressible computational fluid dynamics simulations with fault-tolerant quantum computers*. [Preprint]. arXiv:2406.06323. Available at: [https://arxiv.org/abs/2406.06323](https://arxiv.org/abs/2406.06323).
+49. Li, J., et al. (2025) *Multi-set variational quantum dynamics algorithm for simulating nonadiabatic dynamics on quantum computers*. [Preprint]. arXiv:2503.07388. Available at: [https://arxiv.org/abs/2503.07388](https://arxiv.org/abs/2503.07388).
+50. Duriez, A., et al. (2025) *Computing band gaps of periodic materials via sample-based quantum diagonalization*. [Preprint]. arXiv:2503.10901. Available at: [https://arxiv.org/abs/2503.10901](https://arxiv.org/abs/2503.10901).
+51. Arora, A., Ward, B.M. and Oskay, C. (2024) *An implementation of the finite element method in hybrid classical/quantum computers*. [Preprint]. arXiv:2411.09038. Available at: [https://arxiv.org/abs/2411.09038](https://arxiv.org/abs/2411.09038).
+52. Ghisoni, F., Scala, F., Bajoni, D. and Gerace, D. (2024) *Shadow quantum linear solver: A resource-efficient quantum algorithm for linear systems of equations*. [Preprint]. arXiv:2409.08929. Available at: [https://arxiv.org/abs/2409.08929](https://arxiv.org/abs/2409.08929).
+53. Kahanamoku-Meyer, G.D. (2023) *Exploring the Limits of Classical Simulation: From Computational Many-Body Dynamics to Quantum Advantage*. PhD thesis, University of California, Berkeley. Available at: [https://gregkm.me/files/Kahanamoku-Meyer_dissertation.pdf](https://gregkm.me/files/Kahanamoku-Meyer_dissertation.pdf).
+54. Beverland, M.E. et al. (2022) *Assessing requirements to scale to practical quantum advantage*. [Preprint]. arXiv:2211.07629. Available at: [https://doi.org/10.48550/arXiv.2211.07629](https://doi.org/10.48550/arXiv.2211.07629).
+55. Gilyén et al. (2018) *Quantum singular value transformation and beyond*. [Preprint]. Available at: [https://arxiv.org/abs/1806.01838](https://arxiv.org/abs/1806.01838). Scope: QSVT, matrix functions, and quantum linear algebra primitives.
+56. Berry, Childs, Ostrander, and Wang (2017) *Quantum algorithm for linear differential equations with exponentially improved dependence on precision*. Available at: [https://arxiv.org/abs/1701.03684](https://arxiv.org/abs/1701.03684). Scope: LDE solution-state preparation and correct author attribution.
+57. Krovi (2023) *Improved quantum algorithms for linear and nonlinear differential equations*. Available at: [https://quantum-journal.org/papers/q-2023-02-02-913/](https://quantum-journal.org/papers/q-2023-02-02-913/); Shang et al. (2025) *Designing a Nearly Optimal Quantum Algorithm for Linear Differential Equations via Lindbladians*. Available at: [https://link.aps.org/doi/10.1103/cvl9-97qg](https://link.aps.org/doi/10.1103/cvl9-97qg). Scope: Linear and Carleman-based nonlinear algorithms; an open-system ODE route.
+58. Jin, Liu, and Yu (2022) *Quantum simulation of partial differential equations via Schrödingerisation*. [Preprint]. Available at: [https://arxiv.org/abs/2212.13969](https://arxiv.org/abs/2212.13969). Scope: Enlarged-space unitary representations of linear differential equations.
+59. An et al. (2026) *Quantum Algorithm for Linear Non-unitary Dynamics with Near-Optimal Dependence on All Parameters*. Available at: [https://link.springer.com/article/10.1007/s00220-025-05509-w](https://link.springer.com/article/10.1007/s00220-025-05509-w). Scope: Improved LCHS representations and precision dependence under stated assumptions.
+60. Wang et al. (2025) *Quantum lattice Boltzmann method for simulating nonlinear fluid dynamics*. Available at: [https://arxiv.org/abs/2502.16568](https://arxiv.org/abs/2502.16568). Scope: Node-level ensemble formulation; numerical benchmark sizes should be separated from QPU hardware demonstrations.
+61. Deiml and Peterseim (2024) *Quantum Realization of the Finite Element Method*. [Preprint]. Available at: [https://arxiv.org/abs/2403.19512](https://arxiv.org/abs/2403.19512). Scope: BPX preconditioning and selected solution functionals for a specified elliptic FEM setting.
+62. Fressart, Nowak, and Spillane (2026) *Quantum Domain Decomposition for Preconditioning the Finite Element Method*. [Preprint]. Available at: [https://arxiv.org/abs/2605.26090](https://arxiv.org/abs/2605.26090). Scope: Additive Schwarz preconditioning and quantum block-encoding costs.
+63. Bravo-Prieto et al. (2023) *Variational Quantum Linear Solver*. Available at: [https://quantum-journal.org/papers/q-2023-11-22-1188/](https://quantum-journal.org/papers/q-2023-11-22-1188/). Scope: VQLS prepares a normalized linear-system solution.
+64. Motta et al. (2019) *Determining eigenstates and thermal states on a quantum computer using quantum imaginary time evolution*. [Preprint]. Available at: [https://arxiv.org/abs/1901.07653](https://arxiv.org/abs/1901.07653). Scope: QITE, quantum Lanczos, and thermal extensions.
+65. Kuroiwa et al. (2022) *Quantum Car–Parrinello Molecular Dynamics*. [Preprint]. Available at: [https://arxiv.org/abs/2212.11921](https://arxiv.org/abs/2212.11921). Scope: Hybrid nuclear and electronic dynamics.
+66. Piccinelli et al. (2025) *Quantum chemistry with provable convergence via randomized sample-based Krylov quantum diagonalization*. [Preprint]. Available at: [https://arxiv.org/abs/2508.02578](https://arxiv.org/abs/2508.02578). Scope: SQD, SKQD, and randomized propagation; convergence requires stated state-concentration assumptions.
+67. van Rossum et al. (2026) *Improved quantum sampling methods for molecular simulations*. [Preprint]. Available at: [https://arxiv.org/abs/2608.11569](https://arxiv.org/abs/2608.11569). Scope: Controls on classical diagonalization size and measurement-basis effects in sampling comparisons.
+68. Danilov et al. (2025) *Enhancing the accuracy and efficiency of sample-based quantum diagonalization with phaseless auxiliary-field quantum Monte Carlo*. Available at: [https://arxiv.org/abs/2503.05967](https://arxiv.org/abs/2503.05967). Scope: QPU-derived SQD trials supplied to classical phaseless AFQMC.
+69. Montanaro (2015) *Quantum speedup of Monte Carlo methods*. Available at: [https://arxiv.org/abs/1504.06987](https://arxiv.org/abs/1504.06987). Scope: Quantum expectation estimation and near-quadratic oracle advantages under appropriate assumptions.
+70. Temme et al. (2009) *Quantum Metropolis Sampling*. [Preprint]. Available at: [https://arxiv.org/abs/0911.3635](https://arxiv.org/abs/0911.3635). Scope: Quantum thermal sampling using energy eigenstates and quantum transitions.
+71. Chen, Kastoryano, and Gilyén (2023) *An efficient and exact noncommutative quantum Gibbs sampler*. [Preprint]. Available at: [https://arxiv.org/abs/2311.09207](https://arxiv.org/abs/2311.09207). Scope: Detailed-balanced Lindbladian Gibbs preparation with mixing-time dependence.
+72. (2026) *Quantum simulation algorithms based on quantum trajectories*. Available at: [https://quantum-journal.org/papers/q-2026-04-13-2063/](https://quantum-journal.org/papers/q-2026-04-13-2063/). Scope: Additive jump-operator query dependence for a specified class of Lindbladians.
+73. Babbush et al. (2023) *Exponential quantum speedup in simulating coupled classical oscillators*. Available at: [https://arxiv.org/abs/2303.13012](https://arxiv.org/abs/2303.13012). Scope: Harmonic-system encoding and selected observable estimation with efficient input access.
+74. Das et al. (2026) *Gate-Level Quantum Simulation of Nonunitary Linear Dynamics with Hybrid Oscillator-Qubit Architecture*. [Preprint]. Available at: [https://arxiv.org/abs/2605.10708](https://arxiv.org/abs/2605.10708). Scope: Hybrid oscillator–qubit LCHS construction.
+75. Wu and Li (2026) *Universal Dilation of Linear Itô SDEs: Quantum Trajectories and Lindblad Simulation of Second Moments*. [Preprint]. Available at: [https://arxiv.org/abs/2601.05928](https://arxiv.org/abs/2601.05928). Scope: Linear stochastic equations, trajectory dilation, and second moments.
+76. Uhrig (2024) *Landau–Lifshitz damping from Lindbladian dissipation in quantum magnets*. [Preprint]. Available at: [https://arxiv.org/abs/2406.10613](https://arxiv.org/abs/2406.10613). Scope: LL reduction with local mean field, weak fields, and a specified adaptive dissipator.
+77. Meth et al. (2025) *Simulating two-dimensional lattice gauge theories on a qudit quantum computer*. Available at: [https://www.nature.com/articles/s41567-025-02797-w](https://www.nature.com/articles/s41567-025-02797-w). Scope: A concrete qudit gauge-theory experiment.
+78. Babbush et al. (2019) *Quantum simulation of chemistry with sublinear scaling in basis size*. Available at: [https://www.nature.com/articles/s41534-019-0199-y](https://www.nature.com/articles/s41534-019-0199-y). Scope: First quantization and interaction-picture electronic-structure simulation.
+79. Balazi, Deiml, and Peterseim (2026) *Quantum Enhanced Numerical Homogenization*. [Preprint]. Available at: [https://arxiv.org/abs/2603.28521](https://arxiv.org/abs/2603.28521). Scope: Local fine-scale quantum subproblems coupled to a classical coarse model using selected measurements.
+80. Wu and Hsieh (2018) *Variational Thermal Quantum Simulation via Thermofield Double States*. [Preprint]. Available at: [https://arxiv.org/abs/1811.11756](https://arxiv.org/abs/1811.11756). Scope: Alternating evolution for variational TFD preparation.
+81. Zhu et al. (2019) *Generation of Thermofield Double States and Critical Ground States with a Quantum Computer*. Available at: [https://arxiv.org/abs/1906.02699](https://arxiv.org/abs/1906.02699). Scope: Trapped-ion thermal-state preparation and model-specific circuit-depth effects under noise.
+82. Verdon et al. (2019) *Quantum Hamiltonian-Based Models and the Variational Quantum Thermalizer Algorithm*. [Preprint]. Available at: [https://arxiv.org/abs/1910.02071](https://arxiv.org/abs/1910.02071). Scope: VQT and hybrid models for thermal states.
+83. Faílde et al. (2023) *Hamiltonian Forging of a Thermofield Double*. [Preprint]. Available at: [https://arxiv.org/abs/2311.10566](https://arxiv.org/abs/2311.10566). Scope: Engineered TFD Hamiltonians and entanglement forging with smaller circuits.
+84. Cottrell et al. (2018) *How to Build the Thermofield Double State*. [Preprint]. Available at: [https://arxiv.org/abs/1811.11528](https://arxiv.org/abs/1811.11528). Scope: Parent-Hamiltonian construction under stated physical assumptions.
+85. Chen et al. (2024) *Minimally Entangled Typical Thermal States for Classical and Quantum Simulation of 1+1-Dimensional Z2 Lattice Gauge Theory at Finite Temperature and Density*. [Preprint]. Available at: [https://arxiv.org/abs/2407.11949](https://arxiv.org/abs/2407.11949). Scope: Classical and quantum METTS approaches to a specified gauge model.
+86. Martyn and Swingle (2018) *Product Spectrum Ansatz and the Simplicity of Thermal States*. [Preprint]. Available at: [https://arxiv.org/abs/1812.01015](https://arxiv.org/abs/1812.01015). Scope: Variational thermal preparation using a product spectrum and an entangling circuit.
+87. Sugiura and Shimizu (2013) *Canonical Thermal Pure Quantum State*. Available at: [https://arxiv.org/abs/1302.3138](https://arxiv.org/abs/1302.3138). Scope: Canonical thermal typicality; QPU preparation requires a specified quantum algorithm.
+88. Bluvstein, D., et al. (2023) *Logical quantum processor based on reconfigurable atom arrays*. Available at: [https://www.nature.com/articles/s41586-023-06927-3](https://www.nature.com/articles/s41586-023-06927-3). Scope: Encoded neutral-atom processing, reconfiguration, and logical circuit demonstrations.
+89. (2025) *A fault-tolerant neutral-atom architecture for universal quantum computation*. Available at: [https://www.nature.com/articles/s41586-025-09848-5](https://www.nature.com/articles/s41586-025-09848-5). Scope: Architecture-level ingredients for universal fault-tolerant neutral-atom processing.
+90. Bartolucci, S., et al. (2023) *Fusion-based quantum computation*. Available at: [https://www.nature.com/articles/s41467-023-36493-1](https://www.nature.com/articles/s41467-023-36493-1). Scope: Universal computation using resource states and entangling measurements with photonic error models.
+91. Covey, J. P., Weinfurter, H., and Bernien, H. (2023) *Quantum networks with neutral atom processing nodes*. [Preprint]. Available at: [https://arxiv.org/abs/2304.02088](https://arxiv.org/abs/2304.02088). Scope: Atom–photon interfaces, remote entanglement, and network-node requirements.
+92. Putterman, H., et al. (2025) *Hardware-efficient quantum error correction via concatenated bosonic qubits*. Available at: [https://www.nature.com/articles/s41586-025-08642-7](https://www.nature.com/articles/s41586-025-08642-7). Scope: Cat-qubit protection combined with an outer code and transmon syndrome ancillas.
+93. Puri, S., et al. (2019) *Bias-preserving gates with stabilized cat qubits*. [Preprint]. Available at: [https://arxiv.org/abs/1905.00450](https://arxiv.org/abs/1905.00450). Scope: Encoding-specific bias-preserving gate constructions.
+94. (2023) *Optical readout of a superconducting qubit using a piezo-optomechanical transducer*. [Preprint]. Available at: [https://arxiv.org/abs/2310.06026](https://arxiv.org/abs/2310.06026). Scope: Optical access to superconducting-qubit readout; measurement access is distinct from coherent logical state transfer.
+95. Grinko, D., et al. (2019) *Iterative Quantum Amplitude Estimation*. [Preprint]. Available at: [https://arxiv.org/abs/1912.05559](https://arxiv.org/abs/1912.05559). Scope: Coherent amplification requirements for iterative estimation.
+96. Das, A., et al. (2026) *Gate-Level Quantum Simulation of Nonunitary Linear Dynamics with Hybrid Oscillator-Qubit Architecture*. [Preprint]. Available at: [https://arxiv.org/abs/2605.10708](https://arxiv.org/abs/2605.10708). Scope: Specialized oscillator–qubit LCHS construction, P26.
+97. Fressart, M., Nowak, M., and Spillane, N. (2026) *Quantum Domain Decomposition for Preconditioning the Finite Element Method*. [Preprint]. Available at: [https://arxiv.org/abs/2605.26090](https://arxiv.org/abs/2605.26090). Scope: Specified additive Schwarz construction, P26.
+98. Wu, Y., and Li, Y. (2026) *Universal Dilation of Linear Itô SDEs*. [Preprint]. Available at: [https://arxiv.org/abs/2601.05928](https://arxiv.org/abs/2601.05928). Scope: Stochastic dilation and second-moment construction, P26.
+99. Mirhosseini, M., et al. (2020) *Superconducting qubit to optical photon transduction*. Available at: [https://www.nature.com/articles/s41586-020-3038-6](https://www.nature.com/articles/s41586-020-3038-6). Scope: Microwave excitation to optical photon conversion as an interface ingredient; full coherent logical transfer requires additional characterization.
