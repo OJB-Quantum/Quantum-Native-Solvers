@@ -650,9 +650,7 @@ QPU and hybrid solver techniques
 Forward prediction evaluates a sample and instrument model, while inverse reconstruction infers sample parameters from measured data. These roles are independent of the temporal formulations above: an inverse fit might use static projections, frequency-resolved spectra, or time-dependent signals. A QPU directly evaluates its assigned operator action, quantum correlation, or optimization subproblem; the surrounding physical and instrument models mediate the connection to the final observable. The R placements in branch XI identify proposed applications of available primitives and the target-specific development needed for implementation.
 
 $$
-\boldsymbol{\theta}\xrightarrow{\;\mathcal{F}\;}\boldsymbol{y}_{\mathrm{pred}},
-\qquad
-\boldsymbol{y}_{\mathrm{meas}}\longrightarrow\widehat{\boldsymbol{\theta}}.
+\boldsymbol{\theta}\xrightarrow{\;\mathcal{F}\;}\boldsymbol{y}_{\mathrm{pred}}, \qquad \boldsymbol{y}_{\mathrm{meas}}\longrightarrow\widehat{\boldsymbol{\theta}}.
 $$
 
 The parameter vector $\boldsymbol{\theta}$ might describe atomic coordinates, electrostatic potentials, a spin Hamiltonian, optical constants, or a lithographic mask. The forward map $\mathcal{F}$ includes the sample–probe interaction and instrument response. A general regularized inverse formulation is
@@ -660,8 +658,10 @@ The parameter vector $\boldsymbol{\theta}$ might describe atomic coordinates, el
 $$
 \widehat{\boldsymbol{\theta}}
 =\underset{\boldsymbol{\theta}\in\mathcal{C}}{\operatorname{argmin}}
-\left[D\!\left(\mathcal{F}(\boldsymbol{\theta}),\boldsymbol{y}_{\mathrm{meas}}\right)
-+\lambda R(\boldsymbol{\theta})\right].
+\left
+[D\!\left(\mathcal{F}(\boldsymbol{\theta}),\boldsymbol{y}_{\mathrm{meas}}\right)
++\lambda R(\boldsymbol{\theta})
+\right].
 $$
 
 Here, $D$ is a discrepancy appropriate to the measurement-noise model, $R$ represents prior information, $\lambda$ controls regularization, and $\mathcal{C}$ specifies physical constraints. Weighted least squares is appropriate for a justified Gaussian approximation, whereas low-count measurements often require a Poisson likelihood. A linear quantum solver addresses a compatible linear problem or linearized update [6–8]. For a least-squares normal-equation construction, $A^\dagger A$ squares the spectral condition number when $A$ has full column rank; alternative formulations and preconditioning therefore belong in the resource assessment.
