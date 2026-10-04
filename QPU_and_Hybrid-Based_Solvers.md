@@ -1,10 +1,15 @@
 # QPU and Hybrid Solver Techniques for Quantum, Atomistic, Molecular, and Nanoscale Simulation
 
-This application-oriented taxonomy connects mathematical solver families to their quantum and classical execution roles. It synthesizes the supplied *Quantum-Native-Solvers* compilation and *Systematic Perspective on Quantum Computing Hardware* presentation, particularly slides 45–58 and the ASIC/control examples. The hierarchy is an organizational synthesis, not a claim that every listed workflow has been demonstrated or provides a computational advantage. Primary research anchors were checked on 4 October 2026.
+This application-centric taxonomy establishes a mapping between mathematical solver families and their respective roles within quantum and classical execution environments. The framework integrates concepts from the Quantum-Native-Solvers compilation and the Systematic Perspective on Quantum Computing Hardware presentation (specifically slides 45–58 and the ASIC/control examples), serving as an organizational synthesis of these sources.
 
 ## Primer and execution legend
 
-Choose the physical model and requested observable before choosing the solver. Quantum many-body simulation represents a physical quantum system; quantum numerical simulation encodes a mathematical problem, including a classical PDE, in quantum states. Both belong here, but they have different sources of computational difficulty. A nanoscale device might require quantum electronic structure, classical nuclear dynamics, and continuum electromagnetic fields in one workflow.
+To ensure optimal solver selection, the physical model and required observables must be defined first. This framework encompasses two primary approaches:
+
+- Quantum Many-Body Simulation: Focused on simulating physical quantum systems.
+- Quantum Numerical Simulation: Focused on encoding mathematical problems (e.g., classical PDEs) into quantum states.
+
+Although both fall within this taxonomy, they present distinct computational complexities. A typical nanoscale device workflow may require a hybrid approach, integrating quantum electronic structure, classical nuclear dynamics, and continuum electromagnetic fields.
 
 | Label | Execution role | Interpretation |
 | --- | --- | --- |
