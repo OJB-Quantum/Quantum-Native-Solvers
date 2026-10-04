@@ -66,6 +66,8 @@ Interestingly, some models such as the [Landau-Lifshitz-Gilbert (LLG) equation](
 
 ### Classification Tree
 
+<img width="2651" height="auto" alt="image" src="https://github.com/user-attachments/assets/88a9d559-aeec-43ce-a285-2d3fd31cce7f" />
+
 ```text
 Quantum Simulation and Solver Approaches
 │
@@ -373,6 +375,8 @@ Quantum Simulation and Solver Approaches
 
 Readiness describes a particular implementation, target observable, and accuracy. The placements below are qualitative assessments based on the cited constructions and demonstrations, with scope specific to each algorithm and implementation.
 
+<img width="2403" height="auto" alt="image" src="https://github.com/user-attachments/assets/adbb4c76-433b-43ee-9ffa-4cafaa4768b7" />
+
 <a id="compact-readiness-summary"></a>
 
 ### Compact Readiness Summary
@@ -594,6 +598,8 @@ R applies to a missing problem-specific mapping, access construction, recovery p
 <a id="proposed-heterogeneous-architecture"></a>
 
 ### Proposed Heterogeneous Architecture
+
+<img width="2316" height="auto" alt="image" src="https://github.com/user-attachments/assets/eec0ec06-1112-41e1-932e-146dfd7ed1d3" />
 
 ```text
 Heterogeneous Quantum Computer (Architected for Fault-Tolerant Compatibility)
