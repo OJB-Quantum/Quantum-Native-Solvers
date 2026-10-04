@@ -9,6 +9,7 @@ A compilation of quantum-native solver techniques that can be mapped and run on 
 
 - [Introduction](#introduction)
   - [Core Definitions and Global Legend](#core-definitions-legend)
+- [Towards Deployment of Industry and Academic Quantum Processors](#towards-deployment-of-industry-and-academic-quantum-processors)
 - [I. Quantum Simulation Taxonomy](#quantum-simulation-taxonomy)
   - [Classification Tree](#classification-tree)
   - [Placement Guide](#placement-guide)
