@@ -1,37 +1,70 @@
 # Quantum-Native-Solvers
-A compilation of quantum-native solver techniques that can be mapped and run on a quantum computer. Compiled by Onri Jay Benally. 
+A compilation of quantum-native solver techniques that can be mapped and run on a quantum computer. Compiled by Onri Jay Benally.
 
-[![License](https://img.shields.io/badge/Creative_Commons-License-green)](https://choosealicense.com/licenses/cc-by-4.0) 
+[![License](https://img.shields.io/badge/Creative_Commons-License-green)](https://choosealicense.com/licenses/cc-by-4.0) | [Repository](https://github.com/OJB-Quantum/Quantum-Native-Solvers)
 
-Primary URL for the repository: <https://github.com/OJB-Quantum/Quantum-Native-Solvers>
+<a id="contents"></a>
+
+## Contents
+
+- [Introduction](#introduction)
+  - [Core Definitions and Global Legend](#core-definitions-legend)
+- [I. Quantum Simulation Taxonomy](#quantum-simulation-taxonomy)
+  - [Classification Tree](#classification-tree)
+  - [Placement Guide](#placement-guide)
+- [II. Hardware Readiness and Tiers](#hardware-readiness)
+  - [Compact Readiness Summary](#compact-readiness-summary)
+  - [Extended Readiness Analysis](#extended-readiness-analysis)
+  - [Sparse-Solver Readiness Checks](#sparse-solver-readiness-checks)
+- [III. Resource Metrics and Qubit Scaling](#resource-metrics)
+  - [Error Correction Footprint](#error-correction-footprint)
+  - [Estimated Qubit Requirements](#estimated-qubit-requirements)
+  - [D2Q5 Encoding Comparison](#d2q5-encoding-comparison)
+- [IV. System Integration and Routing](#system-integration)
+  - [Proposed Heterogeneous Architecture](#proposed-heterogeneous-architecture)
+  - [Logic Routing and Decision Tree](#logic-routing-decision-tree)
+  - [Sparse-Solver Routing Guide](#sparse-solver-routing-guide)
+- [References](#references)
 
 ---
 
-The purpose of this repository is to monitor computational techniques (over time) that can be used to determine whether a working mathematical or computational framework of interest may be eligible for quantum simulation. 
+<a id="introduction"></a>
 
-Interestingly, some models such as the [Landau-Lifshitz-Gilbert (LLG) equation](https://iopscience.iop.org/article/10.1088/1367-2630/ae115c) (used in micromagnetism studies) can be systematically derived from [Lindbladian](https://en.wikipedia.org/wiki/Lindbladian) dynamics, which are based on the general form of Markovian master equations used to describe open quantum systems. Another [quantum analog of the LLG](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.133.266704) also exists based on quantum correlation dynamics, which acknowledges a difference from open quantum systems in the previous example. LLG solvers are typically implemented on classical computing resources, especially that of general-purpose graphics processing units (GPUs). However, through careful derivation, supported by literature, such a method can transcend the classical description and becomes eligible for quantum simulation algorithms, as well as numerically exact and analytical verifications. Although this is not always the case for other classical or semi-classical frameworks and models, examples like these that are physics-informed or physics-supported should encourage one to explore the limits. 
+## Introduction
 
----
+The purpose of this repository is to monitor computational techniques (over time) that can be used to determine whether a working mathematical or computational framework of interest may be eligible for quantum simulation.
 
-- **Quantum-native** (adj.): designed for, and inherently dependent upon, quantum-mechanical resources, so that its core function, scaling, or correctness requires nonclassical phenomena (for example, superposition, interference, entanglement), rather than merely imitating them on classical hardware. 
+Interestingly, some models such as the [Landau-Lifshitz-Gilbert (LLG) equation](https://iopscience.iop.org/article/10.1088/1367-2630/ae115c) (used in micromagnetism studies) can be systematically derived from [Lindbladian](https://en.wikipedia.org/wiki/Lindbladian) dynamics, which are based on the general form of Markovian master equations used to describe open quantum systems. Another [quantum analog of the LLG](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.133.266704) also exists based on quantum correlation dynamics, which acknowledges a difference from open quantum systems in the previous example. LLG solvers are typically implemented on classical computing resources, especially that of general-purpose graphics processing units (GPUs). However, through careful derivation, supported by literature, such a method can transcend the classical description and becomes eligible for quantum simulation algorithms, as well as numerically exact and analytical verifications. Although this is not always the case for other classical or semi-classical frameworks and models, examples like these that are physics-informed or physics-supported should encourage one to explore the limits.
 
-- **quantum**: “Borrowed from Latin *quantum*,” historically ‘how much; as much as’ (neuter of *quantus*), later specialized to a discrete physical amount. - *Oxford English Dictionary*; see also Oxford’s gloss tying *quantum* to *quantus*. 
-- **native**: “From Latin *nativus* (‘inborn; produced by birth’), via Middle English/French,” yielding senses such as ‘innate, natural; belonging by birth.’ - *Oxford English Dictionary*. 
+<a id="core-definitions-legend"></a>
 
----
+### Core Definitions and Global Legend
 
-## Classification Tree for Quantum-Native Solvers/ True Quantum Simulation 
-
-(A Quantum Simulation Taxonomy) 
+> **Quantum-native** (adj.): designed for, and inherently dependent upon, quantum-mechanical resources, so that its core function, scaling, or correctness requires nonclassical phenomena (for example, superposition, interference, entanglement), rather than merely imitating them on classical hardware.
+>
+> **quantum**: “Borrowed from Latin *quantum*,” historically ‘how much; as much as’ (neuter of *quantus*), later specialized to a discrete physical amount. - *Oxford English Dictionary*; see also Oxford’s gloss tying *quantum* to *quantus*.
+> **native**: “From Latin *nativus* (‘inborn; produced by birth’), via Middle English/French,” yielding senses such as ‘innate, natural; belonging by birth.’ - *Oxford English Dictionary*.
 
 | Label | Execution or scope |
-| --- | --- |
-| Q | Quantum circuits perform the central computation. |
-| H | Quantum and classical computations form an essential hybrid workflow. |
-| A | Native interactions in a programmable physical simulator implement the model. |
-| C | Classical computation, potentially accelerated by GPUs. |
-| R | A problem-specific research direction requiring an explicit construction and resource analysis. |
-| P26 | A cited preprint. |
+| :---: | :--- |
+| **Q** | Quantum circuits perform the central computation. |
+| **H** | Quantum and classical computations form an essential hybrid workflow. |
+| **A** | Native interactions in a programmable physical simulator implement the model. |
+| **C** | Classical computation, potentially accelerated by GPUs. |
+| **R** | A problem-specific research direction requiring an explicit construction and resource analysis. |
+| **P26** | A cited preprint. |
+
+[Back to contents](#contents)
+
+---
+
+<a id="quantum-simulation-taxonomy"></a>
+
+## I. Quantum Simulation Taxonomy
+
+<a id="classification-tree"></a>
+
+### Classification Tree
 
 ```text
 Quantum Simulation and Solver Approaches
@@ -312,40 +345,37 @@ Quantum Simulation and Solver Approaches
       └─ GPU execution alone belongs to the classical computational route
 ```
 
-## Placement guide
+<a id="placement-guide"></a>
 
-| Location | Added role | Connection |
-| :--- | :--- | :--- |
-| II.A | Sparse quantum linear solvers | Directly prepares a normalized inverse-action or pseudoinverse-action state under the algorithm's access and spectral assumptions. |
-| II.E | Sparse discretization and preconditioning costs | Indirectly affects QLSA performance through conditioning, normalization, and encoding overhead. |
-| III.C | Variational sparse-system workflows | Uses quantum residual estimation and classical optimization; sparsity alone does not establish a speedup. |
-| IV.C | Sparse-Hamiltonian simulation | Directly implements time evolution, providing a subroutine for some QLSAs and spectral methods. |
-| IV.E and IX.F | Sparse shifted-system resolvents | Directly applies a linear solver to an energy-shifted operator; broadening influences conditioning and spectral resolution. |
-| VI.D | Sparse Liouvillian stationary-state routes | Reformulates a stationary-state problem as constrained linear algebra or a null-space search, with additional physical-state checks. |
-| X.D | Sparse-operator quantum eigensolver workflows | Uses encoded operators or evolution to construct a measured subspace for eigenvalue estimation. |
-| X.E | Sparse eigensolvers on sampled configurations | Classical diagonalization follows quantum configuration selection. |
-| XVII.C | Resolvent observable recovery | Converts normalized solution-state information into physical Green-function or response quantities using scales and overlaps. |
-| XVIII.B | Sparse access and resource assessment | Accounts for the representation and coherent access required by the solver. |
-| XIX.C | Classical sparse-solver baselines | Supplies matched CPU/GPU linear-system and eigenproblem comparisons. |
+### Placement Guide
+
+| Location | Label | Role | Connection |
+| :--- | :---: | :--- | :--- |
+| II.A | Q | Sparse quantum linear solvers | Directly prepares a normalized inverse-action or pseudoinverse-action state under the algorithm's access and spectral assumptions. |
+| II.E | Q/H | Sparse discretization and preconditioning costs | Indirectly affects QLSA performance through conditioning, normalization, and encoding overhead. |
+| III.C | H | Variational sparse-system workflows | Uses quantum residual estimation and classical optimization; sparsity alone does not establish a speedup. |
+| IV.C | Q | Sparse-Hamiltonian simulation | Directly implements time evolution, providing a subroutine for some QLSAs and spectral methods. |
+| IV.E and IX.F | Q/H | Sparse shifted-system resolvents | Directly applies a linear solver to an energy-shifted operator; broadening influences conditioning and spectral resolution. |
+| VI.D | Q/H; R | Sparse Liouvillian stationary-state routes | Reformulates a stationary-state problem as constrained linear algebra or a null-space search, with additional physical-state checks. |
+| X.D | Q/H | Sparse-operator quantum eigensolver workflows | Uses encoded operators or evolution to construct a measured subspace for eigenvalue estimation. |
+| X.E | C | Sparse eigensolvers on sampled configurations | Classical diagonalization follows quantum configuration selection. |
+| XVII.C | Q/H/A | Resolvent observable recovery | Converts normalized solution-state information into physical Green-function or response quantities using scales and overlaps. |
+| XVIII.B | Q/H/C | Sparse access and resource assessment | Accounts for the representation and coherent access required by the solver. |
+| XIX.C | C | Classical sparse-solver baselines | Supplies matched CPU/GPU linear-system and eigenproblem comparisons. |
+
+[Back to contents](#contents)
 
 ---
 
-# Quantum Simulation and Solver Techniques by Hardware Readiness
+<a id="hardware-readiness"></a>
 
-Readiness describes a particular implementation, target observable, and accuracy. The placements below are qualitative assessments based on the cited constructions and demonstrations, with scope specific to each algorithm and implementation. 
+## II. Hardware Readiness and Tiers
 
-Q denotes quantum circuits, H a quantum–classical workflow, A native analog quantum simulation, and C classical computation. R identifies a research direction whose hardware requirements require a concrete construction. P26 marks a cited preprint.
+Readiness describes a particular implementation, target observable, and accuracy. The placements below are qualitative assessments based on the cited constructions and demonstrations, with scope specific to each algorithm and implementation.
 
-| Label | Execution or scope |
-| --- | --- |
-| Q | Quantum circuits perform the central computation. |
-| H | Quantum and classical computations form an essential hybrid workflow. |
-| A | Native interactions in a programmable physical simulator implement the model. |
-| C | Classical computation, potentially accelerated by GPUs. |
-| R | A problem-specific research direction requiring an explicit construction and resource analysis. |
-| P26 | A cited preprint. |
+<a id="compact-readiness-summary"></a>
 
-## Compact Version
+### Compact Readiness Summary
 
 | Tier or category | Hardware and computational profile | Representative methods | Interpretation |
 | --- | --- | --- | --- |
@@ -355,88 +385,107 @@ Q denotes quantum circuits, H a quantum–classical workflow, A native analog qu
 | **R. Construction-dependent research directions** | Resources and maturity assessed for the exact proposal. Some admit small prototypes; others have theoretical or classical numerical studies. | General quantum AMR and hp-FEM; nonlinear multiphysics; broad RT-TDDFT interfaces; unspecified domain decomposition; fractional and phase-space solvers; sparse Liouvillian stationary-state proposals without a complete recovery construction; unresolved sparse-access or preconditioning interfaces. | Preserve the distinction between a physical target, a quantum algorithm, and a hardware demonstration. Specified preprint constructions are assessed within their stated scope rather than automatically assigned R. |
 | **C. Classical comparisons and support** | CPUs, GPUs, distributed memory, or classical sampling and tensor contractions. | Classical QMC, MPS/PEPS, DMRG, sparse LU/Cholesky, CG/GMRES, Lanczos/Arnoldi, FEM, NEGF, TDDFT, LLG, and classical quantum trajectories. | These methods supply baselines and hybrid components. A separately specified QPU subroutine establishes quantum assistance. GPU execution of a sparse quantum-physics model remains classical computation. |
 
-## Extended Version
+<a id="extended-readiness-analysis"></a>
 
-## I. Demonstrations and Bounded Prototypes
+### Extended Readiness Analysis
+
+<details markdown="1">
+<summary><strong>Tier I: Demonstrations and Bounded Prototypes</strong></summary>
 
 Designed for experiments and small implementation studies, this tier determines hardware suitability based on the circuit or native interaction model. Although the rows categorize suitable classes of bounded tasks, this does not guarantee that every variant has a corresponding hardware demonstration or universal processor support.
 
-| Category | Techniques and bounded targets | Scope and practical constraint |
-| --- | --- | --- |
-| **A. Walks, automata, and lattice transport [Q/H/A]** | Split-step walks, graph Hamiltonians, QCA, transport with prescribed gauge links, and selected QLBM or QLGA kernels. | Compile streaming and collision separately. Fluid behaviour requires a demonstrated continuum limit, boundary treatment, and closure. Large classical benchmark grids in a quantum algorithm paper are separate from QPU execution. [QLBM construction](https://arxiv.org/abs/2502.16568). |
-| **B. Short Hamiltonian evolution [Q/A]** | Product-formula spin dynamics, small encoded Schrödinger grids, Dirac wave packets, tunneling observables, and bounded sparse-Hamiltonian circuits. | Accessible evolution time and error set scope. Sparse graph degree does not by itself determine compiled gate depth. Dirac spectral studies require the intended energy sector and control of lattice artifacts. |
-| **C. Variational states and dynamics [H]** | VQE, real-time VQS, variational imaginary time, and local-domain QITE on manageable instances. | Ansatz error, metric conditioning, correlations, and measurement cost govern scaling. QITE becomes expensive as required domains grow. [QITE experiments and construction](https://arxiv.org/abs/1901.07653). |
-| **D. Small linear-system and matrix-function experiments [Q/H]** | VQLS on encoded sparse systems, compiled HHL demonstrations, and low-degree QSP/QSVT filters with accessible encodings. | Count source-state preparation, operator-access circuits, controlled operations, and postselection or amplification. Matrix-entry sparsity does not guarantee a short Pauli decomposition. VQLS prepares a solution-state approximation; stationary eigenpairs require eigenstate algorithms. [VQLS](https://quantum-journal.org/papers/q-2023-11-22-1188/), [HHL](https://arxiv.org/abs/0811.3171). |
-| **E. Thermal preparation [Q/H/A]** | QAOA-inspired TFD preparation, variational TFD parent-Hamiltonian methods, VQT, and product-spectrum ansätze on selected systems. | Temperature alone gives insufficient readiness information. Entropy treatment, ansatz expressibility, and purification cost are essential. The execution label follows the actual preparation protocol. [Trapped-ion TFD experiment](https://arxiv.org/abs/1906.02699), [VQT](https://arxiv.org/abs/1910.02071). |
-| **F. Open-system channels [Q/H/A]** | Ancilla-assisted damping or dephasing, collision models, reset protocols, and monitored jump trajectories. | Requires the relevant preparation, measurement, and reset capabilities. A classical MCWF calculation belongs to C unless quantum hardware performs the trajectory evolution. Sparse storage of a classical Liouvillian does not establish a quantum channel implementation. |
-| **G. Analog, bosonic, and qudit simulation [A/Q]** | Native spin interactions, optical-lattice models, oscillator dynamics, and selected truncated gauge models on multilevel hardware. | Judge native Hamiltonian control, calibration, truncation, and observable access. Universal circuit depth is an incomplete metric for analog hardware. [Qudit gauge-theory experiment](https://www.nature.com/articles/s41567-025-02797-w). |
-| **H. Amplitude-estimation experiments [Q/H]** | Maximum-likelihood or iterative amplitude estimation with bounded amplification depth. | Removing QPE reduces some resources, but repeated Grover operations still produce deep circuits. A depth cap changes the attainable precision and sampling tradeoff. [Iterative QAE](https://arxiv.org/abs/1912.05559). |
+| Category | Label | Techniques and bounded targets | Scope and practical constraint |
+| --- | :---: | --- | --- |
+| **A. Walks, automata, and lattice transport** | Q/H/A | Split-step walks, graph Hamiltonians, QCA, transport with prescribed gauge links, and selected QLBM or QLGA kernels. | Compile streaming and collision separately. Fluid behaviour requires a demonstrated continuum limit, boundary treatment, and closure. Large classical benchmark grids in a quantum algorithm paper are separate from QPU execution. [QLBM construction](https://arxiv.org/abs/2502.16568). |
+| **B. Short Hamiltonian evolution** | Q/A | Product-formula spin dynamics, small encoded Schrödinger grids, Dirac wave packets, tunneling observables, and bounded sparse-Hamiltonian circuits. | Accessible evolution time and error set scope. Sparse graph degree does not by itself determine compiled gate depth. Dirac spectral studies require the intended energy sector and control of lattice artifacts. |
+| **C. Variational states and dynamics** | H | VQE, real-time VQS, variational imaginary time, and local-domain QITE on manageable instances. | Ansatz error, metric conditioning, correlations, and measurement cost govern scaling. QITE becomes expensive as required domains grow. [QITE experiments and construction](https://arxiv.org/abs/1901.07653). |
+| **D. Small linear-system and matrix-function experiments** | Q/H | VQLS on encoded sparse systems, compiled HHL demonstrations, and low-degree QSP/QSVT filters with accessible encodings. | Count source-state preparation, operator-access circuits, controlled operations, and postselection or amplification. Matrix-entry sparsity does not guarantee a short Pauli decomposition. VQLS prepares a solution-state approximation; stationary eigenpairs require eigenstate algorithms. [VQLS](https://quantum-journal.org/papers/q-2023-11-22-1188/), [HHL](https://arxiv.org/abs/0811.3171). |
+| **E. Thermal preparation** | Q/H/A | QAOA-inspired TFD preparation, variational TFD parent-Hamiltonian methods, VQT, and product-spectrum ansätze on selected systems. | Temperature alone gives insufficient readiness information. Entropy treatment, ansatz expressibility, and purification cost are essential. The execution label follows the actual preparation protocol. [Trapped-ion TFD experiment](https://arxiv.org/abs/1906.02699), [VQT](https://arxiv.org/abs/1910.02071). |
+| **F. Open-system channels** | Q/H/A | Ancilla-assisted damping or dephasing, collision models, reset protocols, and monitored jump trajectories. | Requires the relevant preparation, measurement, and reset capabilities. A classical MCWF calculation belongs to C unless quantum hardware performs the trajectory evolution. Sparse storage of a classical Liouvillian does not establish a quantum channel implementation. |
+| **G. Analog, bosonic, and qudit simulation** | Q/A | Native spin interactions, optical-lattice models, oscillator dynamics, and selected truncated gauge models on multilevel hardware. | Judge native Hamiltonian control, calibration, truncation, and observable access. Universal circuit depth is an incomplete metric for analog hardware. [Qudit gauge-theory experiment](https://www.nature.com/articles/s41567-025-02797-w). |
+| **H. Amplitude-estimation experiments** | Q/H | Maximum-likelihood or iterative amplitude estimation with bounded amplification depth. | Removing QPE reduces some resources, but repeated Grover operations still produce deep circuits. A depth cap changes the attainable precision and sampling tradeoff. [Iterative QAE](https://arxiv.org/abs/1912.05559). |
 
-## II. Structured Hybrid Workflows
+</details>
 
-In this tier, the quantum processor supplies states, samples, or observables to a classical calculation. The complete workflow includes every repetition, optimization step, and classical solve. Error mitigation, parallel circuit execution, and error correction address different limitations and should be costed separately. 
+<details markdown="1">
+<summary><strong>Tier II: Structured Hybrid Workflows</strong></summary>
 
-| Category | Techniques and targets | Scope and practical constraint |
-| --- | --- | --- |
-| **A. Configuration sampling and diagonalization [H]** | QSCI, SQD, and extensions for excited states; quantum-generated configurations define a classically diagonalized subspace, using sparse eigensolvers where the projected representation supports them. | Match classical subspace size, basis, and accuracy against classical selection methods. Sampling quality, matrix assembly, sparse storage, and classical diagonalization may dominate. Quantum selection does not guarantee that the reduced matrix remains sparse. [Extended SQD](https://arxiv.org/abs/2411.00468), [benchmarking considerations, P26](https://arxiv.org/abs/2608.11569). |
-| **B. Quantum subspace dynamics [H]** | Quantum subspace expansion, measured quantum Lanczos, quantum Krylov, and suitable SKQD or SqDRIFT variants. | Time-evolution depth, initial overlap, projected Hamiltonian and overlap conditioning, and state concentration determine feasibility. The projected matrices need not inherit the original operator's sparsity. Some block-encoded Krylov constructions naturally move into III. [Randomized Krylov diagonalization](https://arxiv.org/abs/2508.02578), [quantum Lanczos](https://quantum-journal.org/papers/q-2023-05-23-1018/). |
-| **C. QPU-assisted classical QMC [H]** | SQD or QSCI wavefunctions supplied as trials to classical phaseless AFQMC; other explicit quantum-generated trial constructions. | Retain the classical approximation and sampling costs. Generic QAE-driven DMC acceleration requires its own coherent algorithm. [SQD-assisted AFQMC](https://arxiv.org/abs/2503.05967). |
-| **D. Thermal state and response pipelines [H]** | TFD-QITE, variational purification, VQT, QMETTS, and quantum preparation of thermal typical states followed by correlator estimation. | Include preparation at each temperature, entropy evaluation where needed, correlation time, and sampling variance. A single pure typical state approximates suitable thermal observables under typicality assumptions. [QITE and thermal ensembles](https://arxiv.org/abs/1901.07653). |
-| **E. Entanglement forging and circuit cutting [H]** | Smaller circuits reconstruct selected TFD or many-body quantities; parent-Hamiltonian optimization may use the reconstructed expectations. | Width reduction trades against classical reconstruction and measurements. An N-qubit device reconstructing properties of a 2N-qubit state carries this overhead. [TFD forging](https://arxiv.org/abs/2311.10566). |
-| **F. Lattice kinetics and variational PDE workflows [H]** | Multiple-circuit QLBM, measurement and feedback between steps, and variational PDE residual methods. | Reinitialization, field reconstruction, boundary handling, and accumulated error may dominate. Nonlinear dynamics requires an explicit closure or feedback model. |
-| **G. Structured finite-element prototypes [Q/H]** | VQLS-based sparse discretized solves or implementable preconditioned FEM circuits on specified problems. | Mesh dimensions alone fail to determine resources. Include matrix encoding, condition number, coefficient access, source-state preparation, and requested solution functionals. A classical sparse mesh matrix requires an explicit coherent-access or operator-decomposition construction. [BPX-preconditioned FEM](https://arxiv.org/abs/2403.19512). |
-| **H. Embedding and coupled molecular calculations [H]** | Quantum impurity solvers inside DMFT, DMET or active-space embedding; QCPMD with classical nuclear motion. | Accuracy of bath fitting, forces, self-consistency, and repeated quantum measurements limits scope. QCPMD device suitability requires a compiled instance. Unspecified extensions receive an additional R marker. [QCPMD](https://arxiv.org/abs/2212.11921). |
-| **I. Open spins, spectroscopy, and device parameters [Q/H/A]** | Monitored trajectories, small explicit bath models, dynamical correlations, and quantum-derived parameters for classical spin or device models. | Bath-memory size and observation time determine resources. A microscopic-to-LLG reduction requires specified physical assumptions; the measurement protocol determines whether QPE is useful. Classical LLG propagation remains C inside a workflow supplied with quantum-derived parameters. [LL reduction](https://arxiv.org/abs/2406.10613). |
-| **J. Nonunitary-evolution prototypes [Q/H/A]** | Small, explicitly compiled Schrödingerisation or LCHS constructions; auxiliary oscillator implementations where supported. | Scope must include auxiliary-state preparation, truncation, recovery probability, and hardware controls. Large accurate circuit instances generally fall in III. Oscillator–qubit processing alone does not require H; an essential classical optimization or embedding loop does. [Schrödingerisation](https://arxiv.org/abs/2212.13969), [oscillator–qubit LCHS, P26](https://arxiv.org/abs/2605.10708v3). |
-| **K. Hybrid sparse linear-system and response workflows [H]** | VQLS applied to encoded sparse discretizations; classical assembly and essential optimization with quantum residual estimation; specified variational shifted-system solves for selected response quantities. | Track row/column sparsity separately from the measured operator decomposition. Include conditioning, residual-to-solution error bounds, optimizer iterations, repetitions, and norm/overlap recovery. A complete classical field requires reconstruction in addition to quantum residual estimation. [VQLS](https://quantum-journal.org/papers/q-2023-11-22-1188/). |
-| **L. Quantum local corrections in sparse multiscale problems [H; P26]** | Classical coarse-scale solution with specified quantum fine-scale corrections in numerical homogenization. | Assess local operator access, coefficient contrast, preparation, selected measurements, and repeated local calls. Generalization to arbitrary nonlinear or coupled multiscale models requires a separate construction. The cited numerical study classically simulates the local quantum solver. [Quantum-enhanced homogenization](https://arxiv.org/abs/2603.28521v2). |
+In this tier, the quantum processor supplies states, samples, or observables to a classical calculation. The complete workflow includes every repetition, optimization step, and classical solve. Error mitigation, parallel circuit execution, and error correction address different limitations and should be costed separately.
 
-## III. Scalable Coherent Algorithms Oriented Toward Fault Tolerance
+| Category | Label | Techniques and targets | Scope and practical constraint |
+| --- | :---: | --- | --- |
+| **A. Configuration sampling and diagonalization** | H | QSCI, SQD, and extensions for excited states; quantum-generated configurations define a classically diagonalized subspace, using sparse eigensolvers where the projected representation supports them. | Match classical subspace size, basis, and accuracy against classical selection methods. Sampling quality, matrix assembly, sparse storage, and classical diagonalization may dominate. Quantum selection does not guarantee that the reduced matrix remains sparse. [Extended SQD](https://arxiv.org/abs/2411.00468), [benchmarking considerations, P26](https://arxiv.org/abs/2608.11569). |
+| **B. Quantum subspace dynamics** | H | Quantum subspace expansion, measured quantum Lanczos, quantum Krylov, and suitable SKQD or SqDRIFT variants. | Time-evolution depth, initial overlap, projected Hamiltonian and overlap conditioning, and state concentration determine feasibility. The projected matrices need not inherit the original operator's sparsity. Some block-encoded Krylov constructions naturally move into III. [Randomized Krylov diagonalization](https://arxiv.org/abs/2508.02578), [quantum Lanczos](https://quantum-journal.org/papers/q-2023-05-23-1018/). |
+| **C. QPU-assisted classical QMC** | H | SQD or QSCI wavefunctions supplied as trials to classical phaseless AFQMC; other explicit quantum-generated trial constructions. | Retain the classical approximation and sampling costs. Generic QAE-driven DMC acceleration requires its own coherent algorithm. [SQD-assisted AFQMC](https://arxiv.org/abs/2503.05967). |
+| **D. Thermal state and response pipelines** | H | TFD-QITE, variational purification, VQT, QMETTS, and quantum preparation of thermal typical states followed by correlator estimation. | Include preparation at each temperature, entropy evaluation where needed, correlation time, and sampling variance. A single pure typical state approximates suitable thermal observables under typicality assumptions. [QITE and thermal ensembles](https://arxiv.org/abs/1901.07653). |
+| **E. Entanglement forging and circuit cutting** | H | Smaller circuits reconstruct selected TFD or many-body quantities; parent-Hamiltonian optimization may use the reconstructed expectations. | Width reduction trades against classical reconstruction and measurements. An N-qubit device reconstructing properties of a 2N-qubit state carries this overhead. [TFD forging](https://arxiv.org/abs/2311.10566). |
+| **F. Lattice kinetics and variational PDE workflows** | H | Multiple-circuit QLBM, measurement and feedback between steps, and variational PDE residual methods. | Reinitialization, field reconstruction, boundary handling, and accumulated error may dominate. Nonlinear dynamics requires an explicit closure or feedback model. |
+| **G. Structured finite-element prototypes** | Q/H | VQLS-based sparse discretized solves or implementable preconditioned FEM circuits on specified problems. | Mesh dimensions alone fail to determine resources. Include matrix encoding, condition number, coefficient access, source-state preparation, and requested solution functionals. A classical sparse mesh matrix requires an explicit coherent-access or operator-decomposition construction. [BPX-preconditioned FEM](https://arxiv.org/abs/2403.19512). |
+| **H. Embedding and coupled molecular calculations** | H | Quantum impurity solvers inside DMFT, DMET or active-space embedding; QCPMD with classical nuclear motion. | Accuracy of bath fitting, forces, self-consistency, and repeated quantum measurements limits scope. QCPMD device suitability requires a compiled instance. Unspecified extensions receive an additional R marker. [QCPMD](https://arxiv.org/abs/2212.11921). |
+| **I. Open spins, spectroscopy, and device parameters** | Q/H/A | Monitored trajectories, small explicit bath models, dynamical correlations, and quantum-derived parameters for classical spin or device models. | Bath-memory size and observation time determine resources. A microscopic-to-LLG reduction requires specified physical assumptions; the measurement protocol determines whether QPE is useful. Classical LLG propagation remains C inside a workflow supplied with quantum-derived parameters. [LL reduction](https://arxiv.org/abs/2406.10613). |
+| **J. Nonunitary-evolution prototypes** | Q/H/A | Small, explicitly compiled Schrödingerisation or LCHS constructions; auxiliary oscillator implementations where supported. | Scope must include auxiliary-state preparation, truncation, recovery probability, and hardware controls. Large accurate circuit instances generally fall in III. Oscillator–qubit processing alone does not require H; an essential classical optimization or embedding loop does. [Schrödingerisation](https://arxiv.org/abs/2212.13969), [oscillator–qubit LCHS, P26](https://arxiv.org/abs/2605.10708v3). |
+| **K. Hybrid sparse linear-system and response workflows** | H | VQLS applied to encoded sparse discretizations; classical assembly and essential optimization with quantum residual estimation; specified variational shifted-system solves for selected response quantities. | Track row/column sparsity separately from the measured operator decomposition. Include conditioning, residual-to-solution error bounds, optimizer iterations, repetitions, and norm/overlap recovery. A complete classical field requires reconstruction in addition to quantum residual estimation. [VQLS](https://quantum-journal.org/papers/q-2023-11-22-1188/). |
+| **L. Quantum local corrections in sparse multiscale problems** | H; P26 | Classical coarse-scale solution with specified quantum fine-scale corrections in numerical homogenization. | Assess local operator access, coefficient contrast, preparation, selected measurements, and repeated local calls. Generalization to arbitrary nonlinear or coupled multiscale models requires a separate construction. The cited numerical study classically simulates the local quantum solver. [Quantum-enhanced homogenization](https://arxiv.org/abs/2603.28521v2). |
 
-This tier identifies implementations whose precision or evolution demands typically exceed noisy circuit budgets. Logical qubits and error correction enable reliable depth, but they leave algorithmic assumptions, data access, and readout costs intact. Large ancilla registers are method dependent; some algorithms trade width for longer execution. 
+</details>
 
-| Category | Techniques and targets | Conditions for useful scaling |
-| --- | --- | --- |
-| **A. Spectral estimation and state preparation [Q]** | Precision QPE, iterative spectral estimation, polynomial filtering, and adiabatic preparation. | Count state overlap, spectral gaps, controlled evolution, and target energy precision. Difficult ground-state preparation may dominate all subsequent calculations. |
-| **B. Hamiltonian simulation, including sparse operators [Q]** | Sparse-Hamiltonian quantum-walk or block-encoding constructions; qubitization, QSP, LCU, interaction-picture methods, and suitable high-order product formulas for electronic, spin, bosonic, Dirac, or Schrödinger models. | Resources follow the access model, operator normalization, row sparsity where applicable, simulation time, precision, and encoding. Sparse-Hamiltonian evolution implements a propagator rather than directly solving a stationary linear system. Product formulas also have small demonstrations in I. [Qubitization](https://quantum-journal.org/papers/q-2019-07-12-163/), [QSVT primitives](https://arxiv.org/abs/1806.01838), [first-quantized chemistry](https://www.nature.com/articles/s41534-019-0199-y). |
-| **C. Sparse quantum linear systems and differential equations [Q]** | Sparse-access HHL and subsequent QLSAs; sparse block encodings with QSVT inverse or pseudoinverse filters; Taylor or spectral LDE embeddings; time-dependent Dyson constructions. | Specify coherent nonzero-location and matrix-entry queries or another explicit block encoding. Include row/column sparsity, encoding normalization, condition number, source preparation, precision, stability, forcing, and solution recovery. Non-Hermitian systems require an appropriate construction; singular systems require specified pseudoinverse and support treatment. The usual output is a normalized solution state or selected functionals. [HHL](https://arxiv.org/abs/0811.3171), [QSVT](https://arxiv.org/abs/1806.01838), [Berry–Childs–Ostrander–Wang LDE algorithm](https://arxiv.org/abs/1701.03684). |
-| **D. Nonunitary linear dynamics [Q/A]** | LCHS, circuit-based Schrödingerisation, specified oscillator–qubit implementations, and engineered Lindbladian ODE embeddings. | Efficient generator access, suitable stability assumptions, auxiliary construction, truncation, and recovery probability are central. Sparse generators still require their access costs to be included. Native auxiliary oscillators require compatible controls and non-Gaussian resources where specified. [LCHS](https://link.springer.com/article/10.1007/s00220-025-05509-w), [ODEs via Lindbladians](https://link.aps.org/doi/10.1103/cvl9-97qg), [oscillator–qubit construction, P26](https://arxiv.org/abs/2605.10708v3). |
-| **E. Preconditioned sparse FEM and structured PDEs [Q]** | Block-encoded sparse discretizations with BPX or other explicitly constructed quantum preconditioners; the specified two-level Additive Schwarz finite-element construction. | Preconditioning must improve the full encoded solve, including construction, normalization, source transformation, application cost, and observable recovery. A preconditioner or its inverse need not preserve the original matrix sparsity. Classical V-cycles or BiCGSTAB require separate quantum constructions. [Quantum FEM](https://arxiv.org/abs/2403.19512), [Additive Schwarz construction, P26](https://arxiv.org/abs/2605.26090). |
-| **F. Coherent expectation estimation [Q]** | QAE and quantum Monte Carlo integration around reversible model and payoff circuits. | Quantum sampling advantages require efficient state preparation and sufficiently accurate coherent amplification. Complete output fields may remove the intended benefit. [Quantum Monte Carlo acceleration](https://arxiv.org/abs/1504.06987). |
-| **G. Thermal and Gibbs algorithms [Q/H/A]** | Imaginary-time polynomial filters, purified Gibbs preparation, quantum Metropolis, and detailed-balanced dissipative Gibbs samplers with explicit implementations. | Temperature, mixing time, overlap, filter success probability, and energy resolution may dominate. Efficient simulation of a thermalizing generator alone supplies no general rapid-mixing guarantee. Native thermalization belongs to A only when the implemented dynamics and target ensemble are specified. [Quantum Metropolis](https://arxiv.org/abs/0911.3635), [detailed-balanced Gibbs construction](https://arxiv.org/abs/2311.09207). |
-| **H. General open-system simulation [Q]** | Accurate Lindblad evolution using channel, dilation, LCU, block-encoding, or trajectory constructions; explicit environment simulation for memory effects; specified linear Itô dilation and second-moment constructions. | Retain the access model and operator normalization in complexity statements. Class-specific additive jump-operator query bounds are separate from full gate cost. Sparse Liouvillian representation does not itself provide physical stationary-state preparation. [Trajectory-based algorithms](https://quantum-journal.org/papers/q-2026-04-13-2063/), [linear Itô construction, P26](https://arxiv.org/abs/2601.05928v4). |
-| **I. Many-body scattering and field theory [Q]** | Prepared incoming states, interacting evolution, channel amplitudes, gauge-constrained models, and multiparticle production. | Include state preparation, finite volume, field truncation, continuum accuracy, and final-state measurements. Smaller analog or qudit gauge experiments belong to I. |
-| **J. Long-time and high-precision response [Q/H]** | Spectral functions, finite temperature Kubo response, and OTOCs using appropriate thermal states and operator orderings. | Spectral resolution, correlator amplitude, observation time, and measurement protocol set requirements. QPE is optional for suitable time-domain approaches. Resolvent-based response additionally requires the checks in III.M. |
-| **K. Encoded classical mechanics and waves [Q]** | Coupled harmonic oscillators and compatible wave-equation mappings to Hamiltonian evolution. | Advantage concerns specified outputs with efficient initial-state and coefficient access. General nonlinear mechanics or arbitrary field readout needs separate analysis. [Harmonic oscillator algorithm](https://arxiv.org/abs/2303.13012). |
-| **L. Block-encoded quantum Krylov and sparse-operator eigensolvers [Q/H]** | Quantum Krylov-state construction, block-encoded quantum Lanczos, and specified filtered subspace methods for accessible sparse operators. | Include initial-state overlap, operator normalization, spectral gaps, Krylov dimension, subspace conditioning, measurement cost, and any classical projected diagonalization. Input sparsity does not imply sparse eigenvectors or sparse projected matrices. An eigenproblem differs from a driven linear-system solve. [Quantum Lanczos](https://quantum-journal.org/papers/q-2023-05-23-1018/), [measurement-efficient Krylov analysis](https://quantum-journal.org/papers/q-2024-08-13-1438/). |
-| **M. Sparse shifted-system resolvents and response extraction [Q/H]** | Quantum linear-system constructions for energy-shifted Hamiltonians, selected Green-function matrix elements, and driven-response solution states. | Define the source and shifted operator, including positive spectral broadening. Include non-Hermitian treatment, conditioning, block normalization, solution norms, and overlap estimation. Narrower broadening improves nominal resolution but may increase conditioning and inverse-approximation cost. A normalized solution state alone does not supply an absolutely normalized Green function. [HHL solution-state framework](https://arxiv.org/abs/0811.3171), [QSVT inverse/pseudoinverse primitives](https://arxiv.org/abs/1806.01838). |
+<details markdown="1">
+<summary><strong>Tier III: Scalable Coherent Algorithms Oriented Toward Fault Tolerance</strong></summary>
 
-## R. Construction-Dependent Research Directions
+This tier identifies implementations whose precision or evolution demands typically exceed noisy circuit budgets. Logical qubits and error correction enable reliable depth, but they leave algorithmic assumptions, data access, and readout costs intact. Large ancilla registers are method dependent; some algorithms trade width for longer execution.
 
-R applies to a missing problem-specific mapping, access construction, recovery procedure, or resource analysis. Specified Additive Schwarz, linear Itô, oscillator–qubit, and numerical-homogenization constructions are assessed in their applicable rows above. 
+| Category | Label | Techniques and targets | Conditions for useful scaling |
+| --- | :---: | --- | --- |
+| **A. Spectral estimation and state preparation** | Q | Precision QPE, iterative spectral estimation, polynomial filtering, and adiabatic preparation. | Count state overlap, spectral gaps, controlled evolution, and target energy precision. Difficult ground-state preparation may dominate all subsequent calculations. |
+| **B. Hamiltonian simulation, including sparse operators** | Q | Sparse-Hamiltonian quantum-walk or block-encoding constructions; qubitization, QSP, LCU, interaction-picture methods, and suitable high-order product formulas for electronic, spin, bosonic, Dirac, or Schrödinger models. | Resources follow the access model, operator normalization, row sparsity where applicable, simulation time, precision, and encoding. Sparse-Hamiltonian evolution implements a propagator rather than directly solving a stationary linear system. Product formulas also have small demonstrations in I. [Qubitization](https://quantum-journal.org/papers/q-2019-07-12-163/), [QSVT primitives](https://arxiv.org/abs/1806.01838), [first-quantized chemistry](https://www.nature.com/articles/s41534-019-0199-y). |
+| **C. Sparse quantum linear systems and differential equations** | Q | Sparse-access HHL and subsequent QLSAs; sparse block encodings with QSVT inverse or pseudoinverse filters; Taylor or spectral LDE embeddings; time-dependent Dyson constructions. | Specify coherent nonzero-location and matrix-entry queries or another explicit block encoding. Include row/column sparsity, encoding normalization, condition number, source preparation, precision, stability, forcing, and solution recovery. Non-Hermitian systems require an appropriate construction; singular systems require specified pseudoinverse and support treatment. The usual output is a normalized solution state or selected functionals. [HHL](https://arxiv.org/abs/0811.3171), [QSVT](https://arxiv.org/abs/1806.01838), [Berry–Childs–Ostrander–Wang LDE algorithm](https://arxiv.org/abs/1701.03684). |
+| **D. Nonunitary linear dynamics** | Q/A | LCHS, circuit-based Schrödingerisation, specified oscillator–qubit implementations, and engineered Lindbladian ODE embeddings. | Efficient generator access, suitable stability assumptions, auxiliary construction, truncation, and recovery probability are central. Sparse generators still require their access costs to be included. Native auxiliary oscillators require compatible controls and non-Gaussian resources where specified. [LCHS](https://link.springer.com/article/10.1007/s00220-025-05509-w), [ODEs via Lindbladians](https://link.aps.org/doi/10.1103/cvl9-97qg), [oscillator–qubit construction, P26](https://arxiv.org/abs/2605.10708v3). |
+| **E. Preconditioned sparse FEM and structured PDEs** | Q | Block-encoded sparse discretizations with BPX or other explicitly constructed quantum preconditioners; the specified two-level Additive Schwarz finite-element construction. | Preconditioning must improve the full encoded solve, including construction, normalization, source transformation, application cost, and observable recovery. A preconditioner or its inverse need not preserve the original matrix sparsity. Classical V-cycles or BiCGSTAB require separate quantum constructions. [Quantum FEM](https://arxiv.org/abs/2403.19512), [Additive Schwarz construction, P26](https://arxiv.org/abs/2605.26090). |
+| **F. Coherent expectation estimation** | Q | QAE and quantum Monte Carlo integration around reversible model and payoff circuits. | Quantum sampling advantages require efficient state preparation and sufficiently accurate coherent amplification. Complete output fields may remove the intended benefit. [Quantum Monte Carlo acceleration](https://arxiv.org/abs/1504.06987). |
+| **G. Thermal and Gibbs algorithms** | Q/H/A | Imaginary-time polynomial filters, purified Gibbs preparation, quantum Metropolis, and detailed-balanced dissipative Gibbs samplers with explicit implementations. | Temperature, mixing time, overlap, filter success probability, and energy resolution may dominate. Efficient simulation of a thermalizing generator alone supplies no general rapid-mixing guarantee. Native thermalization belongs to A only when the implemented dynamics and target ensemble are specified. [Quantum Metropolis](https://arxiv.org/abs/0911.3635), [detailed-balanced Gibbs construction](https://arxiv.org/abs/2311.09207). |
+| **H. General open-system simulation** | Q | Accurate Lindblad evolution using channel, dilation, LCU, block-encoding, or trajectory constructions; explicit environment simulation for memory effects; specified linear Itô dilation and second-moment constructions. | Retain the access model and operator normalization in complexity statements. Class-specific additive jump-operator query bounds are separate from full gate cost. Sparse Liouvillian representation does not itself provide physical stationary-state preparation. [Trajectory-based algorithms](https://quantum-journal.org/papers/q-2026-04-13-2063/), [linear Itô construction, P26](https://arxiv.org/abs/2601.05928v4). |
+| **I. Many-body scattering and field theory** | Q | Prepared incoming states, interacting evolution, channel amplitudes, gauge-constrained models, and multiparticle production. | Include state preparation, finite volume, field truncation, continuum accuracy, and final-state measurements. Smaller analog or qudit gauge experiments belong to I. |
+| **J. Long-time and high-precision response** | Q/H | Spectral functions, finite temperature Kubo response, and OTOCs using appropriate thermal states and operator orderings. | Spectral resolution, correlator amplitude, observation time, and measurement protocol set requirements. QPE is optional for suitable time-domain approaches. Resolvent-based response additionally requires the checks in III.M. |
+| **K. Encoded classical mechanics and waves** | Q | Coupled harmonic oscillators and compatible wave-equation mappings to Hamiltonian evolution. | Advantage concerns specified outputs with efficient initial-state and coefficient access. General nonlinear mechanics or arbitrary field readout needs separate analysis. [Harmonic oscillator algorithm](https://arxiv.org/abs/2303.13012). |
+| **L. Block-encoded quantum Krylov and sparse-operator eigensolvers** | Q/H | Quantum Krylov-state construction, block-encoded quantum Lanczos, and specified filtered subspace methods for accessible sparse operators. | Include initial-state overlap, operator normalization, spectral gaps, Krylov dimension, subspace conditioning, measurement cost, and any classical projected diagonalization. Input sparsity does not imply sparse eigenvectors or sparse projected matrices. An eigenproblem differs from a driven linear-system solve. [Quantum Lanczos](https://quantum-journal.org/papers/q-2023-05-23-1018/), [measurement-efficient Krylov analysis](https://quantum-journal.org/papers/q-2024-08-13-1438/). |
+| **M. Sparse shifted-system resolvents and response extraction** | Q/H | Quantum linear-system constructions for energy-shifted Hamiltonians, selected Green-function matrix elements, and driven-response solution states. | Define the source and shifted operator, including positive spectral broadening. Include non-Hermitian treatment, conditioning, block normalization, solution norms, and overlap estimation. Narrower broadening improves nominal resolution but may increase conditioning and inverse-approximation cost. A normalized solution state alone does not supply an absolutely normalized Green function. [HHL solution-state framework](https://arxiv.org/abs/0811.3171), [QSVT inverse/pseudoinverse primitives](https://arxiv.org/abs/1806.01838). |
 
-| Category | Techniques or unresolved targets | Required construction and assessment |
-| --- | --- | --- |
-| **A. General nonlinear and adaptive field solvers [Q/H; R]** | General quantum AMR, hp-FEM, nonlinear multiphysics, and unrestricted Carleman, Koopman, or Liouville extensions. | Specify closure, truncation, refinement, boundary treatment, stability, coupling, coefficient access, and output recovery. |
-| **B. General fractional and phase-space solvers [Q/H; R]** | Nonlocal kernels, fractional operators, Wigner evolution, and target-specific stochastic extensions without a complete efficient encoding. | Nonlocality may produce dense matrices. Establish an efficient sparse, structured, low-rank, or other explicit access construction rather than assume sparsity. |
-| **C. Sparse Liouvillian stationary-state proposals [Q/H; R]** | Null-space searches or trace-constrained linear-system formulations for stationary density operators where the complete quantum preparation/recovery route remains unspecified. | Treat singularity and non-Hermiticity; establish uniqueness or specify the stationary sector. Include conditioning, Hermiticity, trace normalization, positivity, and usable physical-state recovery. A normalized vectorized density operator is distinct from a purification or a directly prepared mixed state. |
-| **D. Sparse access and quantum preconditioning interfaces [Q/H; R]** | Arbitrary CSR/CSC-to-oracle loading, proposed quantum use of classical preconditioners, or distributed sparse queries without an implemented access model. | Specify reversible index/value access, loading and coherent memory costs, block normalization, transformed sources, inverse/application costs, and communication overhead. |
-| **E. Broad electronic-structure and multiscale interfaces [H; R]** | Broad RT-TDDFT interfaces, general DFT subproblem proposals, unspecified domain decomposition, and nonlinear homogenization extensions. | Identify the QPU subproblem and its convergence, accuracy, measurement, and communication requirements. A classical DFT or sparse local solver alone remains C. |
-| **F. Full-field and distributed solution recovery [Q/H; R]** | Proposals requiring arbitrary full classical fields or coherent solver registers distributed across incompatible hardware modules without a complete protocol. | Include reconstruction, repeated source calls, coherent transfer or teleportation, code mapping, waiting errors, and matched classical outputs. Coherent storage and classical RAM have distinct roles. |
+</details>
 
-## Classical Comparisons and Support
+<details markdown="1">
+<summary><strong>Category R: Construction-Dependent Research Directions</strong></summary>
 
-| Family | Examples | Role in a quantum workflow |
-| --- | --- | --- |
-| **Quantum Monte Carlo executed classically [C]** | VMC, DMC, PIMC, PIGS, reptation, AFQMC, and stochastic series expansion. | Baseline calculations or sampling with QPU-derived trials. Sign, phase, and constraint approximations retain their method-specific scope. |
-| **Classical tensor networks [C]** | MPS, PEPS, TTN, DMRG, TEBD, TDVP, and thermal tensor methods. | Reference calculations, state preparation, compression, or classical subspace work. |
-| **Classical sparse linear-system solvers [C]** | Sparse LU; Cholesky for suitable positive-definite matrices; preconditioned CG for Hermitian positive-definite systems; GMRES and other appropriate nonsymmetric methods. | Full-vector baselines, classical preprocessing, coefficient solves, resolvents, and reduced-system components. Include factorization fill-in, preconditioner setup, memory, and repeated-source amortization. |
-| **Classical sparse eigensolvers [C]** | Lanczos, Arnoldi, shift-invert methods, and suitable iterative subspace solvers. | Spectral baselines and classical diagonalization within QSCI/SQD or measured quantum Krylov workflows. Classical diagonalization remains C even when a QPU selects the subspace. |
-| **Classical field and transport solvers [C]** | FEM, multigrid, Krylov methods, LBM, NEGF, TDDFT, particle-in-cell, and micromagnetic LLG. | Full classical field solutions, embedding environments, or multiscale coupling. Sparse quantum-physics models solved on GPUs remain within C. |
-| **Classical open-system solvers [C]** | Master-equation integration, sparse trace-constrained steady-state solves, MCWF trajectories, stochastic Schrödinger integration, and bath-memory methods. | Reference trajectories, stationary states, and reduced-state dynamics. GPU acceleration changes execution speed within the classical route. |
-| **Classical storage, compilation, and control [C]** | CSR/CSC matrices, meshes, sampled configurations, optimizers, decoders, circuit compilation, and measurement-record processing. | Supplies data and classical support. Coherent sparse-oracle access requires an additional implemented construction; ordinary classical RAM does not store amplitude-encoded quantum solution states. |
+R applies to a missing problem-specific mapping, access construction, recovery procedure, or resource analysis. Specified Additive Schwarz, linear Itô, oscillator–qubit, and numerical-homogenization constructions are assessed in their applicable rows above.
 
-## Sparse-Solver Readiness Checks
+| Category | Label | Techniques or unresolved targets | Required construction and assessment |
+| --- | :---: | --- | --- |
+| **A. General nonlinear and adaptive field solvers** | Q/H; R | General quantum AMR, hp-FEM, nonlinear multiphysics, and unrestricted Carleman, Koopman, or Liouville extensions. | Specify closure, truncation, refinement, boundary treatment, stability, coupling, coefficient access, and output recovery. |
+| **B. General fractional and phase-space solvers** | Q/H; R | Nonlocal kernels, fractional operators, Wigner evolution, and target-specific stochastic extensions without a complete efficient encoding. | Nonlocality may produce dense matrices. Establish an efficient sparse, structured, low-rank, or other explicit access construction rather than assume sparsity. |
+| **C. Sparse Liouvillian stationary-state proposals** | Q/H; R | Null-space searches or trace-constrained linear-system formulations for stationary density operators where the complete quantum preparation/recovery route remains unspecified. | Treat singularity and non-Hermiticity; establish uniqueness or specify the stationary sector. Include conditioning, Hermiticity, trace normalization, positivity, and usable physical-state recovery. A normalized vectorized density operator is distinct from a purification or a directly prepared mixed state. |
+| **D. Sparse access and quantum preconditioning interfaces** | Q/H; R | Arbitrary CSR/CSC-to-oracle loading, proposed quantum use of classical preconditioners, or distributed sparse queries without an implemented access model. | Specify reversible index/value access, loading and coherent memory costs, block normalization, transformed sources, inverse/application costs, and communication overhead. |
+| **E. Broad electronic-structure and multiscale interfaces** | H; R | Broad RT-TDDFT interfaces, general DFT subproblem proposals, unspecified domain decomposition, and nonlinear homogenization extensions. | Identify the QPU subproblem and its convergence, accuracy, measurement, and communication requirements. A classical DFT or sparse local solver alone remains C. |
+| **F. Full-field and distributed solution recovery** | Q/H; R | Proposals requiring arbitrary full classical fields or coherent solver registers distributed across incompatible hardware modules without a complete protocol. | Include reconstruction, repeated source calls, coherent transfer or teleportation, code mapping, waiting errors, and matched classical outputs. Coherent storage and classical RAM have distinct roles. |
+
+</details>
+
+<details markdown="1">
+<summary><strong>Category C: Classical Comparisons and Support</strong></summary>
+
+| Family | Label | Examples | Role in a quantum workflow |
+| --- | :---: | --- | --- |
+| **Quantum Monte Carlo executed classically** | C | VMC, DMC, PIMC, PIGS, reptation, AFQMC, and stochastic series expansion. | Baseline calculations or sampling with QPU-derived trials. Sign, phase, and constraint approximations retain their method-specific scope. |
+| **Classical tensor networks** | C | MPS, PEPS, TTN, DMRG, TEBD, TDVP, and thermal tensor methods. | Reference calculations, state preparation, compression, or classical subspace work. |
+| **Classical sparse linear-system solvers** | C | Sparse LU; Cholesky for suitable positive-definite matrices; preconditioned CG for Hermitian positive-definite systems; GMRES and other appropriate nonsymmetric methods. | Full-vector baselines, classical preprocessing, coefficient solves, resolvents, and reduced-system components. Include factorization fill-in, preconditioner setup, memory, and repeated-source amortization. |
+| **Classical sparse eigensolvers** | C | Lanczos, Arnoldi, shift-invert methods, and suitable iterative subspace solvers. | Spectral baselines and classical diagonalization within QSCI/SQD or measured quantum Krylov workflows. Classical diagonalization remains C even when a QPU selects the subspace. |
+| **Classical field and transport solvers** | C | FEM, multigrid, Krylov methods, LBM, NEGF, TDDFT, particle-in-cell, and micromagnetic LLG. | Full classical field solutions, embedding environments, or multiscale coupling. Sparse quantum-physics models solved on GPUs remain within C. |
+| **Classical open-system solvers** | C | Master-equation integration, sparse trace-constrained steady-state solves, MCWF trajectories, stochastic Schrödinger integration, and bath-memory methods. | Reference trajectories, stationary states, and reduced-state dynamics. GPU acceleration changes execution speed within the classical route. |
+| **Classical storage, compilation, and control** | C | CSR/CSC matrices, meshes, sampled configurations, optimizers, decoders, circuit compilation, and measurement-record processing. | Supplies data and classical support. Coherent sparse-oracle access requires an additional implemented construction; ordinary classical RAM does not store amplitude-encoded quantum solution states. |
+
+</details>
+
+<a id="sparse-solver-readiness-checks"></a>
+
+### Sparse-Solver Readiness Checks
 
 | Check | Quantity or construction to specify | Consequence for readiness |
 | --- | --- | --- |
@@ -450,11 +499,103 @@ R applies to a missing problem-specific mapping, access construction, recovery p
 | **Complete implementation** | Gates, depth, logical qubits, ancillas, correction cycles, repetitions, interfaces, and classical processing. | Determines whether the specified instance fits I, II, or III, or retains an unresolved R component. |
 | **Matched comparison** | Identical accuracy and output task, including classical setup and quantum loading. | Separates executable implementations from substantiated claims of quantum advantage. |
 
----  
+[Back to contents](#contents)
 
-## An Example Architecture of What a Fault-Tolerant Heterogenous/ Hybrid Quantum System Could Look Like - by Onri 
+---
 
-```
+<a id="resource-metrics"></a>
+
+## III. Resource Metrics and Qubit Scaling
+
+<a id="error-correction-footprint"></a>
+
+### Error Correction Footprint
+
+| Code distance $d$ | Physical data qubits | Syndrome-measurement qubits | Patch footprint per logical qubit | Leading approximation |
+| --- | ---: | ---: | ---: | ---: |
+| 7 | 49 | 48 | **97** | $2d^2=98$ |
+| 13 | 169 | 168 | **337** | $2d^2=338$ |
+
+<a id="estimated-qubit-requirements"></a>
+
+### Estimated Qubit Requirements
+
+<a id="physical-circuit-qubit-requirements"></a>
+
+#### A. Bounded Physical-Circuit and Analog Examples
+
+| Method | Register rule | Representative instance | Interpretation |
+| --- | --- | --- | --- |
+| **Coined quantum walk** | $\lceil\log_2N\rceil+\lceil\log_2c\rceil+a$, for $N$ position labels and $c$ coin states. | $N=1,024$, $c=2$, and one explicitly allocated work qubit gives $10+1+1=\mathbf{12}$. | The extra work qubit is an example choice. A continuous-time walk can omit the coin; gate implementation determines workspace. |
+| **D2Q5 binary occupancy representation** | $5M^2+a$ for an $M\times M$ lattice with five binary occupancy channels per site. | $M=8$ gives **320 data qubits**, plus work qubits. | Each channel has binary occupation. Representing a general numerical population requires a different encoding. Width alone establishes no near-term executability. |
+| **D2Q5 stored numerical populations** | $5M^2b+a$ for $b$ binary digits per population, with sign or format bits included in $b$. | $M=8$, $b=8$ gives **2,560 data qubits**, plus arithmetic workspace. | The chosen numerical representation and precision determine $b$; classical floating-point populations are separate from binary occupations. |
+| **D2Q5 amplitude encoding** | $\lceil\log_2(5M^2)\rceil+a$ for a packed index; separate position and velocity registers can introduce padding. | $M=8$: **9 data qubits**; $M=16$: **11**; $M=32$: **13**. | These examples assume a single normalized population vector. Preparation, collision, boundaries, normalization recovery, and measurements add costs. [QLBM formulation](https://arxiv.org/abs/2502.16568). |
+| **VQE, VQS, or QITE** | $n_{\mathrm{state}}+a$. Direct occupation encoding uses one qubit per active spin orbital before reductions. | Four active spin orbitals use **4 data qubits**; twelve active spin orbitals use **12**. | Active-space selection, frozen orbitals, and symmetry tapering change width. The algorithm name alone fixes neither the state width nor the ancillas. |
+| **Small HHL construction** | $n+r+1+a$, where $n=\lceil\log_2N\rceil$, $r$ is the chosen QPE-register width, and one qubit flags the inversion rotation. | $N=4$, $r=3$ gives **6 qubits plus further workspace**. | This is a selected register layout. Energy precision and controlled arithmetic must be adequate for the actual matrix and tolerance. |
+| **Iterative or likelihood-based QAE** | Width of the prepared state, objective encoding, and work registers. The number of additional QPE-register qubits can be zero. | An explicitly chosen 8-qubit input register plus one objective flag gives **9 qubits plus workspace**. | Omitting a QPE register leaves state-preparation and repeated amplification costs. The objective may instead occupy an existing register. [IQAE](https://arxiv.org/abs/1912.05559). |
+| **One-qubit amplitude-damping channel** | One system qubit plus one environmental qubit for its rank-2 dilation. | **2 qubits** for the elementary channel circuit. | Repeated steps can reuse a reset environment qubit if the physical model and hardware permit it. |
+| **General channel dilation** | $n_{\mathrm{sys}}+\lceil\log_2r_K\rceil+a$, for a channel with Kraus rank $r_K$ and a pure initial environment. | A one-qubit rank-4 channel uses **3 qubits before gate workspace**. | Kraus rank determines this minimal environment dimension. Retained memory may require additional environment registers. |
+| **Direct TFD purification** | $2n_{\mathrm{sys}}+a$. | A 6-qubit target system uses **12 purification qubits**, plus work registers. | The reference register carries the purification. Entanglement forging reconstructs selected quantities with different classical and measurement costs. [TFD preparation](https://arxiv.org/abs/1906.02699). |
+| **Native spin or qudit simulation** | Number of physical sites and internal levels used by the implemented model. | A 64-site array with one two-level spin per site uses **64 spin carriers**. | Native analog evolution has its own control and measurement budget; logarithmic amplitude encoding describes a different representation. |
+
+<a id="hybrid-qubit-requirements"></a>
+
+#### B. Structured Hybrid Workflows
+
+| Method and chosen instance | Algorithmic qubits | Patch-only physical qubits at $d=7$ | Patch-only physical qubits at $d=13$ | Unresolved resources |
+| --- | ---: | ---: | ---: | --- |
+| **Multiple-circuit D2Q5 amplitude encoding, $M=16$** | $11+a$ | $1,067+97a$ | $3,707+337a$ | Workspace, state reconstruction, repetitions, and concurrent circuit copies. Sequential kernels can reuse qubits. |
+| **VQLS/FEM with $N=1,024$ algebraic degrees of freedom** | $10+a$ | $970+97a$ | $3,370+337a$ | Cost-function circuits, operator access, state preparation, and conditioning. Node count and algebraic degrees of freedom can differ. |
+| **QSCI/SQD with 24 active spin orbitals** | $24+a$ | $2,328+97a$ | $8,088+337a$ | Ansatz workspace and classical subspace diagonalization. Classical subspace size is separate from qubit count. |
+| **Quantum Krylov or SKQD on 24 state qubits** | $24+a$ | $2,328+97a$ | $8,088+337a$ | Evolution depth, overlap estimation or configuration sampling, and classical conditioning. |
+| **Direct TFD pipeline for a 12-qubit system** | $24+a$ | $2,328+97a$ | $8,088+337a$ | Preparation, entropy evaluation where used, temperature-dependent difficulty, and correlator circuits. |
+| **QMETTS on a 12-qubit system** | $12+a$ | $1,164+97a$ | $4,044+337a$ | Imaginary-time construction and ensemble sampling; a second full purification register is absent in this chosen route. |
+| **Impurity solver with 4 impurity and 8 bath spin orbitals** | $12+a$ | $1,164+97a$ | $4,044+337a$ | Bath fitting, observable measurement, and repeated self-consistency. |
+| **QCPMD with 12 active electronic spin orbitals** | $12+a$ | $1,164+97a$ | $4,044+337a$ | Electronic ansatz and force estimation; the nuclear coordinates are classical in this workflow. |
+| **Quantum-generated AFQMC trial with 24 active spin orbitals** | $24+a$ | $2,328+97a$ | $8,088+337a$ | Trial-generation procedure and classical AFQMC cost; direct overlap-based variants can require different circuits. |
+
+<a id="scalable-qubit-requirements"></a>
+
+#### C. Scalable Coherent Algorithms and Fault-Tolerant Resource Models
+
+| Method and representative encoding | Algorithmic logical width | Patch-only physical qubits at $d=7$ | Patch-only physical qubits at $d=13$ | Additional resource drivers |
+| --- | ---: | ---: | ---: | --- |
+| **QLSA for $N=2^{20}$ unknowns** | $20+a$ | $1,940+97a$ | $6,740+337a$ | State preparation, block encoding, inversion/filter precision, conditioning, and reversible arithmetic. |
+| **LDE solution with $N=2^{20}$ components** | $20+a$ | $1,940+97a$ | $6,740+337a$ | A history-based construction may add a time register, polynomial-order registers, forcing, and solver workspace within $a$. |
+| **Spinless one-particle Schrödinger state on $256^3$ grid points** | $24+a$ | $2,328+97a$ | $8,088+337a$ | Kinetic and potential access, simulation primitives, and boundary operations. |
+| **Four-component one-particle Dirac spinor on $256^3$ grid points** | $26+a$ | $2,522+97a$ | $8,762+337a$ | Two spinor-component qubits supplement the 24 position qubits; spectral-sector and discretization controls are required. |
+| **Occupation encoding of 64 active spin orbitals** | $64+a$ | $6,208+97a$ | $21,568+337a$ | Hamiltonian factorization, selection registers, arithmetic, and state preparation. Symmetry reductions change the data count. |
+| **Conventional QPE on an $n$-qubit state using an $r$-qubit phase register** | $n+r+a$ | $97(n+r+a)$ | $337(n+r+a)$ | Controlled evolution and phase precision. Iterative versions can reuse a smaller phase register with different scheduling. |
+| **Direct purified Gibbs state for 32 system qubits** | $64+a$ | $6,208+97a$ | $21,568+337a$ | Imaginary-time filters, success probability, temperature, and preparation circuitry. |
+| **Schrödingerisation with 20 state qubits and a chosen 8-qubit auxiliary-coordinate register** | $28+a$ | $2,716+97a$ | $9,436+337a$ | Eight auxiliary qubits are an illustrative truncation choice; physical extent and resolution must satisfy the target error. |
+| **LCHS with 20 state qubits and a chosen 6-qubit quadrature-selection register** | $26+a$ | $2,522+97a$ | $8,762+337a$ | The 64-term index capacity is illustrative. Kernel, quadrature accuracy, preparation, selection, and recovery determine the actual count. |
+| **Quantum Metropolis on $n$ state qubits** | $n+a$ | $97(n+a)$ | $337(n+a)$ | Energy registers, stored outcomes, rejection handling, precision, and coherent workspace are construction dependent. |
+| **General Lindblad or retained-bath simulation on $n$ system qubits** | $n+a$ | $97(n+a)$ | $337(n+a)$ | Ancilla reuse, dilation, trajectory method, memory length, and accuracy determine $a$. |
+| **Sequential MPS preparation/sampling with bond dimension $\chi=64$ and local dimension 2** | $6+1+a=7+a$ | $679+97a$ | $2,359+337a$ | Six bond qubits and one recycled site qubit describe this restricted streaming task. Retaining an entire L-site quantum output requires additional site registers. |
+
+<a id="d2q5-encoding-comparison"></a>
+
+### D2Q5 Encoding Comparison
+
+| Lattice | Binary occupancy channels | Stored populations with $b=8$ | Amplitude-encoded data qubits |
+| --- | ---: | ---: | ---: |
+| $8\times8$ | 320 | 2,560 | 9 |
+| $16\times16$ | 1,280 | 10,240 | 11 |
+| $32\times32$ | 5,120 | 40,960 | 13 |
+
+[Back to contents](#contents)
+
+---
+
+<a id="system-integration"></a>
+
+## IV. System Integration and Routing
+
+<a id="proposed-heterogeneous-architecture"></a>
+
+### Proposed Heterogeneous Architecture
+
+```text
 Heterogeneous Quantum Computer (Architected for Fault-Tolerant Compatibility)
 ├─ Main QPU: Neutral-Atom (Rydberg/ tweezer)
 │   ├─ Fast parallel CZ gates (~99.5%); long coherence (≈12.6 sec, hyperfine)
@@ -490,18 +631,9 @@ Heterogeneous Quantum Computer (Architected for Fault-Tolerant Compatibility)
     └─ Compiler for biased/ erasure noise and transduction-aware routing
 ```
 
----
+<a id="logic-routing-decision-tree"></a>
 
-## Decision Tree to Determine Which Quantum-Native Solver/ Simulation Techniques Could Run on an Proposed Fault-Tolerant Heterogenous Quantum Computer 
-
-| Label | Execution |
-| --- | --- |
-| Q | Quantum circuits perform the central computation. |
-| H | Quantum and classical computations form an essential hybrid workflow. |
-| A | Native interactions in a programmable physical simulator implement the model. |
-| C | Classical computation, potentially accelerated by GPUs. |
-| R | A problem-specific research direction requiring an explicit construction and resource analysis. |
-| P26 | A cited preprint. |
+### Logic Routing and Decision Tree
 
 ```text
 Proposed heterogeneous quantum computing system
@@ -720,84 +852,26 @@ Proposed heterogeneous quantum computing system
       └─ P26 remains citation provenance; it does not automatically assign R
 ```
 
-## Sparse-solver routing guide
+<a id="sparse-solver-routing-guide"></a>
 
-| Mathematical task | Taxonomy branch | Execution route | Required checks |
-| --- | --- | --- | --- |
-| Sparse linear-system solution | II.A | Q, or H for a specified essential quantum–classical workflow | Coherent operator access, source preparation, conditioning, inverse approximation, and output recovery. |
-| Variational sparse-system solution | III.C | H | Operator decomposition or query construction, residual estimation, ansatz expressivity, classical optimization, and measurement cost. |
-| Sparse-Hamiltonian evolution | IV.C | Q | Coherent sparse access or another explicit block encoding, normalization, evolution time, and precision. |
-| Sparse resolvent or Green-function evaluation | IV.E and IX.F | Q/H | Shifted operator access, broadening, conditioning, solution norms, and matrix-element estimation. |
-| Quantum Krylov/Lanczos eigenvalue estimation | X.D | Q/H | Operator access, initial overlap, subspace preparation, spectral gaps, projected-matrix conditioning, and sampling. |
-| QPU-selected configuration diagonalization | X.E | H overall; C for diagonalization | Quantum configuration generation, selected-space accuracy, classical sparse-matrix construction, and classical eigenproblem cost. |
-| Sparse Liouvillian stationary-state proposal | VI.D | Q/H; R for an unresolved construction | Singular/non-Hermitian treatment, trace constraint, uniqueness, conditioning, positivity, and usable physical-state recovery. |
-| Classical sparse simulation | XIX.C–D | C | Appropriate solver, preconditioning, discretization error, memory, and matched output accuracy. |
+### Sparse-Solver Routing Guide
 
----
+| Mathematical task | Label | Taxonomy branch | Execution route | Required checks |
+| --- | :---: | --- | --- | --- |
+| Sparse linear-system solution | Q/H | II.A | Q, or H for a specified essential quantum–classical workflow | Coherent operator access, source preparation, conditioning, inverse approximation, and output recovery. |
+| Variational sparse-system solution | H | III.C | H | Operator decomposition or query construction, residual estimation, ansatz expressivity, classical optimization, and measurement cost. |
+| Sparse-Hamiltonian evolution | Q | IV.C | Q | Coherent sparse access or another explicit block encoding, normalization, evolution time, and precision. |
+| Sparse resolvent or Green-function evaluation | Q/H | IV.E and IX.F | Q/H | Shifted operator access, broadening, conditioning, solution norms, and matrix-element estimation. |
+| Quantum Krylov/Lanczos eigenvalue estimation | Q/H | X.D | Q/H | Operator access, initial overlap, subspace preparation, spectral gaps, projected-matrix conditioning, and sampling. |
+| QPU-selected configuration diagonalization | H/C | X.E | H overall; C for diagonalization | Quantum configuration generation, selected-space accuracy, classical sparse-matrix construction, and classical eigenproblem cost. |
+| Sparse Liouvillian stationary-state proposal | Q/H; R | VI.D | Q/H; R for an unresolved construction | Singular/non-Hermitian treatment, trace constraint, uniqueness, conditioning, positivity, and usable physical-state recovery. |
+| Classical sparse simulation | C | XIX.C–D | C | Appropriate solver, preconditioning, discretization error, memory, and matched output accuracy. |
 
-## Estimated Metrics for Qubit Count Per Example Technique 
-
-| Code distance $d$ | Physical data qubits | Syndrome-measurement qubits | Patch footprint per logical qubit | Leading approximation |
-| --- | ---: | ---: | ---: | ---: |
-| 7 | 49 | 48 | **97** | $2d^2=98$ |
-| 13 | 169 | 168 | **337** | $2d^2=338$ |
-
-## A. Bounded Physical-Circuit and Analog Examples
-
-| Method | Register rule | Representative instance | Interpretation |
-| --- | --- | --- | --- |
-| **Coined quantum walk** | $\lceil\log_2N\rceil+\lceil\log_2c\rceil+a$, for $N$ position labels and $c$ coin states. | $N=1,024$, $c=2$, and one explicitly allocated work qubit gives $10+1+1=\mathbf{12}$. | The extra work qubit is an example choice. A continuous-time walk can omit the coin; gate implementation determines workspace. |
-| **D2Q5 binary occupancy representation** | $5M^2+a$ for an $M\times M$ lattice with five binary occupancy channels per site. | $M=8$ gives **320 data qubits**, plus work qubits. | Each channel has binary occupation. Representing a general numerical population requires a different encoding. Width alone establishes no near-term executability. |
-| **D2Q5 stored numerical populations** | $5M^2b+a$ for $b$ binary digits per population, with sign or format bits included in $b$. | $M=8$, $b=8$ gives **2,560 data qubits**, plus arithmetic workspace. | The chosen numerical representation and precision determine $b$; classical floating-point populations are separate from binary occupations. |
-| **D2Q5 amplitude encoding** | $\lceil\log_2(5M^2)\rceil+a$ for a packed index; separate position and velocity registers can introduce padding. | $M=8$: **9 data qubits**; $M=16$: **11**; $M=32$: **13**. | These examples assume a single normalized population vector. Preparation, collision, boundaries, normalization recovery, and measurements add costs. [QLBM formulation](https://arxiv.org/abs/2502.16568). |
-| **VQE, VQS, or QITE** | $n_{\mathrm{state}}+a$. Direct occupation encoding uses one qubit per active spin orbital before reductions. | Four active spin orbitals use **4 data qubits**; twelve active spin orbitals use **12**. | Active-space selection, frozen orbitals, and symmetry tapering change width. The algorithm name alone fixes neither the state width nor the ancillas. |
-| **Small HHL construction** | $n+r+1+a$, where $n=\lceil\log_2N\rceil$, $r$ is the chosen QPE-register width, and one qubit flags the inversion rotation. | $N=4$, $r=3$ gives **6 qubits plus further workspace**. | This is a selected register layout. Energy precision and controlled arithmetic must be adequate for the actual matrix and tolerance. |
-| **Iterative or likelihood-based QAE** | Width of the prepared state, objective encoding, and work registers. The number of additional QPE-register qubits can be zero. | An explicitly chosen 8-qubit input register plus one objective flag gives **9 qubits plus workspace**. | Omitting a QPE register leaves state-preparation and repeated amplification costs. The objective may instead occupy an existing register. [IQAE](https://arxiv.org/abs/1912.05559). |
-| **One-qubit amplitude-damping channel** | One system qubit plus one environmental qubit for its rank-2 dilation. | **2 qubits** for the elementary channel circuit. | Repeated steps can reuse a reset environment qubit if the physical model and hardware permit it. |
-| **General channel dilation** | $n_{\mathrm{sys}}+\lceil\log_2r_K\rceil+a$, for a channel with Kraus rank $r_K$ and a pure initial environment. | A one-qubit rank-4 channel uses **3 qubits before gate workspace**. | Kraus rank determines this minimal environment dimension. Retained memory may require additional environment registers. |
-| **Direct TFD purification** | $2n_{\mathrm{sys}}+a$. | A 6-qubit target system uses **12 purification qubits**, plus work registers. | The reference register carries the purification. Entanglement forging reconstructs selected quantities with different classical and measurement costs. [TFD preparation](https://arxiv.org/abs/1906.02699). |
-| **Native spin or qudit simulation** | Number of physical sites and internal levels used by the implemented model. | A 64-site array with one two-level spin per site uses **64 spin carriers**. | Native analog evolution has its own control and measurement budget; logarithmic amplitude encoding describes a different representation. |
-
-### D2Q5 Encoding Comparison
-
-| Lattice | Binary occupancy channels | Stored populations with $b=8$ | Amplitude-encoded data qubits |
-| --- | ---: | ---: | ---: |
-| $8\times8$ | 320 | 2,560 | 9 |
-| $16\times16$ | 1,280 | 10,240 | 11 |
-| $32\times32$ | 5,120 | 40,960 | 13 |
-
-## B. Structured Hybrid Workflows
-
-| Method and chosen instance | Algorithmic qubits | Patch-only physical qubits at $d=7$ | Patch-only physical qubits at $d=13$ | Unresolved resources |
-| --- | ---: | ---: | ---: | --- |
-| **Multiple-circuit D2Q5 amplitude encoding, $M=16$** | $11+a$ | $1,067+97a$ | $3,707+337a$ | Workspace, state reconstruction, repetitions, and concurrent circuit copies. Sequential kernels can reuse qubits. |
-| **VQLS/FEM with $N=1,024$ algebraic degrees of freedom** | $10+a$ | $970+97a$ | $3,370+337a$ | Cost-function circuits, operator access, state preparation, and conditioning. Node count and algebraic degrees of freedom can differ. |
-| **QSCI/SQD with 24 active spin orbitals** | $24+a$ | $2,328+97a$ | $8,088+337a$ | Ansatz workspace and classical subspace diagonalization. Classical subspace size is separate from qubit count. |
-| **Quantum Krylov or SKQD on 24 state qubits** | $24+a$ | $2,328+97a$ | $8,088+337a$ | Evolution depth, overlap estimation or configuration sampling, and classical conditioning. |
-| **Direct TFD pipeline for a 12-qubit system** | $24+a$ | $2,328+97a$ | $8,088+337a$ | Preparation, entropy evaluation where used, temperature-dependent difficulty, and correlator circuits. |
-| **QMETTS on a 12-qubit system** | $12+a$ | $1,164+97a$ | $4,044+337a$ | Imaginary-time construction and ensemble sampling; a second full purification register is absent in this chosen route. |
-| **Impurity solver with 4 impurity and 8 bath spin orbitals** | $12+a$ | $1,164+97a$ | $4,044+337a$ | Bath fitting, observable measurement, and repeated self-consistency. |
-| **QCPMD with 12 active electronic spin orbitals** | $12+a$ | $1,164+97a$ | $4,044+337a$ | Electronic ansatz and force estimation; the nuclear coordinates are classical in this workflow. |
-| **Quantum-generated AFQMC trial with 24 active spin orbitals** | $24+a$ | $2,328+97a$ | $8,088+337a$ | Trial-generation procedure and classical AFQMC cost; direct overlap-based variants can require different circuits. |
-
-## C. Scalable Coherent Algorithms and Fault-Tolerant Resource Models
-
-| Method and representative encoding | Algorithmic logical width | Patch-only physical qubits at $d=7$ | Patch-only physical qubits at $d=13$ | Additional resource drivers |
-| --- | ---: | ---: | ---: | --- |
-| **QLSA for $N=2^{20}$ unknowns** | $20+a$ | $1,940+97a$ | $6,740+337a$ | State preparation, block encoding, inversion/filter precision, conditioning, and reversible arithmetic. |
-| **LDE solution with $N=2^{20}$ components** | $20+a$ | $1,940+97a$ | $6,740+337a$ | A history-based construction may add a time register, polynomial-order registers, forcing, and solver workspace within $a$. |
-| **Spinless one-particle Schrödinger state on $256^3$ grid points** | $24+a$ | $2,328+97a$ | $8,088+337a$ | Kinetic and potential access, simulation primitives, and boundary operations. |
-| **Four-component one-particle Dirac spinor on $256^3$ grid points** | $26+a$ | $2,522+97a$ | $8,762+337a$ | Two spinor-component qubits supplement the 24 position qubits; spectral-sector and discretization controls are required. |
-| **Occupation encoding of 64 active spin orbitals** | $64+a$ | $6,208+97a$ | $21,568+337a$ | Hamiltonian factorization, selection registers, arithmetic, and state preparation. Symmetry reductions change the data count. |
-| **Conventional QPE on an $n$-qubit state using an $r$-qubit phase register** | $n+r+a$ | $97(n+r+a)$ | $337(n+r+a)$ | Controlled evolution and phase precision. Iterative versions can reuse a smaller phase register with different scheduling. |
-| **Direct purified Gibbs state for 32 system qubits** | $64+a$ | $6,208+97a$ | $21,568+337a$ | Imaginary-time filters, success probability, temperature, and preparation circuitry. |
-| **Schrödingerisation with 20 state qubits and a chosen 8-qubit auxiliary-coordinate register** | $28+a$ | $2,716+97a$ | $9,436+337a$ | Eight auxiliary qubits are an illustrative truncation choice; physical extent and resolution must satisfy the target error. |
-| **LCHS with 20 state qubits and a chosen 6-qubit quadrature-selection register** | $26+a$ | $2,522+97a$ | $8,762+337a$ | The 64-term index capacity is illustrative. Kernel, quadrature accuracy, preparation, selection, and recovery determine the actual count. |
-| **Quantum Metropolis on $n$ state qubits** | $n+a$ | $97(n+a)$ | $337(n+a)$ | Energy registers, stored outcomes, rejection handling, precision, and coherent workspace are construction dependent. |
-| **General Lindblad or retained-bath simulation on $n$ system qubits** | $n+a$ | $97(n+a)$ | $337(n+a)$ | Ancilla reuse, dilation, trajectory method, memory length, and accuracy determine $a$. |
-| **Sequential MPS preparation/sampling with bond dimension $\chi=64$ and local dimension 2** | $6+1+a=7+a$ | $679+97a$ | $2,359+337a$ | Six bond qubits and one recycled site qubit describe this restricted streaming task. Retaining an entire L-site quantum output requires additional site registers. |
+[Back to contents](#contents)
 
 ---
+
+<a id="references"></a>
 
 ## References
 
@@ -918,3 +992,5 @@ Proposed heterogeneous quantum computing system
 115. Fressart, Nowak, and Spillane, *Quantum Domain Decomposition for Preconditioning the Finite Element Method*: [arXiv:2605.26090](https://arxiv.org/abs/2605.26090). P26 reference for the specified Additive Schwarz construction in branch 1.C.
 116. Wu and Li, *Universal Dilation of Linear Itô SDEs: Quantum Trajectories and Lindblad Simulation of Second Moments*: [arXiv:2601.05928v4](https://arxiv.org/abs/2601.05928v4); also [Quantum 10, 2223](https://quantum-journal.org/papers/q-2026-10-01-2223/). P26 identifies the cited arXiv manuscript, which also has a journal publication dated 1 October 2026.
 117. Balazi, Deiml, and Peterseim, *Quantum Enhanced Numerical Homogenization*: [arXiv:2603.28521v2](https://arxiv.org/abs/2603.28521v2). P26 reference for the specified essential quantum–classical workflow in branch 6.D.
+
+[Back to contents](#contents)
