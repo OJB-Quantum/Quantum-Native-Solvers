@@ -656,12 +656,7 @@ $$
 The parameter vector $\boldsymbol{\theta}$ might describe atomic coordinates, electrostatic potentials, a spin Hamiltonian, optical constants, or a lithographic mask. The forward map $\mathcal{F}$ includes the sample–probe interaction and instrument response. A general regularized inverse formulation is
 
 $$
-\widehat{\boldsymbol{\theta}}
-=\underset{\boldsymbol{\theta}\in\mathcal{C}}{\operatorname{argmin}}
-\left
-[D\!\left(\mathcal{F}(\boldsymbol{\theta}),\boldsymbol{y}_{\mathrm{meas}}\right)
-+\lambda R(\boldsymbol{\theta})
-\right].
+\widehat{\boldsymbol{\theta}} =\underset{\boldsymbol{\theta}\in\mathcal{C}}{\operatorname{argmin}} \left[D\!\left(\mathcal{F}(\boldsymbol{\theta}),\boldsymbol{y}_{\mathrm{meas}}\right) + \lambda R(\boldsymbol{\theta}) \right].
 $$
 
 Here, $D$ is a discrepancy appropriate to the measurement-noise model, $R$ represents prior information, $\lambda$ controls regularization, and $\mathcal{C}$ specifies physical constraints. Weighted least squares is appropriate for a justified Gaussian approximation, whereas low-count measurements often require a Poisson likelihood. A linear quantum solver addresses a compatible linear problem or linearized update [6–8]. For a least-squares normal-equation construction, $A^\dagger A$ squares the spectral condition number when $A$ has full column rank; alternative formulations and preconditioning therefore belong in the resource assessment.
