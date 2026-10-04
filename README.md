@@ -45,6 +45,165 @@ Interestingly, some models such as the [Landau-Lifshitz-Gilbert (LLG) equation](
 > **quantum**: “Borrowed from Latin *quantum*,” historically ‘how much; as much as’ (neuter of *quantus*), later specialized to a discrete physical amount. - *Oxford English Dictionary*; see also Oxford’s gloss tying *quantum* to *quantus*.
 > **native**: “From Latin *nativus* (‘inborn; produced by birth’), via Middle English/French,” yielding senses such as ‘innate, natural; belonging by birth.’ - *Oxford English Dictionary*.
 
+---
+
+## Towards Deployment of Industry and Academic Quantum Processors
+
+| Label | Meaning | Interpretation |
+| --- | --- | --- |
+| C | Customer-accessible system or offering | Cloud access, procurement, or partner agreements may be required. |
+| R | Research demonstration or testbed | Applies to the demonstrated implementation or protocol, rather than unrestricted access to every reported capability. |
+| T | Announced target | An announced date does not establish completed deployment or demonstrated performance. |
+| CLOUD | Remote execution | Hardware is hosted by the provider. |
+| SITE | Customer or institutional installation | An offering does not establish that every proposed installation is operating. |
+| LAB | Research apparatus | Register size and physical infrastructure are separate quantities. |
+| FACILITY | Facility-oriented deployment | Does not itself establish fault-tolerant computation. |
+
+```text
+Qubit Architectures × Computational Readiness × Deployment
+│
+├─ I. Industry-Developed Machines and Offerings
+│  │  (Commercial cloud, customer sites, and corporate research laboratories)
+│  │
+│  ├─ Superconducting Processors
+│  │  ├─ IBM Heron [C; CLOUD/ FACILITY] 
+│  │  │  ├─ r1: 133 programmable qubits
+│  │  │  ├─ r2/ r3: 156 programmable qubits; heavy-hex connectivity
+│  │  │  └─ Fixed-frequency qubits with tunable couplers
+│  │  ├─ IBM Nighthawk [C; CLOUD/ FACILITY] 
+│  │  │  ├─ r1/ r2: 120 programmable qubits; square-lattice connectivity
+│  │  │  ├─ r2: cloud availability from September 2026; independent fast reset
+│  │  │  └─ r2: 458 quantum elements = 120 qubits + 218 couplers + 120 reset elements
+│  │  ├─ Rigetti Cepheus-1-108Q [C; CLOUD] 
+│  │  │  ├─ Nominal 108-qubit system built from twelve 9-qubit chiplets
+│  │  │  └─ General availability announced April 2026; usable count is backend-specific
+│  │  ├─ IQM Garnet/ Emerald [C; CLOUD] 
+│  │  │  └─ 20/ 54 qubits; Emerald uses square-lattice connectivity
+│  │  ├─ Google Willow [R; LAB/ FACILITY] 
+│  │  │  ├─ 105-qubit processor supports a distance-7 surface-code memory
+│  │  │  ├─ Below-threshold scaling and beyond-breakeven memory demonstrated
+│  │  │  └─ Real-time distance-5 decoding demonstrated on a 72-qubit processor
+│  │  ├─ AWS Ocelot [R; LAB] 
+│  │  │  ├─ Five cat data qubits + four transmon syndrome ancillas
+│  │  │  ├─ Stabilization buffers are additional circuit resources
+│  │  │  └─ Concatenated bosonic/ repetition-code logical-memory prototype
+│  │  └─ IBM Loon [R; architecture prototype] 
+│  │     └─ Long-range on-chip c-couplers and connectivity for qLDPC-code research
+│  │
+│  ├─ Trapped-Ion Processors
+│  │  ├─ Quantinuum H2/ Helios [C; CLOUD; Helios also SITE offering] 
+│  │  │  ├─ H2: 56 physical qubits
+│  │  │  ├─ Helios: 98 physical qubits; QCCD transport and all-to-all connectivity
+│  │  │  └─ Helios logical demonstrations [R capability] 
+│  │  │     ├─ 94 error-detected logical qubits: global-entanglement experiment
+│  │  │     ├─ 50 error-detected logical qubits: magnetism-simulation experiment
+│  │  │     └─ 48 error-corrected logical qubits: state-preparation/ measurement result
+│  │  ├─ IonQ Forte/ Forte Enterprise [C; CLOUD/ SITE] 
+│  │  │  ├─ 36 physical qubits; all-to-all connectivity
+│  │  │  └─ Algorithmic qubits (#AQ) identify a benchmark, not a logical-qubit count
+│  │  └─ IonQ Tempo development system [R; development benchmark] 
+│  │     └─ #AQ 64 reported in 2025; customer deployment is a separate status
+│  │
+│  ├─ Neutral-Atom Processors
+│  │  ├─ QuEra Aquila [C; CLOUD] 
+│  │  │  └─ Up to 256 atoms; programmable analog Rydberg simulation
+│  │  ├─ QuEra Gemini [C; SITE/ partner access] 
+│  │  │  └─ 260 physical qubits; gate-model processor and QEC testbed
+│  │  ├─ Atom Computing AC1000 [C; SITE offering] 
+│  │  │  └─ >1,200 ytterbium-171 nuclear-spin qubits; mid-circuit control
+│  │  └─ Pasqal Orion-class systems [C; institutional/ partner use] 
+│  │     └─ Analog Rydberg simulation; experiments reported with up to 256 atoms
+│  │
+│  ├─ Industry Research Collaborations
+│  │  └─ Microsoft–Atom Computing [R; industry research] 
+│  │     ├─ 24 entangled logical qubits
+│  │     └─ 28 logical qubits in an error-managed algorithm demonstration
+│  │
+│  ├─ Specialized and Other Architectures
+│  │  ├─ Alice & Bob Boson 4 [C; CLOUD] 
+│  │  │  └─ One exposed cat qubit; restricted experimental instruction set
+│  │  ├─ D-Wave Advantage2 [C; CLOUD/ FACILITY] 
+│  │  │  └─ 4,400+ flux qubits; quantum annealing
+│  │  ├─ Xanadu Aurora [R; modular racks] 
+│  │  │  └─ Photonic prototype; cluster-state processing and modular integration
+│  │  └─ PsiQuantum Omega [R; foundry-manufactured chipset] 
+│  │     └─ Photonic components and interconnections; chipset rather than a qubit register
+│  │
+│  ├─ Semiconductor Spin Research Hardware
+│  │  └─ Intel Tunnel Falls [R; research-chip access] 
+│  │     └─ 12-dot research device; computational encoding depends on implementation
+│  │
+│  ├─ Classical Cryogenic Control Infrastructure
+│  │  ├─ Intel Horse Ridge II: cryo-CMOS control at approximately 4 K 
+│  │  └─ Intel Pando Tree: demultiplexing at approximately 10–20 mK 
+│  │
+│  └─ Announced Fault-Tolerant and Next-System Targets [T]
+│     ├─ IBM: Starling targets 200 logical qubits and 100 million gates by 2029 
+│     │  └─ Kookaburra/ Cockatoo: planned module and intermodule milestones
+│     ├─ Alice & Bob Helium: announced QEC testbed targeting a first logical qubit 
+│     ├─ Pasqal Vela: >256 high-quality qubits announced for 2026 
+│     └─ QuEra Libra: 256 logical qubits targeted for 2028 
+│
+└─ II. Academic and Institutional Research Platforms
+   │  (University laboratories, national centers, and university-linked collaborations)
+   │
+   ├─ Institutional Hybrid Platforms
+   │  └─ Fujitsu–RIKEN [C; institutional hybrid platform] 
+   │     ├─ Demonstrated: 256-qubit superconducting system
+   │     └─ Target [T]: 1,000-qubit system; announced 2026 installation/ launch
+   │
+   ├─ University–Industry Collaborative Processors
+   │  └─ Harvard–MIT–QuEra [R; LAB] 
+   │     ├─ Reconfigurable processor with up to 448 atoms
+   │     ├─ Up to 96 simultaneously active encoded logical qubits
+   │     └─ Logical operations and repeated QEC; protocol-specific protection
+   │
+   ├─ Small-Register University and University-Linked Research Processors
+   │  │  (Register size does not specify apparatus size or control-channel count)
+   │  │
+   │  ├─ Silicon Donor Electron–Nuclear Spin Registers
+   │  │  └─ Silicon Quantum Computing/ UNSW [R; LAB] 
+   │  │     ├─ 11 qubits: nine nuclear-spin data qubits + two electron-spin ancillas
+   │  │     └─ Donor-based registers; distinct from gate-defined quantum dots
+   │  │
+   │  ├─ Gate-Defined Semiconductor Quantum-Dot Spin Processors
+   │  │  ├─ Si/SiGe and silicon MOS research devices [R; LAB]
+   │  │  ├─ QuTech/ TU Delft: universal control of six Si/SiGe spin qubits 
+   │  │  └─ Register size is demonstration-specific; 2–4 qubits is not a ceiling
+   │  │
+   │  └─ Diamond Spin–Photon Quantum-Network Nodes [R; LAB] 
+   │     ├─ NV electron-spin interface, nuclear-spin memories, and optical photons
+   │     ├─ Three-memory-qubit repetition code with repeated bit-flip correction
+   │     └─ Network-node and memory demonstrations; sensing is a separate application
+   │
+   └─ Fundamental Research Testbeds [R; LAB]
+      │  (Architecture exploration and bounded protocol demonstrations)
+      │
+      ├─ Superconducting Research Processors and Component Testbeds
+      │  ├─ Transmon testbeds
+      │  │  ├─ Fixed-frequency and tunable designs; gates, readout, materials, and QEC
+      │  │  └─ Cross-resonance for fixed-frequency devices; other gates depend on design 
+      │  ├─ Fluxonium devices
+      │  │  ├─ Coherence, couplers, and multiqubit gate studies
+      │  │  ├─ Microwave-activated CZ gates demonstrated 
+      │  │  └─ Report T1, Ramsey T2*, or echo T2 for the specified device 
+      │  └─ Flux-qubit test circuits
+      │     ├─ Hamiltonian engineering and quantum-annealing physics
+      │     └─ Small-instance factorization using an annealing multiplier Hamiltonian 
+      │
+      ├─ Trapped-Ion Research Testbeds
+      │  └─ Gate control, motional coupling, and multilevel qudit encoding 
+      │
+      └─ Photonic/ Optical Research Testbeds
+         ├─ Optical benches and integrated photonic circuits
+         ├─ Dual-rail encoding, Hong–Ou–Mandel interference, gates, and teleportation
+         ├─ Boson-sampling experiments: sampling tasks rather than universal gate sets
+         └─ Linear optics with suitable sources, detection, and feedforward:
+            universal quantum-computing schemes, subject to implementation resources
+```
+
+---
+
 | Label | Execution or scope |
 | :---: | :--- |
 | **Q** | Quantum circuits perform the central computation. |
