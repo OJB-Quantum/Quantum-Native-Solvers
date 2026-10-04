@@ -1,6 +1,6 @@
 # QPU and Hybrid Solver Techniques for Quantum, Atomistic, Molecular, and Nanoscale Simulation
 
-This taxonomy maps mathematical solver families to applications and execution roles across quantum and classical hardware. It brings together the Quantum-Native-Solvers compilation and the Systematic Perspective on Quantum Computing Hardware presentation, including slides 45–58 and the ASIC/control examples.
+This taxonomy maps mathematical solver families to applications and execution roles across quantum and classical hardware.  
 
 ## Primer and execution legend
 
