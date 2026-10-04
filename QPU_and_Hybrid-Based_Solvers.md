@@ -96,10 +96,10 @@ Temporal formulation is an additional classification axis, independent of the sp
 ```text
 PDE solver temporal formulations
 ├── Stationary and frequency-domain
-│   └── FDFD / FEM operators, resolvents, QLSA and VQLS
+│   └── FDFD/ FEM operators, resolvents, QLSA and VQLS
 ├── Real-time transient
 │   └── Quantum time-domain finite-difference formulations
-│       ├── Maxwell / Yee-type mappings
+│       ├── Maxwell/ Yee-type mappings
 │       ├── Schrodinger and other wave equations
 │       └── Coupled light-matter models with explicit QPU subproblems
 └── Imaginary-time preparation
@@ -793,14 +793,14 @@ The acquisition terms “tomography,” “ptychography,” and “ellipsometry�
 | QLSA | Quantum linear system algorithm | Prepares a normalized state representing an inverse action. |
 | HHL | Harrow–Hassidim–Lloyd | Foundational quantum linear-system algorithm named after its authors. |
 | VQLS | Variational quantum linear solver | Fits a normalized solution state using quantum cost estimates. |
-| FEM / FVM | Finite element / finite volume method | Discretizes spatial field equations. |
-| FDTD / FDFD | Finite-difference time-domain / finite-difference frequency-domain | Combines finite-difference discretization with a specified temporal formulation. |
+| FEM/ FVM | Finite element/ finite volume method | Discretizes spatial field equations. |
+| FDTD/ FDFD | Finite-difference time-domain/ finite-difference frequency-domain | Combines finite-difference discretization with a specified temporal formulation. |
 | QLBM | Quantum lattice Boltzmann method | Implements a specified encoded lattice kinetic model. |
 | QLGA | Quantum lattice gas automaton | Implements collision and streaming on quantum occupation registers. |
 | QCA | Quantum cellular automaton | Applies local quantum update rules. |
-| DMFT / DMET | Dynamical mean-field / density matrix embedding theory | Embeds quantum impurity or fragment problems in a classical environment. |
+| DMFT/ DMET | Dynamical mean-field/ density matrix embedding theory | Embeds quantum impurity or fragment problems in a classical environment. |
 | EWF | Embedded wavefunction | Partitions a larger electronic calculation into embedded fragment problems. |
-| QM/MM | Quantum mechanics / molecular mechanics | Couples a quantum-mechanical region to a classical environment. |
+| QM/MM | Quantum mechanics/ molecular mechanics | Couples a quantum-mechanical region to a classical environment. |
 | QCPMD | Quantum Car–Parrinello molecular dynamics | Couples quantum electronic parameters to classical nuclear dynamics. |
 | TFD | Thermofield double | Purifies a thermal state using an auxiliary quantum system. |
 | VQT | Variational quantum thermalizer | Fits a thermal-state model using a free-energy objective. |
@@ -810,22 +810,22 @@ The acquisition terms “tomography,” “ptychography,” and “ellipsometry�
 | AFQMC | Auxiliary-field quantum Monte Carlo | Classical stochastic electronic solver with a possible QPU interface. |
 | INS | Inelastic neutron scattering | Experimental response connected here to computed dynamical structure factors. |
 | NEGF | Nonequilibrium Green function | Electronic transport framework with optional quantum-derived inputs. |
-| DFT / AIMD | Density functional theory / ab initio molecular dynamics | Classical electronic and atomistic workflow components; a specified QPU subproblem supplies the quantum contribution in a hybrid. |
+| DFT/ AIMD | Density functional theory/ ab initio molecular dynamics | Classical electronic and atomistic workflow components; a specified QPU subproblem supplies the quantum contribution in a hybrid. |
 | QA | Quantum annealing | Optimization using an accessible annealing Hamiltonian. AQ denotes target-system simulation. |
 | QAOA | Quantum approximate optimization algorithm | Gate-based optimization of a specified encoded objective; performance is assessed against matched classical solvers. |
 | QUBO | Quadratic unconstrained binary optimization | Binary objective used by suitable annealing or gate-based optimization mappings, often with penalty terms. |
-| STEM / 4D-STEM | Scanning transmission electron microscopy / four-dimensional STEM | Raster scan with diffraction data indexed by two scan and two diffraction coordinates. |
-| ET / AET | Electron tomography / atomic electron tomography | Reconstructs sample volumes or atom-resolved structure from electron-microscopy measurements under a specified forward model. |
+| STEM/ 4D-STEM | Scanning transmission electron microscopy/ four-dimensional STEM | Raster scan with diffraction data indexed by two scan and two diffraction coordinates. |
+| ET/ AET | Electron tomography/ atomic electron tomography | Reconstructs sample volumes or atom-resolved structure from electron-microscopy measurements under a specified forward model. |
 | CT | Computed tomography | Projection-based reconstruction used in the cited hybrid annealing examples. |
 | ARPES | Angle-resolved photoemission spectroscopy | Relates electronic removal spectra to measured intensities through a photoemission and instrument model. |
 | EELS | Electron energy-loss spectroscopy | Measures energy-transfer response linked to appropriate electronic dynamical structure factors. |
 | DSF | Dynamical structure factor | Momentum- and frequency-resolved correlation spectrum; the operator differs between density and spin probes. |
 | NMR | Nuclear magnetic resonance | Spin spectroscopy with quantum simulation and Hamiltonian-inference applications. |
-| NV / SQUID | Nitrogen-vacancy center / superconducting quantum interference device | Quantum sensing platforms that acquire data; a specified computational interface connects them to QPU processing. |
-| EUV / ILT | Extreme ultraviolet / inverse lithography technology | Lithographic process and inverse pattern-design workflow; quantum resist spectroscopy supplies selected microscopic process inputs. |
-| MS / MS/MS | Mass spectrometry / tandem mass spectrometry | Mass-to-charge and fragmentation measurements; forward models predict spectra and identification algorithms infer candidate species. |
-| FFT / QFT | Fast Fourier transform / quantum Fourier transform | Classical array transform and quantum amplitude transform, respectively; their inputs and outputs differ. |
-| Jones / Mueller | Jones polarization amplitudes / Mueller Stokes-vector transfer matrix | Optical propagation descriptions; Mueller models accommodate depolarization under appropriate physical constraints. |
+| NV/ SQUID | Nitrogen-vacancy center/ superconducting quantum interference device | Quantum sensing platforms that acquire data; a specified computational interface connects them to QPU processing. |
+| EUV/ ILT | Extreme ultraviolet/ inverse lithography technology | Lithographic process and inverse pattern-design workflow; quantum resist spectroscopy supplies selected microscopic process inputs. |
+| MS/ MS/MS | Mass spectrometry/ tandem mass spectrometry | Mass-to-charge and fragmentation measurements; forward models predict spectra and identification algorithms infer candidate species. |
+| FFT/ QFT | Fast Fourier transform/ quantum Fourier transform | Classical array transform and quantum amplitude transform, respectively; their inputs and outputs differ. |
+| Jones/ Mueller | Jones polarization amplitudes/ Mueller Stokes-vector transfer matrix | Optical propagation descriptions; Mueller models accommodate depolarization under appropriate physical constraints. |
 
 ## References
 
