@@ -25,7 +25,7 @@ Choose your requested output below and follow its solver branch. Check the [read
 | Predict EELS or microscopic EUV photoresist spectra | [III](#branch-iii), [XI](#branch-xi) | ALG fault-tolerant resource estimates [28, 35] | Logical-qubit spectral construction + classical beam or process models |
 | Predict NMR or coherent spectroscopic signals | [III](#branch-iii), [XI](#branch-xi) | HW small NMR and photonic examples; ALG inference [29–31] | Trapped-ion or silicon-photonic examples + classical fitting/spectral analysis |
 | Fit optical/magnetic parameters, identify molecules, or select designs | [XI](#branch-xi), [XII](#branch-xii) | R selected computational targets; construction-specific proposals [32–36] | Explicit quantum response, inverse, or optimization subproblem + classical model/interface |
-| Assign coprocessor work or account for complete execution costs | [X](#branch-x), [XII](#branch-xii) | Implementation-specific resource and validation assessment | QPU + CPU/GPU/ASIC/FPGA or a specified classical analog stage |
+| Assign coprocessor work or account for complete execution costs | [X](#branch-x), [XII](#branch-xii) | Implementation-specific resource and validation assessment | QPU + CPU/GPU/XPU/ASIC/FPGA or a specified classical analog stage |
 
 ## Example decision journeys
 
