@@ -247,6 +247,12 @@ Qubit Architectures × Computational Readiness × Deployment
 
 ## I. Quantum Simulation Taxonomy
 
+<a id="classification-tree"></a>
+
+### Classification Tree
+
+<img width="2651" height="auto" alt="image" src="https://github.com/user-attachments/assets/88a9d559-aeec-43ce-a285-2d3fd31cce7f" />
+
 | Label | Execution or scope |
 | :---: | :--- |
 | **Q** | Quantum circuits perform the central computation. |
@@ -255,12 +261,6 @@ Qubit Architectures × Computational Readiness × Deployment
 | **C** | Classical computation, potentially accelerated by GPUs. |
 | **R** | A problem-specific research direction requiring an explicit construction and resource analysis. |
 | **P26** | A cited preprint. |
-
-<a id="classification-tree"></a>
-
-### Classification Tree
-
-<img width="2651" height="auto" alt="image" src="https://github.com/user-attachments/assets/88a9d559-aeec-43ce-a285-2d3fd31cce7f" />
 
 ```text
 Quantum Simulation and Solver Approaches
