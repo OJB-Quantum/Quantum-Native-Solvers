@@ -46,8 +46,6 @@ Interestingly, some models such as the [Landau-Lifshitz-Gilbert (LLG) equation](
 > **quantum**: “Borrowed from Latin *quantum*,” historically ‘how much; as much as’ (neuter of *quantus*), later specialized to a discrete physical amount. - *Oxford English Dictionary*; see also Oxford’s gloss tying *quantum* to *quantus*.
 > **native**: “From Latin *nativus* (‘inborn; produced by birth’), via Middle English/French,” yielding senses such as ‘innate, natural; belonging by birth.’ - *Oxford English Dictionary*.
 
----
-
 --- 
 
 ### Towards Deployment of Industry-Level vs. Academic Quantum Processors
@@ -240,7 +238,14 @@ Qubit Architectures × Computational Readiness × Deployment
             universal quantum-computing schemes, subject to implementation resources
 ```
 
+[Back to contents](#contents)
+
 ---
+
+
+<a id="quantum-simulation-taxonomy"></a>
+
+## I. Quantum Simulation Taxonomy
 
 | Label | Execution or scope |
 | :---: | :--- |
@@ -250,14 +255,6 @@ Qubit Architectures × Computational Readiness × Deployment
 | **C** | Classical computation, potentially accelerated by GPUs. |
 | **R** | A problem-specific research direction requiring an explicit construction and resource analysis. |
 | **P26** | A cited preprint. |
-
-[Back to contents](#contents)
-
----
-
-<a id="quantum-simulation-taxonomy"></a>
-
-## I. Quantum Simulation Taxonomy
 
 <a id="classification-tree"></a>
 
