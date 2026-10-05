@@ -4,6 +4,7 @@ This application-oriented taxonomy connects mathematical solver families to thei
 
 ## Table of contents
 
+- [Quick start: solver selection router](#quick-start-solver-selection-router)
 - [Fundamentals](#fundamentals)
   - [Primer and execution legend](#primer-and-execution-legend)
   - [Evidence legend](#evidence-legend)
@@ -12,7 +13,19 @@ This application-oriented taxonomy connects mathematical solver families to thei
 - [Solver taxonomy](#solver-taxonomy)
   - [Overview tree](#overview-tree)
   - [Temporal formulation and explicit quantum FDTD placement](#temporal-formulation-and-explicit-quantum-fdtd-placement)
-  - [Detailed technique tree: branches I–XI](#detailed-technique-tree)
+  - [Detailed technique tree: branches I–XII](#detailed-technique-tree)
+    - [I. Electronic eigenstates and material spectra](#branch-i)
+    - [II. Hamiltonian evolution and scattering](#branch-ii)
+    - [III. Interferometry, response, and spectroscopy](#branch-iii)
+    - [IV. Open systems, baths, and transport](#branch-iv)
+    - [V. PDE, finite-element, and finite-volume solvers](#branch-v)
+    - [VI. Lattice kinetics, fluid dynamics, and nonlinear equations](#branch-vi)
+    - [VII. Analog and digital–analog quantum simulation](#branch-vii)
+    - [VIII. Embedded, atomistic, and multiscale simulation](#branch-viii)
+    - [IX. Thermal states, sampling, and Monte Carlo](#branch-ix)
+    - [X. Supporting hardware and coprocessing](#branch-x)
+    - [XI. Characterization, reconstruction, and inverse design](#branch-xi)
+    - [XII. Shared computational overheads and classical interfaces](#branch-xii)
 - [Application framework](#application-framework)
   - [Forward prediction, inverse reconstruction, and measurement interpretation](#forward-prediction-inverse-reconstruction-and-measurement-interpretation)
   - [Application areas and concrete examples](#application-areas-and-concrete-examples)
@@ -22,8 +35,37 @@ This application-oriented taxonomy connects mathematical solver families to thei
   - [Hybrid execution across application branches](#hybrid-execution-across-application-branches)
 - [Readiness and validation](#readiness-and-validation)
   - [Readiness interpretation](#readiness-interpretation)
+  - [Hardware–solver fit matrix](#hardware-solver-fit-matrix)
   - [Direct and indirect connections](#direct-and-indirect-connections)
 - [References](#references)
+- [Document version](#document-version)
+
+## Quick start: solver selection router
+
+Start with the requested output, follow the linked solver branch, then check the [readiness interpretation](#readiness-interpretation) and [hardware–solver fit matrix](#hardware-solver-fit-matrix). Readiness uses the document's [HW, NUM, ALG, and R evidence labels](#evidence-legend); hardware assignments refer to the cited example or specified execution role.
+
+| If your goal is… | Start at branch | Readiness/ evidence | Hardware or hybrid execution fit |
+| --- | --- | --- | --- |
+| Find molecular electronic ground-state energies | [I](#branch-i) | HW selected-space examples; ALG/NUM preparation routes [1, 8, 18] | Gate-based QPU + classical optimization or diagonalization |
+| Predict periodic spectra, band gaps, or fragment energies | [I](#branch-i), [VIII](#branch-viii) | HW model/preprint examples; R for the selected material [2, 26] | QPU + CPU/GPU embedding and spectral analysis |
+| Propagate a reaction wavepacket or estimate an interference amplitude | [II](#branch-ii), [III](#branch-iii) | NUM wavepacket example; R for the selected target [9] | Encoded quantum dynamics + classical channel or spectral analysis |
+| Predict magnetic inelastic neutron scattering | [III](#branch-iii) | HW spin-model examples and a 2026 preprint [3, 4] | Quantum spin evolution + classical response reconstruction |
+| Calculate an ARPES-related spectral function | [III](#branch-iii), [XI](#branch-xi) | HW 27-site model preprint [26] | Quantinuum H2 example + classical photoemission model |
+| Model a dissipative nanodevice or correlated transport | [IV](#branch-iv), [VIII](#branch-viii) | R for the selected device or unresolved target | Gate-based or compatible native quantum evolution + classical transport/ensemble analysis |
+| Solve an elliptic FEM problem or a finite-volume formulation | [V](#branch-v) | ALG/HW elliptic prototype; ALG FVM construction [5, 11] | Quantum solution subroutine + classical meshes, constraints, and preconditioning |
+| Simulate a Maxwell pulse or transient finite-difference field | [V](#branch-v) | NUM/ALG constructions and HW 2D preprint [19–21] | IonQ QPU example + classical source, boundary, and readout handling |
+| Simulate lattice-Boltzmann flow or kinetic populations | [VI](#branch-vi) | NUM nonlinear QLBM; R for candidate confined-flow targets [10] | Encoded streaming/collision + classical boundary and moment processing |
+| Simulate a compatible spin, particle, or oscillator model | [VII](#branch-vii) | Experimental programmable simulation of selected interactions | Native analog quantum interactions or digital–analog sequences |
+| Couple electronic estimates to nuclear motion or a coarse model | [VIII](#branch-viii) | NUM QCPMD; ALG/NUM homogenization preprint [14, 17] | QPU electronic/fine-scale subproblem + classical dynamics or coarse PDE |
+| Estimate thermal observables or a stochastic expectation | [IX](#branch-ix) | HW prototypes/NUM thermal; ALG expectation estimation [15, 18] | Quantum preparation/estimation + classical averaging or stochastic solver |
+| Refine a tomographic image or infer atomic structure | [XI](#branch-xi), [XII](#branch-xii) | HW regional CT example; R electron-tomography extension [23, 24] | D-Wave hybrid CT example; explicit quantum inverse/optimization subproblem for electron targets |
+| Reconstruct a 4D-STEM object or electron ptychographic volume | [XI](#branch-xi), [XII](#branch-xii) | R computational electron target; C electron-imaging baseline [24, 25] | Candidate quantum propagation/inverse update + classical nonlinear reconstruction |
+| Predict EELS or microscopic EUV photoresist spectra | [III](#branch-iii), [XI](#branch-xi) | ALG fault-tolerant resource estimates [28, 35] | Logical-qubit spectral construction + classical beam or process models |
+| Predict NMR or coherent spectroscopic signals | [III](#branch-iii), [XI](#branch-xi) | HW small NMR and photonic examples; ALG inference [29–31] | Trapped-ion or silicon-photonic examples + classical fitting/spectral analysis |
+| Fit optical/magnetic parameters, identify molecules, or select designs | [XI](#branch-xi), [XII](#branch-xii) | R selected computational targets; construction-specific proposals [32–36] | Explicit quantum response, inverse, or optimization subproblem + classical model/interface |
+| Assign coprocessor work or account for complete execution costs | [X](#branch-x), [XII](#branch-xii) | Implementation-specific resource and validation assessment | QPU + CPU/GPU/ASIC/FPGA or a specified classical analog stage |
+
+[Back to contents](#table-of-contents)
 
 ## Fundamentals
 
@@ -128,7 +170,7 @@ Execution labels Q, H, AQ, QA, C, and CA retain their definitions above. The fol
 
 ### Overview tree
 
-The five application branches belong to one taxonomy. Detailed leaves and execution roles follow below.
+The application branches and shared execution support belong to one taxonomy. Detailed leaves and execution roles follow below.
 
 ```text
 QPU and hybrid simulation taxonomy
@@ -172,16 +214,21 @@ QPU and hybrid simulation taxonomy
 │   └── Thermal and stochastic methods
 │       └── TFD, VQT, QMETTS, Gibbs sampling, QAE and AFQMC interfaces
 │           └── Temperature-dependent observables and expectations
-└── Computational characterization, reconstruction, and inverse design
-    ├── Inverse reconstruction [Q/H/QA; R for target-specific extensions]
-    │   ├── Electron tomography, 4D-STEM ptychography, and field-map inversion
-    │   └── Linearized subproblems, constrained optimization, and selected parameter inference
-    ├── Forward signal prediction [Q/H/AQ]
-    │   ├── ARPES, EELS, NMR, interferometric amplitudes, and microscopic response
-    │   └── Quantum correlations combined with classical sample and instrument models
-    └── Experimental and process design [H; R outside specific constructions]
-        ├── EUV resist spectroscopy, mask design, probes, and acquisition settings
-        └── Selected objectives with explicit output, uncertainty, and resource accounting
+├── Computational characterization, reconstruction, and inverse design
+│   ├── Inverse reconstruction [Q/H/QA; R for target-specific extensions]
+│   │   ├── Electron tomography, 4D-STEM ptychography, and field-map inversion
+│   │   └── Linearized subproblems, constrained optimization, and selected parameter inference
+│   ├── Forward signal prediction [Q/H/AQ]
+│   │   ├── ARPES, EELS, NMR, interferometric amplitudes, and microscopic response
+│   │   └── Quantum correlations combined with classical sample and instrument models
+│   └── Experimental and process design [H; R outside specific constructions]
+│       ├── EUV resist spectroscopy, mask design, probes, and acquisition settings
+│       └── Selected objectives with explicit output, uncertainty, and resource accounting
+└── Shared execution support
+    ├── Hardware and coprocessing (X)
+    │   └── CPU/GPU stages, ASIC/FPGA support, and classical analog operations
+    └── Computational overheads and classical interfaces (XII)
+        └── Data access, regularization, reconstruction, readout, and complete-workflow validation
 ```
 
 ### Temporal formulation and explicit quantum FDTD placement
@@ -237,8 +284,9 @@ QPU and hybrid solver techniques
 | [Branch VII](#branch-vii) | Programmable analog and mixed digital–analog quantum simulation |
 | [Branch VIII](#branch-viii) | Embedded, atomistic, and multiscale hybrid simulation |
 | [Branch IX](#branch-ix) | Thermal states, quantum sampling, and Monte Carlo interfaces |
-| [Branch X](#branch-x) | Supporting hardware and data operations, shared by every branch |
+| [Branch X](#branch-x) | Supporting hardware and coprocessing |
 | [Branch XI](#branch-xi) | Computational characterization, reconstruction, and inverse design |
+| [Branch XII](#branch-xii) | Shared computational overheads and classical interfaces |
 
 <a id="branch-i"></a>
 
@@ -438,59 +486,97 @@ IV. Open systems, quantum baths, and transport
 <details markdown="1">
 <summary>Branch V: Quantum numerical PDE solvers, finite elements, and finite volumes</summary>
 
+Select a mathematical primitive, then its spatial discretization and temporal formulation. Shared loading, measurement, and validation requirements are in [branch XII](#branch-xii).
+
+<details markdown="1">
+<summary>Linear-system primitives [Q/H]</summary>
+
 ```text
-V. Quantum numerical PDE solvers, finite elements, and finite volumes
-├── Linear-system primitives [Q/H]
-│   ├── HHL and subsequent QLSAs
-│   │   └── prepare a state proportional to an inverse action under spectral and access assumptions [7].
-│   ├── QSVT inverse or pseudoinverse filters
-│   │   └── transform a block-encoded matrix, with conditioning and support requirements [8].
-│   ├── VQLS
-│   │   └── quantum residual or cost estimates drive classical optimization of a normalized solution state
-│   │       [6].
-│   └── Quantum projected/Krylov approaches
-│       └── estimate subspace operators, then solve the reduced algebraic problem classically.
-├── Discretization-specific constructions [Q/H]
-│   ├── Quantum FEM
-│   │   └── map stiffness or generalized eigenvalue matrices, load vectors, and boundary conditions to the
-│   │       chosen primitive.
-│   ├── Quantum FVM
-│   │   └── map conservative cell balances and flux equations to a specified quantum linear or nonlinear
-│   │       workflow [11].
-│   ├── Finite-difference and spectral methods
-│   │   └── construct coherent stencil or operator access and include its implementation cost.
-│   └── Preconditioning
-│       └── encode BPX, domain-decomposition, or another justified preconditioner and include its
-│           construction and application costs [5].
-├── Time-dependent and dissipative numerical evolution [Q/H/AQ]
-│   ├── Quantum finite-difference time-domain and related evolution formulations
-│   │   └── implement specified Maxwell/Yee-type mappings, driven-source circuits, or spatial
-│   │       finite-difference Hamiltonian evolution; identify the time-update rule for each construction
-│   │       [19–21].
-│   ├── FDTD-related applications
-│   │   └── electromagnetic pulse propagation, specified dielectric-interface scattering, quantum
-│   │       wavepackets, and proposed coupled light-matter workflows. Physical sources, losses, and
-│   │       absorbing boundaries require construction-specific handling.
-│   ├── Linear ODE embeddings
-│   │   └── reformulate time discretization as a linear system or use a dedicated evolution algorithm.
-│   ├── Schrödingerisation
-│   │   └── enlarge the representation so suitable linear dynamics is recovered from unitary evolution [12].
-│   ├── LCHS
-│   │   └── represent suitable nonunitary evolution through weighted Hamiltonian simulations.
-│   └── Hybrid oscillator–qubit LCHS
-│       └── an ancillary quantum oscillator represents the kernel in a coupled oscillator–qubit quantum
-│           architecture [13].
-└── Application scope [model-specific]
-    ├── Poisson, Helmholtz, Maxwell, elasticity, diffusion, and reaction–transport problems
-    │   └── boundary treatment, stability, physical constraints, and requested outputs determine
-    │       eligibility.
-    ├── Nano applicability
-    │   └── continuum constitutive assumptions and included physical mechanisms determine the model's
-    │       nanoscale validity.
-    └── Output scope
-        └── selected-function estimation and full-mesh reconstruction require separate measurement and
-            readout budgets.
+Linear-system primitives [Q/H]
+├── HHL and subsequent QLSAs
+│   └── prepare a state proportional to an inverse action under spectral and access assumptions [7].
+├── QSVT inverse or pseudoinverse filters
+│   └── transform a block-encoded matrix, with conditioning and support requirements [8].
+├── VQLS
+│   └── quantum residual or cost estimates drive classical optimization of a normalized solution state
+│       [6].
+└── Quantum projected/Krylov approaches
+    └── estimate subspace operators, then solve the reduced algebraic problem classically.
 ```
+
+</details>
+
+<details markdown="1">
+<summary>Technical deep dive: operator access, discretization, and preconditioning</summary>
+
+| Existing construction | Operator or data mapping | Implementation requirement | Branch |
+| --- | --- | --- | --- |
+| Sparse-Hamiltonian and quantum-walk constructions | Nonzero matrix entries or a suitable block encoding | Explicit coherent access | [II](#branch-ii) |
+| Finite-difference and spectral methods | Stencil or operator access | Include coherent-access implementation cost | [V](#branch-v) |
+| Quantum FEM | Stiffness or generalized eigenvalue matrices, load vectors, and boundaries | Map to the chosen quantum primitive | [V](#branch-v) |
+| Quantum FVM | Conservative cell balances and flux equations | Specify the quantum linear or nonlinear workflow [11] | [V](#branch-v) |
+| Preconditioning | BPX, domain decomposition, or another justified preconditioner | Include construction and application costs [5] | [V](#branch-v) |
+
+```text
+Discretization-specific constructions [Q/H]
+├── Quantum FEM
+│   └── map stiffness or generalized eigenvalue matrices, load vectors, and boundary conditions to the
+│       chosen primitive.
+├── Quantum FVM
+│   └── map conservative cell balances and flux equations to a specified quantum linear or nonlinear
+│       workflow [11].
+├── Finite-difference and spectral methods
+│   └── construct coherent stencil or operator access and include its implementation cost.
+└── Preconditioning
+    └── encode BPX, domain-decomposition, or another justified preconditioner and include its
+        construction and application costs [5].
+```
+
+</details>
+
+<details markdown="1">
+<summary>Time-dependent and dissipative numerical evolution [Q/H/AQ]</summary>
+
+```text
+Time-dependent and dissipative numerical evolution [Q/H/AQ]
+├── Quantum finite-difference time-domain and related evolution formulations
+│   └── implement specified Maxwell/Yee-type mappings, driven-source circuits, or spatial
+│       finite-difference Hamiltonian evolution; identify the time-update rule for each construction
+│       [19–21].
+├── FDTD-related applications
+│   └── electromagnetic pulse propagation, specified dielectric-interface scattering, quantum
+│       wavepackets, and proposed coupled light-matter workflows. Physical sources, losses, and
+│       absorbing boundaries require construction-specific handling.
+├── Linear ODE embeddings
+│   └── reformulate time discretization as a linear system or use a dedicated evolution algorithm.
+├── Schrödingerisation
+│   └── enlarge the representation so suitable linear dynamics is recovered from unitary evolution [12].
+├── LCHS
+│   └── represent suitable nonunitary evolution through weighted Hamiltonian simulations.
+└── Hybrid oscillator–qubit LCHS
+    └── an ancillary quantum oscillator represents the kernel in a coupled oscillator–qubit quantum
+        architecture [13].
+```
+
+</details>
+
+<details markdown="1">
+<summary>Application scope [model-specific]</summary>
+
+```text
+Application scope [model-specific]
+├── Poisson, Helmholtz, Maxwell, elasticity, diffusion, and reaction–transport problems
+│   └── boundary treatment, stability, physical constraints, and requested outputs determine
+│       eligibility.
+├── Nano applicability
+│   └── continuum constitutive assumptions and included physical mechanisms determine the model's
+│       nanoscale validity.
+└── Output scope
+    └── selected-function estimation and full-mesh reconstruction require separate measurement and
+        readout budgets.
+```
+
+</details>
 
 </details>
 
@@ -667,10 +753,10 @@ IX. Thermal states, quantum sampling, and Monte Carlo interfaces
 <a id="branch-x"></a>
 
 <details markdown="1">
-<summary>Branch X: Supporting hardware and data operations, shared by every branch</summary>
+<summary>Branch X: Supporting hardware and coprocessing</summary>
 
 ```text
-X. Supporting hardware and data operations, shared by every branch
+X. Supporting hardware and coprocessing
 ├── CPU/GPU mathematical coprocessing [C within H]
 │   ├── Before QPU execution
 │   │   └── basis construction, molecular integrals, active spaces, meshes, preprocessing, and circuit
@@ -693,28 +779,14 @@ X. Supporting hardware and data operations, shared by every branch
 │   └── Scope
 │       └── ASICs implement assigned control, decoding, or numerical kernels within the chosen eigensolver
 │           or PDE workflow.
-├── Classical analog coprocessing [CA; R for the proposed combined target]
-│   ├── Analog matrix-vector operations
-│   │   └── proposed electronic or photonic accelerators support an explicit classical linear-algebra stage.
-│   ├── Classical oscillator or field networks
-│   │   └── a calibrated physical model supplies a classical reduced response.
-│   └── Hybrid validity
-│       └── a proposed QPU+CA workflow requires an error budget for conversion, noise, drift, residual
-│           correction, and precision, together with a matched comparison of complete processing time.
-└── Validation and resource accounting
-    ├── Matched baselines
-    │   └── compare the same model, observable, precision, and total processing cost against appropriate
-    │       CPU/GPU methods.
-    ├── Error budget
-    │   └── separate physical-model, discretization, truncation, quantum-algorithm, sampling, hardware, and
-    │       hybrid-coupling errors.
-    ├── Data access
-    │   └── coherent matrix or QRAM access requires a specified quantum interface to the stored data, with
-    │       loading and access costs included.
-    └── Output and advantage
-        └── state preparation, normalization, postselection, repetitions, classical processing, and
-            full-field recovery count toward total cost.
+└── Classical analog coprocessing [CA; R for the proposed combined target]
+    ├── Analog matrix-vector operations
+    │   └── proposed electronic or photonic accelerators support an explicit classical linear-algebra stage.
+    └── Classical oscillator or field networks
+        └── a calibrated physical model supplies a classical reduced response.
 ```
+
+Shared data-access, error-budget, and complete-workflow costs are in [branch XII](#branch-xii).
 
 </details>
 
@@ -723,34 +795,21 @@ X. Supporting hardware and data operations, shared by every branch
 <details markdown="1">
 <summary>Branch XI: Computational characterization, reconstruction, and inverse design</summary>
 
+For the selected application, use [branch XII](#branch-xii) for inverse-problem primitives, regularization, data loading, classical reconstruction loops, and output costs.
+
 ```text
 XI. Computational characterization, reconstruction, and inverse design
-├── Inverse-problem primitives [Q/H/QA; model-specific]
-│   ├── Regularized linear reconstruction [Q/H]
-│   │   └── QLSA, QSVT, VQLS, or projected methods target a coherently accessible linear subproblem. Include
-│   │       input loading, conditioning, preconditioning, normalization, and selected-observable or
-│   │       full-image recovery [6–8].
-│   ├── Discrete reconstruction and model selection [QA/H; Q/H for a specified QAOA mapping]
-│   │   └── Encode a bounded integer or binary objective as QUBO/Ising variables. Quantum annealing or
-│   │       gate-based optimization processes the explicit objective; discretization, penalties,
-│   │       connectivity, and classical work determine total cost [23].
-│   └── Nonlinear reconstruction and parameter inference [H; R for unresolved targets]
-│       └── A classical outer loop updates sample and nuisance parameters while a specified quantum
-│           subroutine evaluates selected forward predictions, derivatives, or linearized updates. The
-│           nonlinear objective requires an explicit quantum subproblem and resource construction.
 ├── Electron tomography and atomic electron tomography [H; R for unvalidated electron targets]
 │   ├── Projection-based reconstruction
-│   │   └── Under a justified projection approximation, discretized line-integral data define a regularized
-│   │       inverse problem. Multiple scattering or nonlinear image formation requires a different forward
-│   │       model.
+│   │   └── Under a justified projection approximation, discretized line-integral data define an inverse
+│   │       problem. Multiple scattering or nonlinear image formation requires a different forward model.
 │   ├── Regional annealing refinement
 │   │   └── A 2026 study validates compact regional QUBO updates with a D-Wave hybrid solver on CT phantoms
 │   │       and a chest slice. Electron-tomography compatibility is a proposed extension requiring an
 │   │       electron-specific forward model and benchmark [23].
 │   └── Atomic-coordinate and potential refinement
 │       └── Proposed quantum subproblems refine a reduced structural description or selected potential
-│           coefficients, with classical alignment, segmentation, and instrument modeling. Measurement
-│           coverage and justified priors constrain inference in the missing wedge.
+│           coefficients.
 ├── 4D-STEM ptychography and ptychographic electron tomography [H/R]
 │   ├── Complex object and probe reconstruction
 │   │   └── Overlapping diffraction intensities constrain complex transmission, probe parameters, positions,
@@ -760,14 +819,10 @@ XI. Computational characterization, reconstruction, and inverse design
 │   │   └── Quantum propagation, inverse action on a linearized update, or reduced parameter estimation
 │   │       requires a target-specific construction, benchmarked against classical CPU/GPU multislice
 │   │       propagation.
-│   ├── Encoding and naming
-│   │   └── 4D-STEM comprises two scan-position and two diffraction coordinates. Quantum-state ptychography
-│   │       reconstructs an unknown quantum state; electron-image reconstruction requires a sample–probe
-│   │       forward model and an explicit computational construction [25].
-│   └── Output constraints
-│       └── A QFT-based reconstruction requires explicit costs for input encoding, intensity constraints,
-│           signed or complex-amplitude recovery, probe/object ambiguities, detector response, and
-│           full-image export, compared at matched precision with a classical FFT workflow [7, 24].
+│   └── Encoding and naming
+│       └── 4D-STEM comprises two scan-position and two diffraction coordinates. Quantum-state ptychography
+│           reconstructs an unknown quantum state; electron-image reconstruction requires a sample–probe
+│           forward model and an explicit computational construction [25].
 ├── ARPES, EELS, and other electronic spectroscopies [Q/H]
 │   ├── ARPES spectral prediction
 │   │   └── Quantum electronic dynamics supplies selected removal spectra or spectral functions. Classical
@@ -790,8 +845,7 @@ XI. Computational characterization, reconstruction, and inverse design
 │   │   └── State preparation, spin dynamics, and correlation measurements yield selected NMR spectra. A
 │   │       trapped-ion demonstration uses four qubits for a small zero-field NMR system [29].
 │   ├── Hamiltonian parameter learning
-│   │   └── A quantum simulator supplies predictions and specified derivatives inside a classical fit to
-│   │       time-resolved measurements; published NMR constructions assess learning of nuclear-spin
+│   │   └── A quantum simulator supplies predictions and specified derivatives for learning nuclear-spin
 │   │       interactions [30].
 │   └── Ensemble and pulse models
 │       └── Classical pulse descriptions, orientation averaging, calibration, and fitting connect the
@@ -857,16 +911,118 @@ XI. Computational characterization, reconstruction, and inverse design
 │       └── Microscopic cross sections and emitted-electron energies directly parameterize
 │           absorption/emission events; downstream transport, chemistry, and development mediate their
 │           indirect influence on lithographic blur and pattern fidelity.
-└── Acquisition design, uncertainty, and validation [H/R]
-    ├── Selected design objectives
-    │   └── Proposed QPU estimates or quantum optimization guide chosen tilts, probe settings, spectral
-    │       points, or process parameters only when the forward model, utility, and uncertainty construction
-    │       are specified.
-    └── Matched experimental goals
-        └── Assess computational advantage and dose reduction against appropriate classical methods at
-            matched reconstruction precision, physical model, acquisition conditions, and total processing
-            cost.
+└── Acquisition design [H/R]
+    └── Selected design objectives
+        └── Proposed QPU estimates or quantum optimization guide chosen tilts, probe settings, spectral
+            points, or process parameters only when the forward model, utility, and uncertainty construction
+            are specified.
 ```
+
+</details>
+
+<a id="branch-xii"></a>
+
+<details markdown="1">
+<summary>Branch XII: Shared computational overheads and classical interfaces</summary>
+
+Shared computational requirements accompany the selected application and solver. Hardware assignments are grouped in [branch X](#branch-x); application-specific physical models are grouped in [branch XI](#branch-xi).
+
+<details markdown="1">
+<summary>Shared inverse-problem primitives</summary>
+
+```text
+Inverse-problem primitives [Q/H/QA; model-specific]
+├── Regularized linear reconstruction [Q/H]
+│   └── QLSA, QSVT, VQLS, or projected methods target a coherently accessible linear subproblem. Include
+│       input loading, conditioning, preconditioning, normalization, and selected-observable or
+│       full-image recovery [6–8].
+├── Discrete reconstruction and model selection [QA/H; Q/H for a specified QAOA mapping]
+│   └── Encode a bounded integer or binary objective as QUBO/Ising variables. Quantum annealing or
+│       gate-based optimization processes the explicit objective; discretization, penalties,
+│       connectivity, and classical work determine total cost [23].
+└── Nonlinear reconstruction and parameter inference [H; R for unresolved targets]
+    └── A classical outer loop updates sample and nuisance parameters while a specified quantum
+        subroutine evaluates selected forward predictions, derivatives, or linearized updates. The
+        nonlinear objective requires an explicit quantum subproblem and resource construction.
+```
+
+</details>
+
+<details markdown="1">
+<summary>Regularization and classical reconstruction loops</summary>
+
+Parameter definitions and the forward map are in the [measurement-interpretation framework](#forward-prediction-inverse-reconstruction-and-measurement-interpretation).
+
+A general regularized inverse formulation is
+
+> $$
+> \widehat{\boldsymbol{\theta}}
+> =\underset{\boldsymbol{\theta}\in\mathcal{C}}{\operatorname{argmin}}
+> \left[
+> D\!\left(\mathcal{F}(\boldsymbol{\theta}),\boldsymbol{y}_{\mathrm{meas}}\right)
+> +\lambda R(\boldsymbol{\theta})
+> \right].
+> $$
+
+Here, $D$ is a discrepancy appropriate to the measurement-noise model, $R$ represents prior information, $\lambda$ controls regularization, and $\mathcal{C}$ specifies physical constraints. Weighted least squares is appropriate for a justified Gaussian approximation, whereas low-count measurements often require a Poisson likelihood. A linear quantum solver addresses a compatible linear problem or a linearized update within the nonlinear reconstruction loop [6–8]. For a least-squares normal-equation construction, $A^\dagger A$ squares the spectral condition number when $A$ has full column rank; alternative formulations and preconditioning therefore belong in the resource assessment.
+
+</details>
+
+<details markdown="1">
+<summary>Classical interfaces and inference constraints</summary>
+
+| Application | Classical interface or inference constraint |
+| --- | --- |
+| Projection-based electron tomography | Under a justified projection approximation, discretized line-integral data define a regularized inverse problem. Multiple scattering or nonlinear image formation requires a different forward model. |
+| Atomic-coordinate and potential refinement | Classical alignment, segmentation, and instrument modeling accompany structural refinement. Measurement coverage and justified priors constrain inference in the missing wedge. |
+| NMR Hamiltonian parameter learning | A quantum simulator supplies predictions and specified derivatives inside a classical fit to time-resolved measurements; published NMR constructions assess learning of nuclear-spin interactions [30]. |
+
+</details>
+
+<details markdown="1">
+<summary>Measurement, data loading, and image export</summary>
+
+```text
+Measurement, reconstruction, and requested-output costs
+├── Output constraints
+│   └── A QFT-based reconstruction requires explicit costs for input encoding, intensity constraints,
+│       signed or complex-amplitude recovery, probe/object ambiguities, detector response, and
+│       full-image export, compared at matched precision with a classical FFT workflow [7, 24].
+└── Matched experimental goals
+    └── Assess computational advantage and dose reduction against appropriate classical methods at
+        matched reconstruction precision, physical model, acquisition conditions, and total processing
+        cost.
+```
+
+For the [ptychographic reconstruction workflow](#forward-prediction-inverse-reconstruction-and-measurement-interpretation):
+
+Within this process, a quantum Fourier transform is applied to the encoded amplitudes; however, recovery via classical arrays necessitates a specific measurement procedure. The total resource cost is determined by several factors, including initial-data loading, nonlinear intensity constraints, complex-amplitude recovery, repeated measurements, and full-image readout.
+
+</details>
+
+<details markdown="1">
+<summary>Complete-workflow validation and resource accounting</summary>
+
+```text
+Complete-workflow validation and resource accounting
+├── Matched baselines
+│   └── compare the same model, observable, precision, and total processing cost against appropriate
+│       CPU/GPU methods.
+├── Error budget
+│   └── separate physical-model, discretization, truncation, quantum-algorithm, sampling, hardware, and
+│       hybrid-coupling errors.
+├── Data access
+│   └── coherent matrix or QRAM access requires a specified quantum interface to the stored data, with
+│       loading and access costs included.
+├── Output and advantage
+│   └── state preparation, normalization, postselection, repetitions, classical processing, and
+│       full-field recovery count toward total cost.
+└── Hybrid validity
+    └── a proposed QPU+CA workflow requires an error budget for conversion, noise, drift, residual
+        correction, and precision, together with a matched comparison of complete processing time.
+```
+
+</details>
 
 </details>
 
@@ -884,18 +1040,7 @@ Forward prediction involves the evaluation of a sample and instrument model, whe
 > \boldsymbol{y}_{\mathrm{meas}}\longrightarrow\widehat{\boldsymbol{\theta}}.
 > $$
 
-The parameter vector $\boldsymbol{\theta}$ describes the selected atomic coordinates, electrostatic potentials, spin-Hamiltonian parameters, optical constants, or lithographic-mask variables. The forward map $\mathcal{F}$ includes the sample–probe interaction and instrument response. A general regularized inverse formulation is
-
-> $$
-> \widehat{\boldsymbol{\theta}}
-> =\underset{\boldsymbol{\theta}\in\mathcal{C}}{\operatorname{argmin}}
-> \left[
-> D\!\left(\mathcal{F}(\boldsymbol{\theta}),\boldsymbol{y}_{\mathrm{meas}}\right)
-> +\lambda R(\boldsymbol{\theta})
-> \right].
-> $$
-
-Here, $D$ is a discrepancy appropriate to the measurement-noise model, $R$ represents prior information, $\lambda$ controls regularization, and $\mathcal{C}$ specifies physical constraints. Weighted least squares is appropriate for a justified Gaussian approximation, whereas low-count measurements often require a Poisson likelihood. A linear quantum solver addresses a compatible linear problem or a linearized update within the nonlinear reconstruction loop [6–8]. For a least-squares normal-equation construction, $A^\dagger A$ squares the spectral condition number when $A$ has full column rank; alternative formulations and preconditioning therefore belong in the resource assessment.
+The parameter vector $\boldsymbol{\theta}$ describes the selected atomic coordinates, electrostatic potentials, spin-Hamiltonian parameters, optical constants, or lithographic-mask variables. The forward map $\mathcal{F}$ includes the sample–probe interaction and instrument response. Shared inverse formulations, regularization, and classical reconstruction loops are grouped in [branch XII](#branch-xii).
 
 ```text
 Computational characterization workflow
@@ -923,7 +1068,7 @@ For coherent thin-specimen ptychography, a simplified forward intensity model is
 > \right|^2.
 > $$
 
-In this framework, the interaction between the probe $P$ and the object transmission $O$ generates an exit wave, the diffraction intensities of which are captured by the detector. The recovery of the phase is constrained by overlapping measurements, while the model is further extended to account for multislice propagation, partial coherence, position errors, and detector response [24]. Within this process, a quantum Fourier transform is applied to the encoded amplitudes; however, recovery via classical arrays necessitates a specific measurement procedure. The total resource cost is determined by several factors, including initial-data loading, nonlinear intensity constraints, complex-amplitude recovery, repeated measurements, and full-image readout. While published research on quantum-state ptychography focuses on reconstructing unknown quantum states through overlapping projections, electron-microscope reconstruction requires a distinct sample–probe encoding and a corresponding inverse workflow [25].
+In this framework, the interaction between the probe $P$ and the object transmission $O$ generates an exit wave, the diffraction intensities of which are captured by the detector. The recovery of the phase is constrained by overlapping measurements, while the model is further extended to account for multislice propagation, partial coherence, position errors, and detector response [24]. The corresponding encoding and image-recovery costs are grouped in [branch XII](#branch-xii). While published research on quantum-state ptychography focuses on reconstructing unknown quantum states through overlapping projections, electron-microscope reconstruction requires a distinct sample–probe encoding and a corresponding inverse workflow [25].
 
 For Angle-Resolved Photoemission Spectroscopy (ARPES), the commonly employed equilibrium sudden-approximation relation is expressed as $I(\boldsymbol{k},\omega)\propto |M(\boldsymbol{k},\omega)|^2 f(\omega)A(\boldsymbol{k},\omega)$ prior to background subtraction and instrument convolution. In this context, a quantum processing unit (QPU) may be used to calculate the spectral function $A$, although additional modeling is required to account for matrix elements $M$, occupations $f$, surface/final-state effects, and the detector response [26, 27]. While electronic spectral functions are defined by electron addition/removal operators, density and spin operators define their respective response structure factors. Related solver primitives utilizing these probe-specific operators are employed across ARPES, EELS, and magnetic INS [3, 4, 28]. Furthermore, quantum-assisted Hamiltonian inference leverages repeated model predictions to fit experimental data, thereby bridging the gap between forward spectroscopy and inverse characterization [30].
 
@@ -931,7 +1076,7 @@ The role of a quantum sensor is to enhance or modify data acquisition through it
 
 ### Application areas and concrete examples
 
-The following application tree originates from the primary scientific task, linking each example to a predicted quantity, a solver family, and its associated execution roles. Branch references I–XI correspond to the detailed technique tree described above, while numbered citations refer to the primary research anchors. Microscopic electronic, spin, and vibrational models are used to describe quantum degrees of freedom directly, whereas kinetic and continuum models describe reduced populations or fields, the physical validity of which is governed by their closure, boundary conditions, and constitutive assumptions.
+The following application tree originates from the primary scientific task, linking each example to a predicted quantity, a solver family, and its associated execution roles. Branch references I–XII correspond to the detailed technique tree described above, while numbered citations refer to the primary research anchors. Microscopic electronic, spin, and vibrational models are used to describe quantum degrees of freedom directly, whereas kinetic and continuum models describe reduced populations or fields, the physical validity of which is governed by their closure, boundary conditions, and constitutive assumptions.
 
 #### Application tree (compact version)
 
@@ -1002,6 +1147,9 @@ QPU and hybrid quantum-solvers: application areas and examples
 ```
 
 #### Application tree (extended version)
+
+<details markdown="1">
+<summary>Application examples, outputs, solver routes, and evidence</summary>
 
 ```text
 QPU and hybrid quantum-solvers: application areas and examples
@@ -1219,6 +1367,8 @@ QPU and hybrid quantum-solvers: application areas and examples
         └── Route: quantum subproblem + classical parameter fitting and independent verification (I, XI)
 ```
 
+</details>
+
 ### Application-to-solver mapping
 
 | Application | Solver branches | Direct quantum task | Essential or useful classical task | Model, accuracy, and output requirements |
@@ -1266,6 +1416,8 @@ Hardware assignment is a second axis shared by applications A–L. CPU and GPU t
 | Digital + native analog quantum simulation [Q/AQ] | Gate sequences and native quantum interaction blocks | Compatible spin, interacting-mode, or lattice-model dynamics | [II](#branch-ii), [IV](#branch-iv), [VII](#branch-vii) |
 | Hybrid quantum annealing + classical processing [QA/H] | A bounded encoded optimization objective and classical assembly/refinement | Regional tomographic updates or a separately constructed discrete design objective | [XI](#branch-xi) |
 
+Use [branch XII](#branch-xii) to assess shared loading, reconstruction, measurement, and validation costs for these arrangements.
+
 [Back to contents](#table-of-contents)
 
 ## Readiness and validation
@@ -1294,6 +1446,26 @@ Hardware assignment is a second axis shared by applications A–L. CPU and GPU t
 | Computational ellipsometry, polarimetry, and magnetometry extensions | Candidate microscopic-response or reduced inverse subproblems; quantum ellipsometric sensing has a separate theory [32] | QPU acceleration requires an explicit microscopic-response or inverse subproblem and a matched complete performance benchmark. |
 | Quantum-assisted mass-spectrum prediction and identification | Established classical fragmentation baselines and a published quantum identification proposal [33, 34] | Electronic inputs, fragmentation dynamics, and database-free identification require separate accuracy and computational comparisons. |
 | Quantum-assisted mask or acquisition optimization | Application-specific research extensions | Explicit objectives, mappings, classical baselines, uncertainty, and complete resource costs determine readiness. |
+
+<a id="hardware-solver-fit-matrix"></a>
+
+### Hardware–solver fit matrix
+
+The lookup connects hardware examples and execution classes to their stated task and evidence scope. Application mappings and complete resource requirements are linked in the corresponding branches.
+
+| Platform or execution class | Solver branches | Readiness/ cited scope | Key model or execution requirement |
+| --- | --- | --- | --- |
+| Quantinuum H2 | [I](#branch-i), [III](#branch-iii), [XI](#branch-xi) | HW preprint: 27-site spectral-function model using 54 qubits [26] | Material-specific Hamiltonian, state preparation, sampling accuracy, and photoemission/instrument model |
+| IonQ QPU | [V](#branch-v) | HW 2026 preprint: 2D time-domain Maxwell benchmarks; 3D benchmarks use a simulator [21] | Specified finite-difference mapping, source/boundary treatment, stability, and signed-field recovery |
+| D-Wave hybrid solver | [XI](#branch-xi), [XII](#branch-xii) | HW regional QUBO refinement of CT phantoms and a chest slice [23] | Discrete objective, penalties/connectivity, classical regional assembly, and matched image accuracy; electron targets remain R |
+| Trapped-ion processor (four-qubit NMR example) | [III](#branch-iii), [XI](#branch-xi) | HW small zero-field NMR demonstration [29] | Spin-network size, evolution fidelity, ensemble handling, and sampling |
+| Programmable silicon-photonic processor | [III](#branch-iii), [XI](#branch-xi) | HW ancilla-assisted autocorrelation spectroscopy [31] | Compatible target Hamiltonian, state preparation, controlled dynamics, and observable access |
+| Gate-based QPU + CPU/GPU | [I](#branch-i), [VIII](#branch-viii), [IX](#branch-ix), [X](#branch-x) | HW selected-space electronic examples; HW-input/NUM AFQMC interface [1, 2, 16] | Classical subspace size, configuration coverage, embedding error, and total classical work |
+| Native analog or mixed digital–analog quantum platforms | [II](#branch-ii), [IV](#branch-iv), [VII](#branch-vii) | Experimental programmable simulation of selected interactions | Match available interactions, geometry, controls, observable access, and calibration to the target model |
+| Fault-tolerant logical-qubit execution | [III](#branch-iii), [XI](#branch-xi) | ALG EELS and EUV microscopic-spectrum resource estimates [28, 35] | Logical qubits, non-Clifford gates, and shots are specified in the readiness table |
+| QPU + classical analog coprocessor | [X](#branch-x), [XII](#branch-xii) | R proposed combined numerical workflow | Conversion, noise, drift, residual correction, precision, and complete processing-time comparison |
+
+[Back to contents](#table-of-contents)
 
 ### Direct and indirect connections
 
@@ -1394,5 +1566,13 @@ The complete workflow is selected as physical model → encoded operator/state �
 34. Tsai, Nuckels, and Wang, *Integrating Quantum Computing into De Novo Metabolite Identification*, Journal of Systemics, Cybernetics and Informatics (2023). [Paper](https://iiisci.org/Journal/PDV/sci/pdfs/ZA381UC23.pdf). Algorithmic proposal for a selected metabolite-identification stage.
 35. Kharazi et al., *Quantum Simulations for Extreme Ultraviolet Photolithography* (2026 preprint, version 2, revised 20 August 2026). [Paper](https://arxiv.org/abs/2602.20234v2).
 36. *Gradient-based inverse extreme ultraviolet lithography*, Applied Optics (2015). [Paper](https://doi.org/10.1364/AO.54.007284). Classical inverse-EUV baseline incorporating optical and resist effects.
+
+[Back to contents](#table-of-contents)
+
+## Document version
+
+| Edition | Date |
+| --- | --- |
+| 2026-10-05 | 5 October 2026 |
 
 [Back to contents](#table-of-contents)
