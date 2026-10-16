@@ -46,6 +46,9 @@ Interestingly, some models such as the [Landau-Lifshitz-Gilbert (LLG) equation](
 > **quantum**: “Borrowed from Latin *quantum*,” historically ‘how much; as much as’ (neuter of *quantus*), later specialized to a discrete physical amount. - *Oxford English Dictionary*; see also Oxford’s gloss tying *quantum* to *quantus*.
 > **native**: “From Latin *nativus* (‘inborn; produced by birth’), via Middle English/French,” yielding senses such as ‘innate, natural; belonging by birth.’ - *Oxford English Dictionary*.
 
+
+<img width="4203" height="auto" alt="image" src="https://github.com/user-attachments/assets/232c0a88-0c6a-409d-a185-df8b3d6cc315" />
+
 --- 
 
 ### Towards Deployment of Industry-Level vs. Academic Quantum Processors
