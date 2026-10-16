@@ -1,5 +1,5 @@
 # Quantum-Native-Solvers
-A compilation of quantum-native solver techniques that can be mapped and run on a quantum computer. Compiled by Onri Jay Benally.
+A compilation of quantum-native solver techniques that can be mapped and run on a quantum computer. Compiled by Onri Jay Benally, a Quantum Hardware Engineer.
 
 [![License](https://img.shields.io/badge/Creative_Commons-License-green)](https://choosealicense.com/licenses/cc-by-4.0) | [Repository](https://github.com/OJB-Quantum/Quantum-Native-Solvers)
 
@@ -45,6 +45,9 @@ Interestingly, some models such as the [Landau-Lifshitz-Gilbert (LLG) equation](
 >
 > **quantum**: “Borrowed from Latin *quantum*,” historically ‘how much; as much as’ (neuter of *quantus*), later specialized to a discrete physical amount. - *Oxford English Dictionary*; see also Oxford’s gloss tying *quantum* to *quantus*.
 > **native**: “From Latin *nativus* (‘inborn; produced by birth’), via Middle English/French,” yielding senses such as ‘innate, natural; belonging by birth.’ - *Oxford English Dictionary*.
+
+
+<img width="4203" height="auto" alt="image" src="https://github.com/user-attachments/assets/232c0a88-0c6a-409d-a185-df8b3d6cc315" />
 
 --- 
 
